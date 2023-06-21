@@ -21,3 +21,6 @@ super + b
 
 super + r
     rofi -show drun
+
+ctrl + super + p
+    $HOME/.config/scripts/power.sh
