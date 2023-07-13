@@ -11,22 +11,33 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+# Ctrl arrow jumps
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
+# Env vars
+export EDITOR="nvim"
+export VISUAL="nvim"
+export PATH=$HOME/.local/bin:/usr/lib/cargo/bin:$PATH
+
+# Aliases
 alias ls="exa -1 --icons"
 alias ll="ls -l"
 alias la="ls -a"
 alias nala="sudo nala"
 alias cat="batcat"
-
 alias vim="nvim"
-export EDITOR="nvim"
+alias vi='nvim'
+alias svi='sudo vi'
 
-export PATH=$HOME/.local/bin:$PATH
-
-eval "$(starship init zsh)"
-
-bindkey "^[[1;5C" forward-word
-bindkey "^[[1;5D" backward-word
-
+# pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
+#autojump
+[[ -s /home/athrail/.autojump/etc/profile.d/autojump.sh ]] && source /home/athrail/.autojump/etc/profile.d/autojump.sh
+
+autoload -U compinit && compinit -u
+
+eval "$(starship init zsh)"

@@ -4,7 +4,6 @@ Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'neovim/nvim-lspconfig'
-Plug 'Mofiqul/dracula.nvim'
 Plug 'sindrets/diffview.nvim'
 Plug 'TimUntersberger/neogit'
 Plug 'nvim-lua/plenary.nvim'
@@ -26,9 +25,11 @@ Plug 'hrsh7th/vim-vsnip'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+
 call plug#end()
 
-colorscheme dracula
+colorscheme catppuccin-mocha
 
 "General setup
 set number
@@ -64,19 +65,6 @@ lua require('mason').setup()
 lua <<EOF
   require('lualine').setup{
     options = { theme = 'dracula' }
-  }
-EOF
-"indent-blankline
-lua <<EOF
-  vim.opt.list = true
-  vim.opt.listchars:append 'space:⋅'
-  vim.opt.listchars:append 'eol:↴'
-
-  require('indent_blankline').setup {
-    show_current_context = true,
-    show_current_context_start = true,
-    show_end_of_line = true,
-    space_char_blankline = " ",
   }
 EOF
 
