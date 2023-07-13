@@ -15,6 +15,7 @@ alias ls="exa -1 --icons"
 alias ll="ls -l"
 alias la="ls -a"
 alias nala="sudo nala"
+alias cat="batcat"
 
 alias vim="nvim"
 export EDITOR="nvim"
