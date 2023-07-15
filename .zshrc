@@ -19,9 +19,14 @@ bindkey "^[[1;5D" backward-word
 export EDITOR="nvim"
 export VISUAL="nvim"
 export PATH=$HOME/.local/bin:/usr/lib/cargo/bin:$PATH
+export PAGER="most"
+export BAT_THEME="Catppuccin-mocha"
+export LIBVIRT_DEFAULT_URI="qemu:///system"
 
 # Aliases
-alias ls="exa -1 --icons"
+alias ..="cd .."
+alias cd..="cd .."
+alias ls="exa -1 --icons --group-directories-first"
 alias ll="ls -l"
 alias la="ls -a"
 alias nala="sudo nala"
