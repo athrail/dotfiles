@@ -45,4 +45,3 @@ eval "$(pyenv init -)"
 
 autoload -U compinit && compinit -u
 
-eval "$(starship init zsh)"
