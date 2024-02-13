@@ -235,6 +235,15 @@ require('lazy').setup({
     opts = {},
   },
 
+  {
+    "christoomey/vim-tmux-navigator",
+    lazy = false,
+  },
+  {
+    "nvim-telescope/telescope-file-browser.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+  },
+
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -317,6 +326,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- Buffer jumping
 vim.keymap.set('n', '<leader>n', function() vim.cmd('bn') end, { desc = 'Next buffer in buffer list' })
 vim.keymap.set('n', '<leader>p', function() vim.cmd('bN') end, { desc = 'Previous buffer in buffer list' })
+vim.keymap.set('n', '<leader>q', function() vim.cmd('bd') end, { desc = 'Delete current buffer' })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -341,10 +351,17 @@ require('telescope').setup {
     },
     layout_strategy = 'vertical',
   },
+  extensions = {
+    file_browser = {
+      -- theme = 'ivy',
+      hijack_netrw = true,
+    }
+  }
 }
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
+pcall(require('telescope').load_extension, 'file_browser')
 
 -- Telescope live_grep in git root
 -- Function to find the git root directory based on the current buffer's path
@@ -400,6 +417,8 @@ local function telescope_live_grep_open_files()
     prompt_title = 'Live Grep in Open Files',
   }
 end
+vim.keymap.set('n', '<leader>e', ":Telescope file_browser path=%:p:h select_buffer=true<CR>", { noremap = true, desc = 'File [B]rowser at current path' })
+vim.keymap.set('n', '<leader>E', ":Telescope file_browser<CR>", { noremap = true, desc = '[E]xplore working dir' })
 vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[S]earch [/] in Open Files' })
 vim.keymap.set('n', '<leader>ss', require('telescope.builtin').builtin, { desc = '[S]earch [S]elect Telescope' })
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
@@ -715,6 +734,26 @@ vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end)
 vim.keymap.set("n", "<C-A-P>", function() harpoon:list():prev() end)
 vim.keymap.set("n", "<C-A-N>", function() harpoon:list():next() end)
 
+local colors = require("catppuccin.palettes").get_palette()
+local TelescopeColor = {
+	TelescopeMatching = { fg = colors.flamingo },
+	TelescopeSelection = { fg = colors.text, bg = colors.surface0, bold = true },
+
+	TelescopePromptPrefix = { bg = colors.surface0 },
+	TelescopePromptNormal = { bg = colors.surface0 },
+	TelescopeResultsNormal = { bg = colors.mantle },
+	TelescopePreviewNormal = { bg = colors.mantle },
+	TelescopePromptBorder = { bg = colors.surface0, fg = colors.surface0 },
+	TelescopeResultsBorder = { bg = colors.mantle, fg = colors.mantle },
+	TelescopePreviewBorder = { bg = colors.mantle, fg = colors.mantle },
+	TelescopePromptTitle = { bg = colors.pink, fg = colors.mantle },
+	TelescopeResultsTitle = { fg = colors.mantle },
+	TelescopePreviewTitle = { bg = colors.green, fg = colors.mantle },
+}
+
+for hl, col in pairs(TelescopeColor) do
+	vim.api.nvim_set_hl(0, hl, col)
+end
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
