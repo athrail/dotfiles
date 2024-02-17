@@ -1,4 +1,5 @@
 vim.wo.number = true
+vim.wo.relativenumber = true
 vim.o.mouse = 'a'
 vim.o.clipboard = 'unnamedplus'
 
