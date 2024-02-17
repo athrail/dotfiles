@@ -12,7 +12,3 @@ PS1='[\u@\h \W]\$ '
 export MANGOHUD=1
 export PATH=$PATH:$HOME/.local/bin
 
-if [[ $(ps --no-header --pid=$PPID --format=cmd) != "fish" ]]
-then
-	exec fish
-fi
