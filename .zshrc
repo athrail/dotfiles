@@ -19,6 +19,7 @@ bindkey "^[[1;5D" backward-word
 export EDITOR="nvim"
 export VISUAL="nvim"
 export PATH=$HOME/.local/bin:/usr/lib/cargo/bin:$PATH
+export PATH=$PATH:/usr/local/go/bin
 export PAGER="most"
 export BAT_THEME="Catppuccin-mocha"
 export LIBVIRT_DEFAULT_URI="qemu:///system"
@@ -26,14 +27,14 @@ export LIBVIRT_DEFAULT_URI="qemu:///system"
 # Aliases
 alias ..="cd .."
 alias cd..="cd .."
-alias ls="exa -1 --icons --group-directories-first"
+alias ls="exa -1 --group-directories-first"
 alias ll="ls -l"
 alias la="ls -a"
 alias nala="sudo nala"
 alias cat="batcat"
 alias vim="nvim"
-alias vi='nvim'
-alias svi='sudo vi'
+alias vi="nvim"
+alias cl="clear"
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
