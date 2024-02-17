@@ -1,4 +1,3 @@
-# Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
@@ -7,8 +6,8 @@ setopt extendedglob
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/athrail/.zshrc'
 
-autoload -Uz compinit
-compinit
+autoload -U compinit && compinit -u
+
 # End of lines added by compinstall
 
 # Ctrl arrow jumps
@@ -20,9 +19,17 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 export PATH=$HOME/.local/bin:/usr/lib/cargo/bin:$PATH
 export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:$HOME/go/bin
 export PAGER="most"
 export BAT_THEME="Catppuccin-mocha"
 export LIBVIRT_DEFAULT_URI="qemu:///system"
+export ZSH="$HOME/.oh-my-zsh"
+
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+plugins=(git)
+
+source $ZSH/oh-my-zsh.sh
 
 # Aliases
 alias ..="cd .."
@@ -41,12 +48,10 @@ export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-#autojump
-[[ -s /home/athrail/.autojump/etc/profile.d/autojump.sh ]] && source /home/athrail/.autojump/etc/profile.d/autojump.sh
+. /usr/share/autojump/autojump.sh
 
-autoload -U compinit && compinit -u
-
-source ~/powerlevel10k/powerlevel10k.zsh-theme
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+function lk() {
+  cd $(walk --icons)
+}
