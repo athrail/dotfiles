@@ -4,6 +4,7 @@ vim.g.maplocalleader = ' '
 local keymap = vim.keymap -- for conciseness
 
 keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+keymap.set('n', '<Esc>', ':noh<Return><Esc>', { silent = true })
 
 -- Remap for dealing with word wrap
 keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -16,9 +17,7 @@ keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating 
 keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- Buffer jumping
-keymap.set('n', '<leader>n', function() vim.cmd('bn') end, { desc = 'Next buffer in buffer list' })
-keymap.set('n', '<leader>p', function() vim.cmd('bN') end, { desc = 'Previous buffer in buffer list' })
-keymap.set('n', '<leader>q', function() vim.cmd('bd') end, { desc = 'Delete current buffer' })
+keymap.set('n', '<C-q>', function() vim.cmd('bd') end, { desc = 'Delete current buffer' })
 
 -- window management
 keymap.set("n", "<leader>sv", "<C-w>v", { desc = "[S]plit window [v]ertically" }) -- split window vertically

@@ -4,6 +4,7 @@ Servers = {
   pyright = {},
   tsserver = {},
   html = { filetypes = { 'html', 'twig', 'hbs' } },
+  cmake = {},
 
   lua_ls = {
     Lua = {

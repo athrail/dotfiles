@@ -2,6 +2,7 @@ vim.wo.number = true
 vim.wo.relativenumber = true
 vim.o.mouse = 'a'
 vim.o.clipboard = 'unnamedplus'
+vim.o.cursorline = true -- highlight the current cursor line
 
 vim.o.breakindent = true
 vim.o.undofile = true
