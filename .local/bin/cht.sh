@@ -4,8 +4,8 @@ core_utils=$(echo "awk xargs find sed parallel stow" | tr ' ' '\n')
 
 selected=$(echo -e "$languages\n$core_utils" | fzf)
 
-if [[ $? -ne 0]] ; then
-  return
+if [[ $? -ne 0 ]]; then
+  exit
 fi
 
 read -p "query: " -r query
