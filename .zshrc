@@ -42,6 +42,7 @@ alias cat="batcat"
 alias vim="nvim"
 alias vi="nvim"
 alias cl="clear"
+alias lg="lazygit"
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
