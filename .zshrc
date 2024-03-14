@@ -49,10 +49,8 @@ export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-. /usr/share/autojump/autojump.sh
+# zoxide
+eval "$(zoxide init zsh)"
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-function lk() {
-  cd $(walk --icons)
-}
