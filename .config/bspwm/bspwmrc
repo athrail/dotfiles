@@ -12,8 +12,8 @@ polybar full &
 
 xsetroot -cursor_name left_ptr
 
-bspc monitor LVDS1 -d 1 2 3 4 5
-bspc monitor VGA1 -d 6 7 8 9 10
+bspc monitor LVDS-1 -d 1 2 3 4 5 6 7
+#bspc monitor VGA1 -d 6 7 8 9 10
 
 # Border gaps,width, and padding
 bspc config border_width         2
