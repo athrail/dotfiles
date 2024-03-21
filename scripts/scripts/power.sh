@@ -10,7 +10,7 @@ options="$suspend\n$reboot\n$shutdown"
 
 choice=$(echo -e "$options" | \
     rofi -dmenu -i -p "$uptime" \
-    -theme-str 'window {width:20%; height: 20%;}')
+    -theme-str 'window { width:20%; height: 30%; } listview { columns: 1; lines: 3; }')
 
 if [ $? -ne 0 ]; then
     exit
