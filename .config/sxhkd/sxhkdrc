@@ -22,11 +22,20 @@ super + shift + b
 super + shift + t
     alacritty
 
+super + shift + s
+    flameshot gui
+
 super + r
     rofi -show drun
 
+super + e
+    thunar $HOME
+
+super + period
+    rofi -show emoji
+
 ctrl + super + p
-    $HOME/scripts/power.sh
+    $HOME/scripts/scripts/power.sh
 
 # expand a window by moving one of its side outward
 super + alt + {h,j,k,l}
