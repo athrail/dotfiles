@@ -9,6 +9,12 @@ killall -q sxhkd
 sxhkd &
 killall -q polybar
 polybar full &
+killall -q flameshot
+flameshot &
+killall -q dunst
+dunst&
+
+nitrogen --restore
 
 xsetroot -cursor_name left_ptr
 
