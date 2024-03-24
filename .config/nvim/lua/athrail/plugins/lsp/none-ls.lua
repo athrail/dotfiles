@@ -26,6 +26,7 @@ return {
       sources = {
         formatting.prettier,
         formatting.black,
+        formatting.gofmt,
       },
       on_attach = function(current_client, bufnr)
         if current_client.supports_method("textDocument/formatting") then
