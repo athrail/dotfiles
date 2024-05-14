@@ -20,6 +20,7 @@ export VISUAL="nvim"
 export PATH=$HOME/.local/bin:/usr/lib/cargo/bin:$PATH
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
+export PATH=$PATH:$HOME/.local/kitty.app/bin
 export PAGER="most"
 export BAT_THEME="Catppuccin-mocha"
 export LIBVIRT_DEFAULT_URI="qemu:///system"
