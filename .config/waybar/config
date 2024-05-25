@@ -4,25 +4,8 @@
     "height": 5,
     "modules-left": ["hyprland/window"],
     "modules-center": ["hyprland/workspaces"],
-    "modules-right": ["custom/terminal", "custom/files", "custom/browser", "custom/apps", "tray", "hyprland/language", "pulseaudio", "network", "clock", "custom/power"],
+    "modules-right": ["tray", "hyprland/language", "pulseaudio", "network", "clock", "custom/power"],
 
-    // Custom modules
-    "custom/apps": {
-        "format": " ",
-        "on-click": "wofi -show drun",
-    },
-    "custom/browser": {
-        "format": "󰖟 ",
-        "on-click": "chromium",
-    },
-    "custom/files": {
-        "format": " ",
-        "on-click": "dolphin",
-    },
-    "custom/terminal": {
-        "format": " ",
-        "on-click": "alacritty",
-    },
     "custom/power": {
         "format": "",
         "on-click": "~/.local/share/bin/powermenu",
@@ -52,8 +35,9 @@
         "spacing": 10
     },
     "clock": {
+        "interval": 60,
         "format": "{:  %H:%M}",
-        // "on-click": "gnome-calendar"
+        "max-length": 25
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
