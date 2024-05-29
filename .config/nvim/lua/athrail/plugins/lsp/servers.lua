@@ -1,10 +1,6 @@
 Servers = {
-  clangd = {},
-  gopls = {},
-  pyright = {},
-  tsserver = {},
-  html = { filetypes = { 'html', 'twig', 'hbs' } },
-  cmake = {},
+  rust_analyzer = {},
+
 
   lua_ls = {
     Lua = {

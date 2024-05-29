@@ -11,8 +11,6 @@ return {
 
     mason_null_ls.setup({
       ensure_installed = {
-        "prettier", -- prettier formatter
-        "black", -- python formatter
       },
     })
 
@@ -24,8 +22,6 @@ return {
 
     null_ls.setup({
       sources = {
-        formatting.prettier,
-        formatting.black,
         formatting.gofmt,
       },
       on_attach = function(current_client, bufnr)
