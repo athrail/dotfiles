@@ -18,8 +18,7 @@ exec --no-startup-id dunst &
 exec --no-startup-id flameshot
 exec --no-startup-id xsettingsd &
 exec_always --no-startup-id setxkbmap -option ctrl:nocaps
-exec_always --no-startup-id killall -w polybar
-exec_always --no-startup-id polybar --reload full &
+exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 # Use pactl to adjust volume in PulseAudio.
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
