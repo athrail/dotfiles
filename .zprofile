@@ -12,6 +12,7 @@ export PATH=$HOME/.local/bin:/usr/lib/cargo/bin:$PATH
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
 export PATH=$PATH:$HOME/.local/kitty.app/bin
+export PATH=$PATH:$HOME/.cargo/bin
 export PAGER="most"
 export BAT_THEME="Catppuccin Mocha"
 export LIBVIRT_DEFAULT_URI="qemu:///system"
