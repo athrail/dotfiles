@@ -1,6 +1,32 @@
----------------------------
--- Default awesome theme --
----------------------------
+------------------------------
+-- Catppuccin awesome theme --
+------------------------------
+local rosewater = "#f5e0dc"
+local flamingo = "#f2cdcd"
+local pink = "#f5c2e7"
+local mauve = "#cba6f7"
+local red = "#f38ba8"
+local maroon = "#eba0ac"
+local peach = "#fab387"
+local yellow = "#f9e2af"
+local green = "#a6e3a1"
+local teal = "#94e2d5"
+local sky = "#89dceb"
+local sapphire = "#74c7ec"
+local blue = "#89b4fa"
+local lavender = "#b4befe"
+local text = "#cdd6f4"
+local subtext1 = "#bac2de"
+local subtext0 = "#a6adc8"
+local overlay2 = "#9399b2"
+local overlay1 = "#7f849c"
+local overlay0 = "#6c7086"
+local surface2 = "#585b70"
+local surface1 = "#45475a"
+local surface0 = "#313244"
+local base = "#1e1e2e"
+local mantle = "#181825"
+local crust = "#11111b"
 
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
@@ -11,24 +37,24 @@ local themes_path = gfs.get_themes_dir()
 
 local theme = {}
 
-theme.font          = "sans 8"
+theme.font          = "JetBrainsMonoNF 10"
 
-theme.bg_normal     = "#222222"
-theme.bg_focus      = "#535d6c"
-theme.bg_urgent     = "#ff0000"
-theme.bg_minimize   = "#444444"
+theme.bg_normal     = base
+theme.bg_focus      = surface1
+theme.bg_urgent     = red
+theme.bg_minimize   = surface0
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = "#aaaaaa"
-theme.fg_focus      = "#ffffff"
-theme.fg_urgent     = "#ffffff"
-theme.fg_minimize   = "#ffffff"
+theme.fg_normal     = text
+theme.fg_focus      = theme.fg_normal
+theme.fg_urgent     = base
+theme.fg_minimize   = theme.overlay0
 
-theme.useless_gap   = dpi(0)
-theme.border_width  = dpi(1)
-theme.border_normal = "#000000"
-theme.border_focus  = "#535d6c"
-theme.border_marked = "#91231c"
+theme.useless_gap   = dpi(3)
+theme.border_width  = dpi(2)
+theme.border_normal = surface0
+theme.border_focus  = lavender
+theme.border_marked = theme.border_normal
 
 -- There are other variable sets
 -- overriding the default one when
@@ -124,7 +150,7 @@ theme.awesome_icon = theme_assets.awesome_icon(
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
-theme.icon_theme = nil
+theme.icon_theme = ""
 
 return theme
 
