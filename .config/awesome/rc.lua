@@ -239,7 +239,7 @@ autostart = function()
   awful.spawn("flameshot")
   awful.spawn("xsettingsd")
   awful.spawn("blueman-applet")
-  awful.spawn("setxkbmap -option ctrl:nocaps")
+  awful.spawn("setxkbmap pl -option ctrl:nocaps")
 end
 autostart()
 -- }}}
@@ -318,6 +318,7 @@ globalkeys = gears.table.join(
   awful.key({ modkey, "Shift" }, "space", function() awful.layout.inc(-1) end,
     { description = "select previous", group = "layout" }),
   awful.key({ modkey, }, "e", function() awful.spawn("firefox") end),
+  awful.key({modkey, "Control"}, "0", function() awful.spawn("bash /home/athrail/scripts/rofi/power.sh") end),
 
   awful.key({ modkey, "Control" }, "n",
     function()
