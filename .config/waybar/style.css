@@ -20,6 +20,7 @@ window#waybar {
 #pulseaudio,
 #tray,
 #workspaces,
+#backlight,
 #window {
   padding: 0 5px;
   color: @lavender;

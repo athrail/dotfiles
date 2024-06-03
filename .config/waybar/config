@@ -4,7 +4,7 @@
     "height": 5,
     "modules-left": ["hyprland/workspaces", "hyprland/window"],
     "modules-center": [],
-    "modules-right": ["tray", "battery", "pulseaudio", "clock"],
+    "modules-right": ["tray", "backlight", "battery", "pulseaudio", "clock"],
 
     // Modules configuration
     "hyprland/workspaces": {
@@ -40,6 +40,11 @@
         "interval": 60,
         "format": "   {:%H:%M}",
         "max-length": 25
+    },
+    "backlight": {
+      "device": "intel_backlight",
+      "format": "{icon}  {percent}%",
+      "format-icons": ["", ""]
     },
     "pulseaudio": {
         "scroll-step": 1,
