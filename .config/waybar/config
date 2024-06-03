@@ -2,14 +2,10 @@
     "layer": "top",
     "position": "top",
     "height": 5,
-    "modules-left": ["hyprland/window"],
-    "modules-center": ["hyprland/workspaces"],
-    "modules-right": ["tray", "hyprland/language", "pulseaudio", "network", "clock", "custom/power"],
+    "modules-left": ["hyprland/workspaces", "hyprland/window"],
+    "modules-center": [],
+    "modules-right": ["tray", "battery", "pulseaudio", "clock"],
 
-    "custom/power": {
-        "format": "",
-        "on-click": "~/.local/share/bin/powermenu",
-    },
     // Modules configuration
     "hyprland/workspaces": {
         "disable-scroll": false,
@@ -22,35 +18,32 @@
             "10": "0",
         }
     },
-    "hyprland/language": {
-        "format": "{}",
-        "format-en": "English",
-        "on-click": "hyprctl switchxkblayout evision-rgb-keyboard next",
-    },
     "hyprland/window": {
         "format": "{title}",
     },
     "tray": {
-        // "icon-size": 21,
+        "icon-size": 16,
         "spacing": 10
+    },
+    "battery": {
+      "bat": "BAT0",
+      "interval": 60,
+      "states": {
+        "warning": 30,
+        "critical": 15
+      },
+      "format": "{icon}   {capacity}%",
+      "format-icons": ["", "", "", "", ""],
+      "max-length": 25
     },
     "clock": {
         "interval": 60,
-        "format": "{:  %H:%M}",
+        "format": "   {:%H:%M}",
         "max-length": 25
-    },
-    "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "  {essid}",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ifname} via {gwaddr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
-        "on-click": "~/.local/share/bin/wifimenu"
     },
     "pulseaudio": {
         "scroll-step": 1,
-        "format": " {volume}%",
+        "format": "    {volume}%",
         "on-click": "pavucontrol"
     },
 }
