@@ -11,6 +11,7 @@ return {
 
     mason_null_ls.setup({
       ensure_installed = {
+        "black"
       },
     })
 
@@ -23,6 +24,7 @@ return {
     null_ls.setup({
       sources = {
         formatting.gofmt,
+        formatting.black
       },
       on_attach = function(current_client, bufnr)
         if current_client.supports_method("textDocument/formatting") then
