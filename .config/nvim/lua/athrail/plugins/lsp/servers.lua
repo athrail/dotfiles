@@ -1,6 +1,5 @@
 Servers = {
-  rust_analyzer = {},
-
+  gopls = {},
 
   lua_ls = {
     Lua = {
