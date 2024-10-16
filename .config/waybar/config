@@ -3,8 +3,8 @@
     "position": "top",
     "height": 5,
     "modules-left": ["hyprland/workspaces", "hyprland/window"],
-    "modules-center": [],
-    "modules-right": ["tray", "backlight", "battery", "pulseaudio", "clock"],
+    "modules-center": ["clock#1", "clock#2", "clock#3"],
+    "modules-right": ["tray", "backlight", "battery", "pulseaudio"],
 
     // Modules configuration
     "hyprland/workspaces": {
@@ -13,9 +13,10 @@
         "warp-on-scroll": true,
         "on-scroll-up": "hyprctl dispatch workspace e+1",
         "on-scroll-down": "hyprctl dispatch workspace e-1",
-        "format": " {icon} ",
+        "format": "{icon}",
         "format-icons": {
-            "10": "0",
+          "active": "",
+          "default": "",
         }
     },
     "hyprland/window": {
@@ -36,9 +37,19 @@
       "format-icons": ["", "", "", "", ""],
       "max-length": 25
     },
-    "clock": {
+    "clock#1": {
         "interval": 60,
         "format": "   {:%H:%M}",
+        "max-length": 25
+    },
+    "clock#2": {
+        "interval": 86400,
+        "format": "   {:%A}",
+        "max-length": 25
+    },
+    "clock#3": {
+        "interval": 86400,
+        "format": "{:%d/%m/%Y}",
         "max-length": 25
     },
     "backlight": {

@@ -30,22 +30,22 @@ window#waybar.empty #window {
   background-color: transparent;
 }
 
+#workspaces {
+  font-family: "JetBrainsMono Nerd Font";
+}
+
 #workspaces button {
   color: @text;
   margin: 0 2px;
 }
 
-#workspaces button:hover {
-  background: rgba(0, 0, 0, 0.2);
-}
-
 #workspaces button.active {
-  background-color: @lavender;
-  color: @base;
+  /* background-color: @lavender; */
+  color: @text;
 }
 
 #workspaces button.urgent {
-  background-color: @red;
+  /* background-color: @red; */
   color: @text;
 }
 
