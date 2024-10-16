@@ -41,3 +41,5 @@ source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
+
+eval "$(fzf --zsh)"
