@@ -18,13 +18,12 @@ bindkey "^[[1;5D" backward-word
 # aliases
 source ~/.aliases
 
-GTK_THEME="catppuccin-mocha-lavender-standard+default"
 
 # fzf catppuccin theme
-export FZF_DEFAULT_OPTS=" \
---color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
---color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
---color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+# export FZF_DEFAULT_OPTS=" \
+# --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+# --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+# --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
 
 export EDITOR="nvim"
 export VISUAL="nvim"
@@ -32,14 +31,20 @@ export PATH=$HOME/.local/bin:/usr/lib/cargo/bin:$PATH
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
 export PATH=$PATH:$HOME/.cargo/bin
-export PAGER="most"
-export BAT_THEME="Catppuccin Mocha"
 export LIBVIRT_DEFAULT_URI="qemu:///system"
 
-# autosuggestions
-source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# plugins configuration
+
+# Always starting with insert mode for each command line
+ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+# Do the initialization when the script is sourced (i.e. Initialize instantly)
+ZVM_INIT_MODE=sourcing
+
+# plugins
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.zsh
 
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
-
 eval "$(fzf --zsh)"
