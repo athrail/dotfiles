@@ -1,3 +1,0 @@
-return {
-  "pplatta/vim-uefi"
-}
