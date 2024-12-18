@@ -18,7 +18,6 @@ bindkey "^[[1;5D" backward-word
 # aliases
 source ~/.aliases
 
-
 # fzf catppuccin theme
 # export FZF_DEFAULT_OPTS=" \
 # --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
@@ -32,6 +31,7 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
 export PATH=$PATH:$HOME/.cargo/bin
 export LIBVIRT_DEFAULT_URI="qemu:///system"
+export MANPAGER='nvim +Man!'
 
 # plugins configuration
 
@@ -43,7 +43,6 @@ ZVM_INIT_MODE=sourcing
 # plugins
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.zsh
 
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
