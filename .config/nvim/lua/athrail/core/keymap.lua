@@ -20,6 +20,7 @@ keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnosti
 keymap.set("n", "<leader>bn", "<cmd>bnext<CR>", { desc = "[B]uffer [N]ext" })
 keymap.set("n", "<leader>bp", "<cmd>bprev<CR>", { desc = "[B]uffer [P]rev" })
 keymap.set("n", "<leader>bd", "<cmd>bd<CR>", { desc = "[B]uffer [D]elete" })
+keymap.set("n", "<leader>bD", "<cmd>bufdo bd<CR>", { desc = "[B]uffer [D]elete all" })
 
 -- window management
 keymap.set("n", "<leader>sv", "<C-w>v", { desc = "[S]plit window [v]ertically" }) -- split window vertically
