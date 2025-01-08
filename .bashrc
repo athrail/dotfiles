@@ -11,5 +11,3 @@ PS1='[\u@\h \W]\$ '
 
 export MANGOHUD=1
 export PATH=$PATH:$HOME/.local/bin
-
-. "$HOME/.cargo/env"
