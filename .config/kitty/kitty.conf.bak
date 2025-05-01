@@ -2240,7 +2240,4 @@ hide_window_decorations yes
 
 #: }}}
 
-# BEGIN_KITTY_THEME
-# Rosé Pine
-include current-theme.conf
-# END_KITTY_THEME
+include ./themes/rose-pine.conf
