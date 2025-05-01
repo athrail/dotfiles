@@ -1,0 +1,11 @@
+background-color=#26233a
+text-color=#e0def4
+border-color=#524f67
+progress-color=over #31748f
+
+anchor=top-center
+font=Fira Sans Condensed 14
+padding=10
+
+[urgency=high]
+border-color=#eb6f92
