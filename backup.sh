@@ -22,6 +22,7 @@ CONFIG_FILES=(
     "rofi"
     "waybar"
     "wezterm"
+    "foot"
     "starship.toml"
 )
 
