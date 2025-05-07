@@ -18,6 +18,7 @@ window#waybar {
 #clock,
 #pulseaudio,
 #tray,
+#bluetooth,
 #workspaces,
 #window {
   padding: 0 5px;
@@ -49,16 +50,4 @@ window#waybar.empty #window {
 #tray > .needs-attention {
   -gtk-icon-effect: highlight;
   background-color: @red;
-}
-
-#pulseaudio {
-  color: @peach;
-}
-
-#clock {
-  color: @blue;
-}
-
-#battery {
-  color: @mauve;
 }
