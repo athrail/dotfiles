@@ -3,17 +3,16 @@
 * {
   font-family: "JetBrainsMono Nerd Font", FontAwesome;
   font-size: 16px;
-  padding: 0 8px;
   margin: 0;
+  padding: 0;
   border-radius: 0;
 }
 
 window#waybar {
   background-color: transparent;
-  color: @text;
+  color: @iris;
   transition-property: background-color;
   transition-duration: 0.2s;
-  margin: 25px 25px;
 }
 
 tooltip, tooltip * {
@@ -26,6 +25,49 @@ tooltip, tooltip * {
   background-color: @base;
   margin: 0px 3px;
   border-radius: 5;
+  border-style: solid;
+  border-width: 2px;
+  padding: 4px 20px;
+}
+
+#workspaces {
+  padding: 4px;
+}
+
+#load {
+  border-color: @iris;
+}
+
+#window {
+  border-color: @foam;
+}
+
+#clock {
+  border-color: @love;
+}
+
+#memory {
+  border-color: @gold;
+}
+
+#temperature.cpu {
+  border-color: @rose;
+}
+
+#temperature.gpu {
+  border-color: @pine;
+}
+
+#bluetooth {
+  border-color: @foam;
+}
+
+#pulseaudio {
+  border-color: @love;
+}
+
+#pulseaudio {
+  border-color: @love;
 }
 
 #window * {
@@ -37,8 +79,8 @@ tooltip, tooltip * {
 }
 
 #workspaces button {
-  color: @text;
-  margin: 0 2px;
+  color: @iris;
+  padding: 0 4px;
 }
 
 #workspaces button.active {
