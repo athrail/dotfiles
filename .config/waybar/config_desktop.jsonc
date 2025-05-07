@@ -2,10 +2,14 @@
     "layer": "top",
     "position": "top",
     "height": 30,
-    "mod": "dock",
     "exclusive": true,
     "passthrough": false,
     "gtk-layer-shell": true,
+
+    "margin-top": 10,
+    "margin-right": 10,
+    "margin-bottom": 0,
+    "margin-left": 10,
 
     "modules-left": ["hyprland/workspaces", "hyprland/window"],
     "modules-center": ["clock"],

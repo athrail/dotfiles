@@ -9,10 +9,23 @@
 }
 
 window#waybar {
-  background-color: @base;
+  background-color: transparent;
   color: @text;
   transition-property: background-color;
   transition-duration: 0.2s;
+  margin: 25px 25px;
+}
+
+tooltip, tooltip * {
+  font-family: "Fira Sans Condensed";
+}
+
+#window, #workspaces, #tray,
+#load, #memory, #temperature, #bluetooth, #pulseaudio, #tray,
+#clock {
+  background-color: @base;
+  margin: 0px 3px;
+  border-radius: 5;
 }
 
 #window * {
