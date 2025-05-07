@@ -1,9 +1,9 @@
 @import "rose-pine.css";
 
 * {
-  font-family: "Fira Sans Condensed", "JetBrainsMono Nerd Font", FontAwesome;
+  font-family: "JetBrainsMono Nerd Font", FontAwesome;
   font-size: 16px;
-  padding: 0;
+  padding: 0 8px;
   margin: 0;
   border-radius: 0;
 }
@@ -15,19 +15,12 @@ window#waybar {
   transition-duration: 0.2s;
 }
 
-#clock,
-#pulseaudio,
-#tray,
-#bluetooth,
-#workspaces,
-#window {
-  padding: 0 5px;
-  color: @text;
-  font-family: "JetBrainsMono Nerd Font";
+#window * {
+  font-family: "Fira Sans Condensed";
 }
 
-window#waybar.empty #window {
-  background-color: transparent;
+#workspaces * {
+  padding: 0;
 }
 
 #workspaces button {
@@ -36,11 +29,17 @@ window#waybar.empty #window {
 }
 
 #workspaces button.active {
-  color: @iris;
+  color: @base;
+  background-color: @iris;
 }
 
 #workspaces button.urgent {
-  color: @love;
+  color: @base;
+  background-color: @love;
+}
+
+#tray * {
+  padding: 0;
 }
 
 #tray > .passive {
