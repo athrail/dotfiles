@@ -2,9 +2,9 @@
     "layer": "top",
     "position": "top",
     "height": 30,
-    "modules-left": ["hyprland/workspaces", "hyprland/window"],
-    "modules-center": ["clock#1", "clock#2", "clock#3"],
-    "modules-right": ["tray", "pulseaudio"],
+    "modules-left": ["hyprland/workspaces"],
+    "modules-center": ["hyprland/window"],
+    "modules-right": ["clock#1", "clock#2", "clock#3", "tray", "pulseaudio"],
 
     // Modules configuration
     "hyprland/workspaces": {
@@ -13,11 +13,7 @@
         "warp-on-scroll": true,
         "on-scroll-up": "hyprctl dispatch workspace e+1",
         "on-scroll-down": "hyprctl dispatch workspace e-1",
-        "format": "{icon}",
-        "format-icons": {
-          "active": "",
-          "default": "",
-        }
+        "format": "{id}",
     },
     "hyprland/window": {
         "format": "{title}",
@@ -26,25 +22,14 @@
         "icon-size": 16,
         "spacing": 10
     },
-    "battery": {
-      "bat": "BAT0",
-      "interval": 60,
-      "states": {
-        "warning": 30,
-        "critical": 15
-      },
-      "format": "{icon}   {capacity}%",
-      "format-icons": ["", "", "", "", ""],
-      "max-length": 25
-    },
     "clock#1": {
         "interval": 60,
-        "format": "   {:%H:%M}",
+        "format": " {:%H:%M}",
         "max-length": 25
     },
     "clock#2": {
         "interval": 86400,
-        "format": "   {:%A}",
+        "format": " {:%A}",
         "max-length": 25
     },
     "clock#3": {
@@ -52,14 +37,9 @@
         "format": "{:%d/%m/%Y}",
         "max-length": 25
     },
-    "backlight": {
-      "device": "intel_backlight",
-      "format": "{icon}  {percent}%",
-      "format-icons": ["", ""]
-    },
     "pulseaudio": {
         "scroll-step": 1,
-        "format": "    {volume}%",
+        "format": "  {volume}%",
         "on-click": "pavucontrol"
     },
 }

@@ -2,7 +2,7 @@
 
 * {
   font-family: "Fira Sans Condensed", "JetBrainsMono Nerd Font", FontAwesome;
-  font-size: 18px;
+  font-size: 16px;
   padding: 0;
   margin: 0;
   border-radius: 0;
@@ -16,22 +16,17 @@ window#waybar {
 }
 
 #clock,
-#network,
 #pulseaudio,
 #tray,
 #workspaces,
-#backlight,
 #window {
   padding: 0 5px;
-  color: @lavender;
+  color: @text;
+  font-family: "JetBrainsMono Nerd Font";
 }
 
 window#waybar.empty #window {
   background-color: transparent;
-}
-
-#workspaces {
-  font-family: "JetBrainsMono Nerd Font";
 }
 
 #workspaces button {
@@ -40,13 +35,11 @@ window#waybar.empty #window {
 }
 
 #workspaces button.active {
-  /* background-color: @lavender; */
-  color: @text;
+  color: @iris;
 }
 
 #workspaces button.urgent {
-  /* background-color: @red; */
-  color: @text;
+  color: @love;
 }
 
 #tray > .passive {

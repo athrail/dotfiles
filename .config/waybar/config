@@ -17,6 +17,9 @@
         "format-icons": {
           "active": "",
           "default": "",
+        },
+        "persistent-workspaces": {
+          "*": 9,
         }
     },
     "hyprland/window": {
