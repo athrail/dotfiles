@@ -25,3 +25,5 @@ zoxide init fish | source
 function update-mirrors
     sudo reflector --latest 30 --protocol http,https --sort rate --save /etc/pacman.d/mirrorlist
 end
+
+fastfetch --colors-block-range-end 7 --colors-block-width 3
