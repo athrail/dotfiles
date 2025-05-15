@@ -18,6 +18,7 @@ CONFIG_FILES=(
     "foot"
     "godot"
     "hypr"
+    "hyprpanel"
     "kitty"
     "mako"
     "nvim"
