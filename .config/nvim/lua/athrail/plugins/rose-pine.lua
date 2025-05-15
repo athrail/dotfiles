@@ -9,6 +9,7 @@ return {
       }
     })
 
-		vim.cmd("colorscheme rose-pine")
+    vim.cmd("colorscheme rose-pine")
+    vim.cmd("highlight CursorLine ctermbg=NONE guibg=NONE")
 	end
 }
