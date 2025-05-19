@@ -1,19 +1,19 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 30,
+    "height": 40,
     "exclusive": true,
     "passthrough": false,
     "gtk-layer-shell": true,
 
-    "margin-top": 15,
-    "margin-right": 15,
-    "margin-bottom": 0,
-    "margin-left": 15,
+    "margin-top": 5,
+    "margin-right": 5,
+    "margin-bottom": 5,
+    "margin-left": 5,
 
     "modules-left": ["hyprland/workspaces", "hyprland/window"],
     "modules-center": ["clock"],
-    "modules-right": ["load", "memory", "temperature#cpu", "temperature#gpu", "bluetooth", "pulseaudio", "tray"],
+    "modules-right": ["tray", "load", "memory", "temperature#cpu", "temperature#gpu", "bluetooth", "pulseaudio"],
 
     // Modules configuration
     "hyprland/workspaces": {
@@ -28,17 +28,14 @@
         }
     },
     "hyprland/window": {
-        "format": "{title}"
-    },
-    "hyprland/window": {
-        "format": "{title}"
+      "icon": true
     },
     "tray": {
         "icon-size": 16,
         "spacing": 10
     },
     "clock": {
-        "format": " {:%H:%M   %A, %b%e}",
+        "format": " {:%H:%M   %A, %b %e}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "load": {
