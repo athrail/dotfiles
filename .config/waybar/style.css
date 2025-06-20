@@ -9,13 +9,11 @@
 }
 
 window#waybar {
-  background-color: transparent;
+  background-color: @base;
   color: @iris;
-  transition-property: background-color;
-  transition-duration: 0.2s;
 }
 
-tooltip, tooltip * {
+tooltip, tooltip *, menu, menu * {
   font-family: "Fira Sans Condensed";
 }
 
@@ -24,14 +22,12 @@ tooltip, tooltip * {
 #clock {
   background-color: @base;
   margin: 0px 3px;
-  border-radius: 5;
-  border-style: solid;
-  border-width: 2px;
-  padding: 4px 20px;
+  border-bottom: solid 2px;
+  padding: 3px 20px;
 }
 
 #workspaces {
-  padding: 4px;
+  padding: 2px;
 }
 
 #load {
@@ -75,7 +71,8 @@ tooltip, tooltip * {
 }
 
 #workspaces * {
-  padding: 0;
+  padding: 0 2px;
+  border-radius: 5px;
 }
 
 #workspaces button {
