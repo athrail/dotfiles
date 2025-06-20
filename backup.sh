@@ -22,7 +22,7 @@ CONFIG_FILES=(
     "nvim"
     "waybar"
     "niri"
-    "alacritty"
+    "kitty"
     "ghostty"
     "starship.toml"
 )
