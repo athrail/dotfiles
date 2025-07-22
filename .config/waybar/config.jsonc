@@ -1,12 +1,12 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 40,
+    "height": 35,
     "exclusive": true,
     "passthrough": false,
     "gtk-layer-shell": true,
 
-    "modules-left": ["niri/workspaces", "niri/window"],
+    "modules-left": ["hyprland/workspaces", "hyprland/window"],
     "modules-center": ["clock"],
     "modules-right": ["tray", "load", "memory", "temperature#cpu", "temperature#gpu", "bluetooth", "pulseaudio"],
 
@@ -19,7 +19,7 @@
         "on-scroll-down": "hyprctl dispatch workspace e-1",
         "format": "{id}",
         "persistent-workspaces": {
-          "*": 10
+          "*": 5
         }
     },
     "hyprland/window": {
