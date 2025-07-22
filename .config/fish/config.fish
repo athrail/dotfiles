@@ -4,8 +4,7 @@ set fish_greeting
 fish_add_path "/home/athrail/.local/bin"
 
 # exports
-set -xU EDITOR nvim
-set -xU MANPAGER 'nvim +Man!'
+set -xU EDITOR hx
 
 # aliases
 alias ff fastfetch
@@ -14,7 +13,7 @@ alias ls eza
 alias cl clear
 alias cat bat
 alias lg lazygit
-alias vim nvim
+alias hx helix
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
@@ -28,4 +27,3 @@ zoxide init fish | source
 function update-mirrors
     sudo reflector --latest 30 --protocol http,https --sort rate --save /etc/pacman.d/mirrorlist
 end
-
