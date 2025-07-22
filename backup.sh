@@ -37,6 +37,7 @@ done
 cp -r $HOME/.tmux.conf $DEV_ENV
 cp -r $HOME/.gitconfig $DEV_ENV
 cp -r $HOME/.zshrc $DEV_ENV
+cp $HOME/.config/helix/config.toml "$BACKUP_DIR/helix/"
+cp $HOME/.config/helix/languages.toml "$BACKUP_DIR/helix/"
 
 echo "Backup completed."
-
