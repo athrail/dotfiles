@@ -3,7 +3,3 @@ theme = "rose_pine"
 [keys.normal.S-z]
 S-z = ":write-quit"
 S-q = ":quit"
-
-[keys.normal.S-b]
-d = ":buffer-close"
-D = ":buffer-close-all"
