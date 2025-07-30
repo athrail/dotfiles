@@ -22,11 +22,6 @@ vim.keymap.set('n', '<leader>q', ':quit<CR>')
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', '<Esc>', ':noh<Return><Esc>', { silent = true })
 
-vim.keymap.set('n', '<leader>sv', '<C-w>v')
-vim.keymap.set('n', '<leader>sh', '<C-w>s')
-vim.keymap.set('n', '<leader>sq', '<C-w>q')
-vim.keymap.set('n', '<leader>se', '<C-w>=')
-
 vim.keymap.set('n', '<leader>bd', ':bd<CR>')
 vim.keymap.set('n', '<leader>bD', ':bd!<CR>')
 
@@ -39,23 +34,16 @@ vim.pack.add({
   { src = 'https://github.com/rose-pine/neovim' },
   { src = 'https://github.com/stevearc/oil.nvim' },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
-  { src = 'https://github.com/echasnovski/mini.icons' },
-  { src = 'https://github.com/folke/which-key.nvim' },
   { src = 'https://github.com/mbbill/undotree' },
-  { src = 'https://github.com/nvim-lualine/lualine.nvim' },
   { src = 'https://github.com/tpope/vim-fugitive' },
-  { src = 'https://github.com/echasnovski/mini.pick' },
+  { src = 'https://github.com/echasnovski/mini.icons' },
+  { src = 'https://github.com/echasnovski/mini.align' },
+  { src = 'https://github.com/echasnovski/mini.completion' },
+  { src = 'https://github.com/echasnovski/mini.trailspace' },
+  { src = 'https://github.com/neovim/nvim-lspconfig' },
+  { src = 'https://github.com/nvim-lua/plenary.nvim' },
+  { src = 'https://github.com/nvim-telescope/telescope.nvim' },
 })
-
-vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(ev)
-    local client = vim.lsp.get_client_by_id(ev.data.client_id)
-    if client:supports_method('textDocument/completion') then
-      vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
-    end
-  end,
-})
--- vim.cmd('set completeopt+=noselect')
 
 require 'rose-pine'.setup({
   styles = { italic = false },
@@ -67,13 +55,36 @@ require 'nvim-treesitter.configs'.setup({
   highlight = { enable = true }
 })
 
-vim.keymap.set('n', '<leader>ff', ':Pick files<CR>')
-vim.keymap.set('n', '<leader>fg', ':Pick grep_live<CR>')
-vim.keymap.set('n', '<leader><space>', ':Pick buffers<CR>')
-vim.keymap.set('n', '<leader>fh', ':Pick help<CR>')
-vim.keymap.set('n', '<leader>\'', ':Pick resume<CR>')
+local telescope = require('telescope')
+telescope.setup({
+  defaults = {
+    layout_strategy = 'vertical',
+  },
+  pickers = {
+    current_buffer_tags = { fname_width = 100, },
+    jumplist = { fname_width = 100, },
+    loclist = { fname_width = 100, },
+    lsp_definitions = { fname_width = 100, },
+    lsp_document_symbols = { fname_width = 100, },
+    lsp_dynamic_workspace_symbols = { fname_width = 100, },
+    lsp_implementations = { fname_width = 100, },
+    lsp_incoming_calls = { fname_width = 100, },
+    lsp_outgoing_calls = { fname_width = 100, },
+    lsp_references = { fname_width = 100, },
+    lsp_type_definitions = { fname_width = 100, },
+    lsp_workspace_symbols = { fname_width = 100, },
+    quickfix = { fname_width = 100, },
+    tags = { fname_width = 100, },
+  }
+})
 
-require 'mini.pick'.setup()
+local tbuiltin = require('telescope.builtin')
+vim.keymap.set('n', '<C-p>', tbuiltin.find_files)
+vim.keymap.set('n', '<leader>fg', tbuiltin.live_grep)
+vim.keymap.set('n', '<leader>fw', tbuiltin.grep_string)
+vim.keymap.set('n', '<leader><space>', tbuiltin.buffers)
+vim.keymap.set('n', '<leader>fh', tbuiltin.help_tags)
+vim.keymap.set('n', '<leader>\'', tbuiltin.resume)
 
 vim.keymap.set('n', '<leader>u', ':UndotreeToggle<CR>')
 
@@ -91,30 +102,5 @@ require 'oil'.setup({
 })
 vim.keymap.set('n', '<leader>e', ':Oil<CR>')
 
-vim.lsp.config.clangd = {
-  cmd = {
-    'clangd',
-    '--background-index',
-    '--offset-encoding=utf-8',
-  },
-  root_markers = { '.clangd', 'compile_commands.json' },
-  filetypes = { 'c', 'cpp' },
-}
-vim.lsp.config('pylsp', {})
-
 vim.lsp.enable({ 'pylsp', 'clangd' })
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
-
-require 'which-key'.setup()
-require 'lualine'.setup({
-  options = {
-    icons_enabled = true,
-    theme = 'rose-pine',
-    component_separators = '|',
-    section_separators = '',
-  },
-  sections = {
-    lualine_b = { },
-    lualine_c = { { 'filename', path = 1 } }
-  }
-})
