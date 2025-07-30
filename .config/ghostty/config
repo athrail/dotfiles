@@ -1,7 +1,31 @@
 shell-integration-features = no-cursor
+window-decoration = none
 
 font-family = JetBrainsMono Nerd Font
 font-size = 14
+mouse-hide-while-typing = true
+scrollback-limit = 1000000
 
 theme = rose-pine
 cursor-style = block
+
+keybind = ctrl+n=new_window
+
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+j=goto_split:down
+keybind = ctrl+k=goto_split:up
+keybind = ctrl+l=goto_split:right
+
+keybind = ctrl+space>v=new_split:right
+keybind = ctrl+space>h=new_split:down
+keybind = ctrl+space>f=toggle_split_zoom
+
+keybind = ctrl+space>n=next_tab
+keybind = ctrl+space>p=previous_tab
+
+keybind = alt+shift+l=next_tab
+keybind = alt+shift+h=previous_tab
+
+keybind = super+r=reload_config
+
+window-save-state = always
