@@ -33,6 +33,9 @@ vim.keymap.set('n', '<leader>q', ':quit<CR>')
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', '<Esc>', ':noh<Return><Esc>', { silent = true })
 
+vim.keymap.set('n', '<leader>%', ':vsplit<CR>')
+vim.keymap.set('n', '<leader>"', ':split<CR>')
+
 vim.keymap.set('n', '<leader>bd', ':bd<CR>')
 vim.keymap.set('n', '<leader>bD', ':bd!<CR>')
 
@@ -169,4 +172,4 @@ vim.keymap.set('n', '<C-h>', smart_splits.move_cursor_left)
 vim.keymap.set('n', '<C-j>', smart_splits.move_cursor_down)
 vim.keymap.set('n', '<C-k>', smart_splits.move_cursor_up)
 vim.keymap.set('n', '<C-l>', smart_splits.move_cursor_right)
-im.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
+vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
