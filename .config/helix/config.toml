@@ -1,5 +1,0 @@
-theme = "rose_pine"
-
-[keys.normal.S-z]
-S-z = ":write-quit"
-S-q = ":quit"
