@@ -15,6 +15,7 @@ mkdir -p "$BACKUP_DIR"
 # List of specific configuration files/directories to back up
 CONFIG_FILES=(
     "fish"
+    "foot"
     "fuzzel"
     "godot"
     "hypr"
