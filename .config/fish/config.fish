@@ -17,7 +17,6 @@ alias ls eza
 alias cl clear
 alias cat bat
 alias lg lazygit
-alias hx helix
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
