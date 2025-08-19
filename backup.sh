@@ -24,6 +24,7 @@ CONFIG_FILES=(
     "niri"
     "kitty"
     "ghostty"
+    "wlogout"
     "starship.toml"
 )
 
