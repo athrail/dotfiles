@@ -71,6 +71,7 @@ vim.pack.add({
 require 'rose-pine'.setup({
   styles = { italic = false },
 })
+vim.cmd('autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE')
 vim.cmd('colorscheme rose-pine')
 
 require 'nvim-treesitter.configs'.setup({
