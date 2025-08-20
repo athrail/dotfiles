@@ -12,6 +12,7 @@ source "$HOME/.local/share/bob/env/env.fish"
 
 # aliases
 alias ff fastfetch
+alias vim nvim
 alias .. "cd .."
 alias ls eza
 alias cl clear
@@ -20,7 +21,6 @@ alias lg lazygit
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
-    # fastfetch --colors-block-range-end 7 --colors-block-width 3
 end
 
 starship init fish | source
