@@ -103,7 +103,7 @@ telescope.setup({
 })
 
 local tbuiltin = require('telescope.builtin')
-vim.keymap.set('n', '<C-p>', tbuiltin.find_files)
+vim.keymap.set('n', '<leader>ff', tbuiltin.find_files)
 vim.keymap.set('n', '<leader>fg', tbuiltin.live_grep)
 vim.keymap.set('n', '<leader>fw', tbuiltin.grep_string)
 vim.keymap.set('n', '<leader><space>', tbuiltin.buffers)
