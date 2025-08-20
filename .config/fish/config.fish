@@ -5,8 +5,8 @@ fish_add_path "/home/athrail/.local/bin"
 
 # exports
 set -xU VISUAL "/home/athrail/.local/share/bob/nvim-bin/nvim"
-set -xU EDITOR "nvim"
-set -xU MANPAGER "nvim +Man!"
+set -xU EDITOR "/home/athrail/.local/share/bob/nvim-bin/nvim"
+set -xU MANPAGER "/home/athrail/.local/share/bob/nvim-bin/nvim +Man!"
 
 source "$HOME/.local/share/bob/env/env.fish"
 
