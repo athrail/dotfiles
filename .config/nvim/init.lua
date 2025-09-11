@@ -60,12 +60,16 @@ vim.pack.add({
   { src = 'https://github.com/echasnovski/mini.icons' },
   { src = 'https://github.com/echasnovski/mini-git' },
   { src = 'https://github.com/echasnovski/mini.align' },
+  { src = 'https://github.com/echasnovski/mini.pairs' },
+  { src = 'https://github.com/echasnovski/mini.statusline' },
+  { src = 'https://github.com/echasnovski/mini.surround' },
   { src = 'https://github.com/echasnovski/mini.completion' },
   { src = 'https://github.com/echasnovski/mini.trailspace' },
-  { src = 'https://github.com/mrjones2014/smart-splits.nvim' },
   { src = 'https://github.com/neovim/nvim-lspconfig' },
   { src = 'https://github.com/nvim-lua/plenary.nvim' },
   { src = 'https://github.com/nvim-telescope/telescope.nvim' },
+  { src = 'https://github.com/MeanderingProgrammer/render-markdown.nvim' },
+  { src = 'https://github.com/chomosuke/typst-preview.nvim' },
 })
 
 require 'rose-pine'.setup({
@@ -120,6 +124,11 @@ require 'mini.git'.setup()
 require 'mini.align'.setup()
 require 'mini.completion'.setup()
 require 'mini.trailspace'.setup()
+require 'mini.pairs'.setup()
+require 'mini.statusline'.setup()
+require 'mini.surround'.setup()
+require 'render-markdown'.setup()
+require 'typst-preview'.setup()
 
 vim.keymap.set('n', '<leader>u', ':UndotreeToggle<CR>')
 
@@ -159,18 +168,5 @@ vim.lsp.config('pylsp', {
   }
 })
 
-vim.lsp.enable({ 'pylsp', 'clangd' })
-vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
-
--- Smart splits configuration for TMUX interopability
-local smart_splits = require('smart-splits')
-smart_splits.setup()
-vim.keymap.set('n', '<A-h>', smart_splits.resize_left)
-vim.keymap.set('n', '<A-j>', smart_splits.resize_down)
-vim.keymap.set('n', '<A-k>', smart_splits.resize_up)
-vim.keymap.set('n', '<A-l>', smart_splits.resize_right)
-vim.keymap.set('n', '<C-h>', smart_splits.move_cursor_left)
-vim.keymap.set('n', '<C-j>', smart_splits.move_cursor_down)
-vim.keymap.set('n', '<C-k>', smart_splits.move_cursor_up)
-vim.keymap.set('n', '<C-l>', smart_splits.move_cursor_right)
+vim.lsp.enable({ 'pylsp', 'clangd', 'html', 'tinymist' })
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
