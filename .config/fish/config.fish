@@ -28,5 +28,6 @@ fzf --fish | source
 zoxide init fish | source
 
 function update-mirrors
-    sudo reflector --latest 30 --protocol http,https --sort rate --save /etc/pacman.d/mirrorlist
+    sudo reflector --country France,Germany,Poland,Netherlands,Czech,Slovakia --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+    # sudo reflector --latest 30 --protocol http,https --sort rate --save /etc/pacman.d/mirrorlist
 end
