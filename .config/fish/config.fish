@@ -24,9 +24,11 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
-starship init fish | source
 fzf --fish | source
 zoxide init fish | source
+
+fish_config theme choose "Rosé Pine"
+fish_config prompt choose simple
 
 function update-mirrors
     sudo reflector --country France,Germany,Poland,Netherlands,Czech,Slovakia --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
