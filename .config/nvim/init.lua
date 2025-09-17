@@ -127,7 +127,10 @@ require 'mini.trailspace'.setup()
 require 'mini.pairs'.setup()
 require 'mini.statusline'.setup()
 require 'mini.surround'.setup()
-require 'render-markdown'.setup()
+require 'render-markdown'.setup({
+  latex = { enabled = false },
+  html = { enabled = false }
+})
 require 'typst-preview'.setup()
 
 vim.keymap.set('n', '<leader>u', ':UndotreeToggle<CR>')
@@ -152,7 +155,6 @@ vim.lsp.config('clangd', {
     'clangd',
     '--clang-tidy',
     '--background-index',
-    '--compile-commands-dir=/opt/bios/compile_commands/',
   }
 })
 
@@ -168,5 +170,5 @@ vim.lsp.config('pylsp', {
   }
 })
 
-vim.lsp.enable({ 'pylsp', 'clangd', 'html', 'tinymist' })
+vim.lsp.enable({ 'pylsp', 'clangd', 'tinymist' })
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
