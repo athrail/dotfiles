@@ -1,6 +1,7 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR --export EDITOR:/home/athrail/\x2elocal/share/bob/nvim\x2dbin/nvim
+SETUVAR --export GEM_HOME:/home/athrail/\x2elocal/share/gem/ruby/3\x2e4\x2e0
 SETUVAR --export MANPAGER:/home/athrail/\x2elocal/share/bob/nvim\x2dbin/nvim\x20\x2bMan\x21
 SETUVAR --export VISUAL:/home/athrail/\x2elocal/share/bob/nvim\x2dbin/nvim
 SETUVAR __fish_initialized:3800
@@ -36,7 +37,7 @@ SETUVAR fish_pager_color_description:yellow\x1e\x2di
 SETUVAR fish_pager_color_prefix:normal\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
 SETUVAR fish_pager_color_selected_background:\x2dr
-SETUVAR fish_user_paths:/home/athrail/\x2elocal/bin
+SETUVAR fish_user_paths:/bin\x1e/home/athrail/\x2elocal/share/gem/ruby/3\x2e4\x2e0/bin\x1e/home/athrail/\x2elocal/share/gem/ruby/3\x2e4\x2e0\x1e/home/athrail/\x2elocal/bin
 SETUVAR pure_begin_prompt_with_current_directory:true
 SETUVAR pure_check_for_new_release:false
 SETUVAR pure_color_at_sign:pure_color_mute

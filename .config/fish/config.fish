@@ -1,12 +1,14 @@
 # general variables setup
 set fish_greeting
 
-fish_add_path "/home/athrail/.local/bin"
-
 # exports
 set -xU VISUAL "/home/athrail/.local/share/bob/nvim-bin/nvim"
 set -xU EDITOR "/home/athrail/.local/share/bob/nvim-bin/nvim"
 set -xU MANPAGER "/home/athrail/.local/share/bob/nvim-bin/nvim +Man!"
+set -xU GEM_HOME "$(gem env user_gemhome)"
+
+fish_add_path "/home/athrail/.local/bin"
+fish_add_path "$GEM_HOME/bin"
 
 source "$HOME/.local/share/bob/env/env.fish"
 
@@ -28,7 +30,7 @@ fzf --fish | source
 zoxide init fish | source
 
 fish_config theme choose "Rosé Pine"
-fish_config prompt choose simple
+fish_config prompt choose astronaut
 
 function update-mirrors
     sudo reflector --country France,Germany,Poland,Netherlands,Czech,Slovakia --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
