@@ -56,11 +56,8 @@ vim.pack.add({
   { src = 'https://github.com/rose-pine/neovim' },
   { src = 'https://github.com/stevearc/oil.nvim' },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
-  { src = 'https://github.com/mbbill/undotree' },
   { src = 'https://github.com/echasnovski/mini.icons' },
-  { src = 'https://github.com/echasnovski/mini-git' },
   { src = 'https://github.com/echasnovski/mini.align' },
-  { src = 'https://github.com/echasnovski/mini.pairs' },
   { src = 'https://github.com/echasnovski/mini.statusline' },
   { src = 'https://github.com/echasnovski/mini.surround' },
   { src = 'https://github.com/echasnovski/mini.completion' },
@@ -68,7 +65,6 @@ vim.pack.add({
   { src = 'https://github.com/neovim/nvim-lspconfig' },
   { src = 'https://github.com/nvim-lua/plenary.nvim' },
   { src = 'https://github.com/nvim-telescope/telescope.nvim' },
-  { src = 'https://github.com/MeanderingProgrammer/render-markdown.nvim' },
   { src = 'https://github.com/chomosuke/typst-preview.nvim' },
 })
 
@@ -120,20 +116,12 @@ vim.keymap.set('n', 'gd', tbuiltin.lsp_definitions)
 vim.keymap.set('n', 'gri', tbuiltin.lsp_implementations)
 vim.keymap.set('n', 'gO', tbuiltin.lsp_document_symbols)
 
-require 'mini.git'.setup()
 require 'mini.align'.setup()
 require 'mini.completion'.setup()
 require 'mini.trailspace'.setup()
-require 'mini.pairs'.setup()
 require 'mini.statusline'.setup()
 require 'mini.surround'.setup()
-require 'render-markdown'.setup({
-  latex = { enabled = false },
-  html = { enabled = false }
-})
 require 'typst-preview'.setup()
-
-vim.keymap.set('n', '<leader>u', ':UndotreeToggle<CR>')
 
 require 'oil'.setup({
   columns = {
@@ -170,5 +158,11 @@ vim.lsp.config('pylsp', {
   }
 })
 
-vim.lsp.enable({ 'pylsp', 'clangd', 'tinymist' })
+vim.lsp.config('ruby-lsp', {
+  cmd = { "ruby-lsp" },
+  filetypes = { "ruby", "eruby" },
+  root_markers = { "Gemfile", ".git" },
+})
+
+vim.lsp.enable({ 'pylsp', 'clangd', 'tinymist', 'ruby-lsp' })
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
