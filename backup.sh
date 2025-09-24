@@ -26,6 +26,7 @@ CONFIG_FILES=(
     "kitty"
     "ghostty"
     "wlogout"
+    "git"
     "starship.toml"
 )
 
@@ -38,7 +39,6 @@ done
 
 # copy directly to root
 cp -r $HOME/.tmux.conf $DEV_ENV
-cp -r $HOME/.gitconfig $DEV_ENV
 cp -r $HOME/.zshrc $DEV_ENV
 
 echo "Backup completed."
