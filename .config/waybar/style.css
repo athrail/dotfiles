@@ -1,104 +1,74 @@
-@import "rose-pine.css";
+@import "../omarchy/current/theme/waybar.css";
 
 * {
-  font-family: "JetBrainsMono Nerd Font", FontAwesome;
-  font-size: 14px;
-  margin: 0;
-  padding: 0;
+  background-color: @background;
+  color: @foreground;
+
+  border: none;
   border-radius: 0;
+  min-height: 0;
+  font-family: 'JetBrainsMono Nerd Font';
+  font-size: 16px;
 }
 
-window#waybar {
-  background-color: @base;
-  color: @iris;
+.modules-left {
+  margin-left: 8px;
 }
 
-tooltip, tooltip *, menu, menu * {
-  font-family: "Fira Sans Condensed";
-}
-
-#window, #workspaces, #tray,
-#load, #memory, #temperature, #bluetooth, #pulseaudio, #tray,
-#clock {
-  background-color: @base;
-  margin: 0px 3px;
-  border-bottom: solid 2px;
-  padding: 3px 20px;
-}
-
-#workspaces {
-  padding: 2px;
-}
-
-#load {
-  border-color: @iris;
-}
-
-#window {
-  border-color: @foam;
-}
-
-#clock {
-  border-color: @love;
-}
-
-#memory {
-  border-color: @gold;
-}
-
-#temperature.cpu {
-  border-color: @rose;
-}
-
-#temperature.gpu {
-  border-color: @pine;
-}
-
-#bluetooth {
-  border-color: @foam;
-}
-
-#pulseaudio {
-  border-color: @love;
-}
-
-#pulseaudio {
-  border-color: @love;
-}
-
-#window * {
-  font-family: "Fira Sans Condensed";
-}
-
-#workspaces * {
-  padding: 0 2px;
-  border-radius: 5px;
+.modules-right {
+  margin-right: 8px;
 }
 
 #workspaces button {
-  color: @iris;
-  padding: 0 4px;
+  all: initial;
+  padding: 0 6px;
+  margin: 0 1.5px;
+  min-width: 9px;
 }
 
-#workspaces button.active {
-  color: @base;
-  background-color: @iris;
+#workspaces button.empty {
+  opacity: 0.5;
 }
 
-#workspaces button.urgent {
-  color: @base;
-  background-color: @love;
+#tray,
+#cpu,
+#battery,
+#network,
+#bluetooth,
+#pulseaudio,
+#custom-omarchy,
+#custom-screenrecording-indicator,
+#custom-update {
+  min-width: 12px;
+  margin: 0 7.5px;
 }
 
-#tray * {
-  padding: 0;
+#custom-expand-icon {
+  margin-right: 7px;
 }
 
-#tray > .passive {
-  -gtk-icon-effect: dim;
+tooltip {
+  padding: 2px;
 }
 
-#tray > .needs-attention {
-  -gtk-icon-effect: highlight;
-  background-color: @red;
+#custom-update {
+  font-size: 10px;
+}
+
+#clock {
+  margin-left: 8.75px;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+#custom-screenrecording-indicator {
+  min-width: 12px;
+  margin-left: 8.75px;
+  font-size: 10px;
+}
+
+#custom-screenrecording-indicator.active {
+  color: #a55555;
 }
