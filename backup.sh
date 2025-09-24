@@ -1,8 +1,8 @@
 #!/bin/bash
 
 if [ -z "${DEV_ENV}" ]; then
-    echo "Need to set DEV_ENV variable first!"
-    exit 1
+  echo "Need to set DEV_ENV variable first!"
+  exit 1
 fi
 
 # Define the source and destination directories
@@ -14,27 +14,28 @@ mkdir -p "$BACKUP_DIR"
 
 # List of specific configuration files/directories to back up
 CONFIG_FILES=(
-    "fish"
-    "foot"
-    "fuzzel"
-    "godot"
-    "hypr"
-    "mako"
-    "nvim"
-    "waybar"
-    "niri"
-    "kitty"
-    "ghostty"
-    "wlogout"
-    "git"
-    "starship.toml"
+  "alacritty"
+  "fish"
+  "foot"
+  "fuzzel"
+  "godot"
+  "hypr"
+  "mako"
+  "nvim"
+  "waybar"
+  "niri"
+  "kitty"
+  "ghostty"
+  "wlogout"
+  "git"
+  "starship.toml"
 )
 
 # Loop through the list and copy each configuration file/directory
 for CONFIG in "${CONFIG_FILES[@]}"; do
-    if [ -e "$SOURCE_DIR/$CONFIG" ]; then
-        cp -r "$SOURCE_DIR/$CONFIG" "$BACKUP_DIR/"
-    fi
+  if [ -e "$SOURCE_DIR/$CONFIG" ]; then
+    cp -r "$SOURCE_DIR/$CONFIG" "$BACKUP_DIR/"
+  fi
 done
 
 # copy directly to root
