@@ -29,7 +29,6 @@ end
 fzf --fish | source
 zoxide init fish | source
 
-fish_config theme choose "Rosé Pine"
 fish_config prompt choose astronaut
 
 function update-mirrors
