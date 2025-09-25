@@ -27,6 +27,7 @@ CONFIG_FILES=(
   "kitty"
   "ghostty"
   "wlogout"
+  "uwsm"
   "git"
   "starship.toml"
 )
