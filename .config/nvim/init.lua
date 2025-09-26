@@ -1,3 +1,5 @@
+local vim = vim
+
 -- General options
 vim.o.number = true
 vim.o.relativenumber = true
@@ -33,8 +35,8 @@ vim.keymap.set('n', '<leader>q', ':quit<CR>')
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', '<Esc>', ':noh<Return><Esc>', { silent = true })
 
-vim.keymap.set('n', '<leader>%', '<C-w><C-v><C-w><C-w>')
-vim.keymap.set('n', '<leader>"', '<C-w><C-s><C-w><C-w>')
+vim.keymap.set('n', '<leader>%', '<C-w>v<C-w>w')
+vim.keymap.set('n', '<leader>"', '<C-w>s<C-w>w')
 
 vim.keymap.set('n', '<C-l>', '<C-w>l')
 vim.keymap.set('n', '<C-h>', '<C-w>h')
@@ -44,11 +46,11 @@ vim.keymap.set('n', '<C-j>', '<C-w>j')
 vim.keymap.set('n', '<leader>bd', ':bd<CR>')
 vim.keymap.set('n', '<leader>bD', ':bd!<CR>')
 
-vim.keymap.set({'n','v','x'}, '<leader>y', '"+yy')
-vim.keymap.set({'n','v','x'}, '<leader>d', '"+dd')
+vim.keymap.set({ 'n', 'v', 'x' }, '<leader>y', '"+yy')
+vim.keymap.set({ 'n', 'v', 'x' }, '<leader>d', '"+dd')
 
 -- Git blame for selection
-function git_blame()
+local function git_blame()
   local lines_start = vim.fn.line('v')
   local lines_end   = vim.fn.line('.')
 
@@ -61,15 +63,8 @@ vim.pack.add({
   { src = 'https://github.com/folke/tokyonight.nvim' },
   { src = 'https://github.com/stevearc/oil.nvim' },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
-  { src = 'https://github.com/echasnovski/mini.icons' },
-  { src = 'https://github.com/echasnovski/mini.align' },
-  { src = 'https://github.com/echasnovski/mini.statusline' },
-  { src = 'https://github.com/echasnovski/mini.surround' },
-  { src = 'https://github.com/echasnovski/mini.completion' },
-  { src = 'https://github.com/echasnovski/mini.trailspace' },
+  { src = 'https://github.com/echasnovski/mini.nvim' },
   { src = 'https://github.com/neovim/nvim-lspconfig' },
-  { src = 'https://github.com/nvim-lua/plenary.nvim' },
-  { src = 'https://github.com/nvim-telescope/telescope.nvim' },
   { src = 'https://github.com/chomosuke/typst-preview.nvim' },
 })
 
@@ -87,48 +82,29 @@ require 'nvim-treesitter.configs'.setup({
   highlight = { enable = true }
 })
 
-local telescope = require('telescope')
-telescope.setup({
-  defaults = {
-    layout_strategy = 'vertical',
-  },
-  pickers = {
-    current_buffer_tags = { fname_width = 100, },
-    jumplist = { fname_width = 100, },
-    loclist = { fname_width = 100, },
-    lsp_definitions = { fname_width = 100, },
-    lsp_document_symbols = { fname_width = 100, },
-    lsp_dynamic_workspace_symbols = { fname_width = 100, },
-    lsp_implementations = { fname_width = 100, },
-    lsp_incoming_calls = { fname_width = 100, },
-    lsp_outgoing_calls = { fname_width = 100, },
-    lsp_references = { fname_width = 100, },
-    lsp_type_definitions = { fname_width = 100, },
-    lsp_workspace_symbols = { fname_width = 100, },
-    quickfix = { fname_width = 100, },
-    tags = { fname_width = 100, },
-  }
-})
+require 'mini.pick'.setup()
+require 'mini.extra'.setup()
+vim.keymap.set('n', '<leader>ff', MiniPick.builtin.files)
+vim.keymap.set('n', '<leader>fg', MiniPick.builtin.grep_live)
+vim.keymap.set('n', '<leader>fw', function()
+  MiniPick.builtin.grep({ pattern = vim.fn.expand('<cword>') or '' })
+end)
+vim.keymap.set('n', '<leader>fh', MiniPick.builtin.help)
+vim.keymap.set('n', '<leader><leader>', MiniPick.builtin.buffers)
+vim.keymap.set('n', '<leader>\'', MiniPick.builtin.resume)
 
-local tbuiltin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', tbuiltin.find_files)
-vim.keymap.set('n', '<leader>fg', tbuiltin.live_grep)
-vim.keymap.set('n', '<leader>fw', tbuiltin.grep_string)
-vim.keymap.set('n', '<leader><space>', tbuiltin.buffers)
-vim.keymap.set('n', '<leader>fh', tbuiltin.help_tags)
-vim.keymap.set('n', '<leader>\'', tbuiltin.resume)
-
-vim.keymap.set('n', 'grr', tbuiltin.lsp_references)
-vim.keymap.set('n', 'grs', tbuiltin.lsp_workspace_symbols)
-vim.keymap.set('n', 'gd', tbuiltin.lsp_definitions)
-vim.keymap.set('n', 'gri', tbuiltin.lsp_implementations)
-vim.keymap.set('n', 'gO', tbuiltin.lsp_document_symbols)
+vim.keymap.set('n', 'grr', ":Pick lsp scope=\"references\"<CR>")
+vim.keymap.set('n', 'grs', ":Pick lsp scope=\"workspace_symboo\"<CR>")
+vim.keymap.set('n', 'gd', ":Pick lsp scope=\"definition\"<CR>")
+vim.keymap.set('n', 'gri', ":Pick lsp scope=\"implementation\"<CR>")
+vim.keymap.set('n', 'gO', ":Pick lsp scope=\"document_symbol\"<CR>")
 
 require 'mini.align'.setup()
 require 'mini.completion'.setup()
 require 'mini.trailspace'.setup()
 require 'mini.statusline'.setup()
 require 'mini.surround'.setup()
+
 require 'typst-preview'.setup()
 
 require 'oil'.setup({
@@ -172,5 +148,5 @@ vim.lsp.config('ruby-lsp', {
   root_markers = { "Gemfile", ".git" },
 })
 
-vim.lsp.enable({ 'pylsp', 'clangd', 'tinymist', 'ruby-lsp' })
+vim.lsp.enable({ 'pylsp', 'clangd', 'tinymist', 'ruby-lsp', 'lua_ls' })
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
