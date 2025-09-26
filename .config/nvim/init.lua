@@ -36,6 +36,11 @@ vim.keymap.set('n', '<Esc>', ':noh<Return><Esc>', { silent = true })
 vim.keymap.set('n', '<leader>%', '<C-w><C-v><C-w><C-w>')
 vim.keymap.set('n', '<leader>"', '<C-w><C-s><C-w><C-w>')
 
+vim.keymap.set('n', '<C-l>', '<C-w>l')
+vim.keymap.set('n', '<C-h>', '<C-w>h')
+vim.keymap.set('n', '<C-k>', '<C-w>k')
+vim.keymap.set('n', '<C-j>', '<C-w>j')
+
 vim.keymap.set('n', '<leader>bd', ':bd<CR>')
 vim.keymap.set('n', '<leader>bD', ':bd!<CR>')
 
