@@ -2,9 +2,9 @@
 set fish_greeting
 
 # exports
-set -xg VISUAL "$HOME/.local/share/bob/nvim-bin/nvim"
-set -xg EDITOR "$HOME/.local/share/bob/nvim-bin/nvim"
-set -xg MANPAGER "$HOME/.local/share/bob/nvim-bin/nvim +Man!"
+set -xg VISUAL "nvim"
+set -xg EDITOR "nvim"
+set -xg MANPAGER "nvim +Man!"
 set -xg GEM_HOME "$(gem env user_gemhome)"
 
 fish_add_path "/home/athrail/.local/bin"
@@ -14,8 +14,7 @@ mise activate fish | source
 
 # aliases
 alias ff fastfetch
-alias nvim "$HOME/.local/share/bob/nvim-bin/nvim"
-alias vim "$HOME/.local/share/bob/nvim-bin/nvim"
+alias vim "nvim"
 alias .. "cd .."
 alias ls eza
 alias cl clear
