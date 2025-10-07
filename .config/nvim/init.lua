@@ -38,16 +38,8 @@ vim.keymap.set('n', '<Esc>', ':noh<Return><Esc>', { silent = true })
 vim.keymap.set('n', '<leader>%', '<C-w>v<C-w>w')
 vim.keymap.set('n', '<leader>"', '<C-w>s<C-w>w')
 
-vim.keymap.set('n', '<C-l>', '<C-w>l')
-vim.keymap.set('n', '<C-h>', '<C-w>h')
-vim.keymap.set('n', '<C-k>', '<C-w>k')
-vim.keymap.set('n', '<C-j>', '<C-w>j')
-
 vim.keymap.set('n', '<leader>bd', ':bd<CR>')
 vim.keymap.set('n', '<leader>bD', ':bd!<CR>')
-
-vim.keymap.set({ 'n', 'v', 'x' }, '<leader>y', '"+yy')
-vim.keymap.set({ 'n', 'v', 'x' }, '<leader>d', '"+dd')
 
 -- Git blame for selection
 local function git_blame()
@@ -66,6 +58,8 @@ local plugins = {
   { 'echasnovski/mini.nvim' },
   { 'chomosuke/typst-preview.nvim' },
   { 'j-hui/fidget.nvim' },
+  { 'neovim/nvim-lspconfig' },
+  { 'ibhagwan/fzf-lua' },
 }
 
 -- Bootstrap lazy.nvim
@@ -103,36 +97,19 @@ require'nvim-treesitter'.setup {
 }
 require'nvim-treesitter'.install { 'c', 'cpp', 'python', 'json', 'yaml', 'ruby' }
 
-local win_config = function()
-  local height = math.floor(0.618 * vim.o.lines)
-  local width = math.floor(0.618 * vim.o.columns)
-  return {
-    anchor = 'NW',
-    height = height,
-    width = width,
-    row = math.floor(0.5 * (vim.o.lines - height)),
-    col = math.floor(0.5 * (vim.o.columns - width)),
-  }
-end
+require 'fzf-lua'.setup()
+vim.keymap.set('n', '<leader>ff', FzfLua.files)
+vim.keymap.set('n', '<leader>fg', FzfLua.live_grep)
+vim.keymap.set('n', '<leader>fw', FzfLua.grep_cword)
+vim.keymap.set('n', '<leader>fh', FzfLua.helptags)
+vim.keymap.set('n', '<leader><leader>', FzfLua.buffers)
+vim.keymap.set('n', '<leader>\'', FzfLua.resume)
 
-require 'mini.pick'.setup(
-  { window = { config = win_config } }
-)
-require 'mini.extra'.setup()
-vim.keymap.set('n', '<leader>ff', MiniPick.builtin.files)
-vim.keymap.set('n', '<leader>fg', MiniPick.builtin.grep_live)
-vim.keymap.set('n', '<leader>fw', function()
-  MiniPick.builtin.grep({ pattern = vim.fn.expand('<cword>') or '' })
-end)
-vim.keymap.set('n', '<leader>fh', MiniPick.builtin.help)
-vim.keymap.set('n', '<leader><leader>', MiniPick.builtin.buffers)
-vim.keymap.set('n', '<leader>\'', MiniPick.builtin.resume)
-
-vim.keymap.set('n', 'grr', ":Pick lsp scope=\"references\"<CR>")
-vim.keymap.set('n', 'grs', ":Pick lsp scope=\"workspace_symbol\"<CR>")
-vim.keymap.set('n', 'gd', ":Pick lsp scope=\"definition\"<CR>")
-vim.keymap.set('n', 'gri', ":Pick lsp scope=\"implementation\"<CR>")
-vim.keymap.set('n', 'gO', ":Pick lsp scope=\"document_symbol\"<CR>")
+vim.keymap.set('n', 'grr', FzfLua.lsp_references)
+vim.keymap.set('n', 'grs', FzfLua.lsp_workspace_symbols)
+vim.keymap.set('n', 'gd', FzfLua.lsp_definitions)
+vim.keymap.set('n', 'gri', FzfLua.lsp_implementations)
+vim.keymap.set('n', 'gO', FzfLua.lsp_document_symbols)
 
 require 'mini.align'.setup()
 require 'mini.completion'.setup()
@@ -160,13 +137,7 @@ require 'oil'.setup({
 })
 vim.keymap.set('n', '<leader>e', ':Oil<CR>')
 
--- LSP section
-vim.lsp.config('gopls', {
-  cmd = { 'gopls' },
-  root_markers = { 'mod.go' },
-  filetypes = { 'go' },
-})
-
+-- LSP section (leverage lsp-config for most)
 vim.lsp.config.clangd = {
   cmd = {
     'clangd',
@@ -192,17 +163,5 @@ vim.lsp.config('pylsp', {
   }
 })
 
-vim.lsp.config('ruby-lsp', {
-  cmd = { "ruby-lsp" },
-  filetypes = { "ruby", "eruby" },
-  root_markers = { "Gemfile", ".git" },
-})
-
-vim.lsp.config('tinymist', {
-  cmd = { 'tinymist' },
-  filetypes = { 'typst' },
-  root_markers = { '.git' },
-})
-
-vim.lsp.enable({ 'pylsp', 'clangd', 'tinymist', 'gopls' })
+vim.lsp.enable({ 'pylsp', 'clangd', 'tinymist', 'gopls', 'ruby_lsp' })
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
