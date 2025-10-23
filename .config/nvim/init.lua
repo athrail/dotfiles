@@ -59,34 +59,14 @@ end
 vim.keymap.set('v', '<leader>gb', git_blame)
 
 -- Plugins
-local plugins = {
-  { 'folke/tokyonight.nvim' },
-  { 'stevearc/oil.nvim' },
-  { 'nvim-treesitter/nvim-treesitter', branch = 'main', lazy = false, build = ':TSUpdate' },
-  { 'echasnovski/mini.nvim' },
-  { 'chomosuke/typst-preview.nvim' },
-  { 'j-hui/fidget.nvim' },
-}
-
--- Bootstrap lazy.nvim
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-  if vim.v.shell_error ~= 0 then
-    vim.api.nvim_echo({
-      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out, "WarningMsg" },
-      { "\nPress any key to exit..." },
-    }, true, {})
-    vim.fn.getchar()
-    os.exit(1)
-  end
-end
-vim.opt.rtp:prepend(lazypath)
-
--- Plugins
-require("lazy").setup(plugins, {})
+vim.pack.add({
+  { src = 'https://github.com/folke/tokyonight.nvim' },
+  { src = 'https://github.com/stevearc/oil.nvim' },
+  { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'main' },
+  { src = 'https://github.com/echasnovski/mini.nvim' },
+  { src = 'https://github.com/chomosuke/typst-preview.nvim' },
+  { src = 'https://github.com/j-hui/fidget.nvim' },
+})
 
 require 'tokyonight'.setup({
   styles = {
@@ -97,11 +77,10 @@ require 'tokyonight'.setup({
 vim.cmd('autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE')
 vim.cmd('colorscheme tokyonight')
 
-require'nvim-treesitter'.setup {
-  -- Directory to install parsers and queries to
-  install_dir = vim.fn.stdpath('data') .. '/site'
-}
-require'nvim-treesitter'.install { 'c', 'cpp', 'python', 'json', 'yaml', 'ruby' }
+require 'nvim-treesitter.configs'.setup({
+  ensure_installed = { 'c', 'cpp', 'python', 'json', 'yaml' },
+  highlight = { enable = true }
+})
 
 local win_config = function()
   local height = math.floor(0.618 * vim.o.lines)
