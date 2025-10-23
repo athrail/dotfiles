@@ -62,7 +62,7 @@ vim.keymap.set('v', '<leader>gb', git_blame)
 vim.pack.add({
   { src = 'https://github.com/folke/tokyonight.nvim' },
   { src = 'https://github.com/stevearc/oil.nvim' },
-  { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'main' },
+  { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
   { src = 'https://github.com/echasnovski/mini.nvim' },
   { src = 'https://github.com/chomosuke/typst-preview.nvim' },
   { src = 'https://github.com/j-hui/fidget.nvim' },
@@ -140,26 +140,15 @@ require 'oil'.setup({
 vim.keymap.set('n', '<leader>e', ':Oil<CR>')
 
 -- LSP section
-vim.lsp.config('gopls', {
-  cmd = { 'gopls' },
-  root_markers = { 'mod.go' },
-  filetypes = { 'go' },
-})
-
-vim.lsp.config.clangd = {
+vim.lsp.config('clangd', {
   cmd = {
     'clangd',
     '--clang-tidy',
     '--background-index',
-    '--offset-encoding=utf-8',
-  },
-  root_markers = { '.clangd', 'compile_commands.json' },
-  filetypes = { 'c', 'cpp' },
-}
+  }
+})
 
 vim.lsp.config('pylsp', {
-  filetypes = { 'py' },
-  root_markers = { 'pyproject.toml' },
   settings = {
     pylsp = {
       plugins = {
@@ -177,11 +166,5 @@ vim.lsp.config('ruby-lsp', {
   root_markers = { "Gemfile", ".git" },
 })
 
-vim.lsp.config('tinymist', {
-  cmd = { 'tinymist' },
-  filetypes = { 'typst' },
-  root_markers = { '.git' },
-})
-
-vim.lsp.enable({ 'pylsp', 'clangd', 'tinymist', 'gopls' })
+vim.lsp.enable({ 'pylsp', 'clangd', 'tinymist', 'ruby-lsp', 'lua_ls' })
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
