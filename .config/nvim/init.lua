@@ -53,7 +53,7 @@ vim.keymap.set('v', '<leader>gb', git_blame)
 
 -- Plugins
 vim.pack.add({
-  { src = 'https://github.com/folke/tokyonight.nvim' },
+  { src = 'https://github.com/rose-pine/neovim' },
   { src = 'https://github.com/stevearc/oil.nvim' },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
   { src = 'https://github.com/echasnovski/mini.icons' },
@@ -68,14 +68,11 @@ vim.pack.add({
   { src = 'https://github.com/chomosuke/typst-preview.nvim' },
 })
 
-require 'tokyonight'.setup({
-  styles = {
-    comments = { italic = false },
-    keywords = { italic = false },
-  }
+require 'rose-pine'.setup({
+  styles = { italic = false },
 })
 vim.cmd('autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE')
-vim.cmd('colorscheme tokyonight')
+vim.cmd('colorscheme rose-pine')
 
 require 'nvim-treesitter.configs'.setup({
   ensure_installed = { 'c', 'cpp', 'python', 'json', 'yaml' },
