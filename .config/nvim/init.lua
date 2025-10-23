@@ -1,3 +1,5 @@
+local vim = vim
+
 -- General options
 vim.o.number = true
 vim.o.relativenumber = true
@@ -33,17 +35,14 @@ vim.keymap.set('n', '<leader>q', ':quit<CR>')
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', '<Esc>', ':noh<Return><Esc>', { silent = true })
 
-vim.keymap.set('n', '<leader>%', '<C-w><C-v><C-w><C-w>')
-vim.keymap.set('n', '<leader>"', '<C-w><C-s><C-w><C-w>')
+vim.keymap.set('n', '<leader>%', '<C-w>v<C-w>w')
+vim.keymap.set('n', '<leader>"', '<C-w>s<C-w>w')
 
 vim.keymap.set('n', '<leader>bd', ':bd<CR>')
 vim.keymap.set('n', '<leader>bD', ':bd!<CR>')
 
-vim.keymap.set({'n','v','x'}, '<leader>y', '"+yy')
-vim.keymap.set({'n','v','x'}, '<leader>d', '"+dd')
-
 -- Git blame for selection
-function git_blame()
+local function git_blame()
   local lines_start = vim.fn.line('v')
   local lines_end   = vim.fn.line('.')
 
@@ -52,69 +51,69 @@ end
 vim.keymap.set('v', '<leader>gb', git_blame)
 
 -- Plugins
-vim.pack.add({
-  { src = 'https://github.com/rose-pine/neovim' },
-  { src = 'https://github.com/stevearc/oil.nvim' },
-  { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
-  { src = 'https://github.com/echasnovski/mini.icons' },
-  { src = 'https://github.com/echasnovski/mini.align' },
-  { src = 'https://github.com/echasnovski/mini.statusline' },
-  { src = 'https://github.com/echasnovski/mini.surround' },
-  { src = 'https://github.com/echasnovski/mini.completion' },
-  { src = 'https://github.com/echasnovski/mini.trailspace' },
-  { src = 'https://github.com/neovim/nvim-lspconfig' },
-  { src = 'https://github.com/nvim-lua/plenary.nvim' },
-  { src = 'https://github.com/nvim-telescope/telescope.nvim' },
-  { src = 'https://github.com/chomosuke/typst-preview.nvim' },
-})
+local plugins = {
+  { 'folke/tokyonight.nvim' },
+  { 'stevearc/oil.nvim' },
+  { 'nvim-treesitter/nvim-treesitter', branch = 'main', lazy = false, build = ':TSUpdate' },
+  { 'echasnovski/mini.align' },
+  { 'echasnovski/mini.completion' },
+  { 'echasnovski/mini.trailspace' },
+  { 'echasnovski/mini.statusline' },
+  { 'echasnovski/mini.surround' },
+  { 'chomosuke/typst-preview.nvim' },
+  { 'j-hui/fidget.nvim' },
+  { 'neovim/nvim-lspconfig' },
+  { 'ibhagwan/fzf-lua' },
+}
 
-require 'rose-pine'.setup({
-  styles = { italic = false },
-})
-vim.cmd('autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE')
-vim.cmd('colorscheme rose-pine')
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
+end
+vim.opt.rtp:prepend(lazypath)
 
-require 'nvim-treesitter.configs'.setup({
-  ensure_installed = { 'c', 'cpp', 'python', 'json', 'yaml' },
-  highlight = { enable = true }
-})
+-- Plugins
+require("lazy").setup(plugins, {})
 
-local telescope = require('telescope')
-telescope.setup({
-  defaults = {
-    layout_strategy = 'vertical',
-  },
-  pickers = {
-    current_buffer_tags = { fname_width = 100, },
-    jumplist = { fname_width = 100, },
-    loclist = { fname_width = 100, },
-    lsp_definitions = { fname_width = 100, },
-    lsp_document_symbols = { fname_width = 100, },
-    lsp_dynamic_workspace_symbols = { fname_width = 100, },
-    lsp_implementations = { fname_width = 100, },
-    lsp_incoming_calls = { fname_width = 100, },
-    lsp_outgoing_calls = { fname_width = 100, },
-    lsp_references = { fname_width = 100, },
-    lsp_type_definitions = { fname_width = 100, },
-    lsp_workspace_symbols = { fname_width = 100, },
-    quickfix = { fname_width = 100, },
-    tags = { fname_width = 100, },
+require 'tokyonight'.setup({
+  styles = {
+    comments = { italic = false },
+    keywords = { italic = false },
   }
 })
+vim.cmd('autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE')
+vim.cmd('colorscheme tokyonight')
 
-local tbuiltin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', tbuiltin.find_files)
-vim.keymap.set('n', '<leader>fg', tbuiltin.live_grep)
-vim.keymap.set('n', '<leader>fw', tbuiltin.grep_string)
-vim.keymap.set('n', '<leader><space>', tbuiltin.buffers)
-vim.keymap.set('n', '<leader>fh', tbuiltin.help_tags)
-vim.keymap.set('n', '<leader>\'', tbuiltin.resume)
+require'nvim-treesitter'.setup {
+  -- Directory to install parsers and queries to
+  install_dir = vim.fn.stdpath('data') .. '/site'
+}
+require'nvim-treesitter'.install { 'c', 'cpp', 'python', 'json', 'yaml', 'ruby' }
 
-vim.keymap.set('n', 'grr', tbuiltin.lsp_references)
-vim.keymap.set('n', 'grs', tbuiltin.lsp_workspace_symbols)
-vim.keymap.set('n', 'gd', tbuiltin.lsp_definitions)
-vim.keymap.set('n', 'gri', tbuiltin.lsp_implementations)
-vim.keymap.set('n', 'gO', tbuiltin.lsp_document_symbols)
+require 'fzf-lua'.setup()
+vim.keymap.set('n', '<leader>ff', FzfLua.files)
+vim.keymap.set('n', '<leader>fg', FzfLua.live_grep)
+vim.keymap.set('n', '<leader>fw', FzfLua.grep_cword)
+vim.keymap.set('n', '<leader>fh', FzfLua.helptags)
+vim.keymap.set('n', '<leader><leader>', FzfLua.buffers)
+vim.keymap.set('n', '<leader>\'', FzfLua.resume)
+
+vim.keymap.set('n', 'grr', FzfLua.lsp_references)
+vim.keymap.set('n', 'grs', FzfLua.lsp_workspace_symbols)
+vim.keymap.set('n', 'gd', FzfLua.lsp_definitions)
+vim.keymap.set('n', 'gri', FzfLua.lsp_implementations)
+vim.keymap.set('n', 'gO', FzfLua.lsp_document_symbols)
 
 require 'mini.align'.setup()
 require 'mini.completion'.setup()
@@ -122,6 +121,11 @@ require 'mini.trailspace'.setup()
 require 'mini.statusline'.setup()
 require 'mini.surround'.setup()
 require 'typst-preview'.setup()
+require 'fidget'.setup({
+  notification = {
+    override_vim_notify = true,
+  },
+})
 
 require 'oil'.setup({
   columns = {
@@ -137,16 +141,21 @@ require 'oil'.setup({
 })
 vim.keymap.set('n', '<leader>e', ':Oil<CR>')
 
--- LSP section
-vim.lsp.config('clangd', {
+-- LSP section (leverage lsp-config for most)
+vim.lsp.config.clangd = {
   cmd = {
     'clangd',
     '--clang-tidy',
     '--background-index',
-  }
-})
+    '--offset-encoding=utf-8',
+  },
+  root_markers = { '.clangd', 'compile_commands.json' },
+  filetypes = { 'c', 'cpp' },
+}
 
 vim.lsp.config('pylsp', {
+  filetypes = { 'py' },
+  root_markers = { 'pyproject.toml' },
   settings = {
     pylsp = {
       plugins = {
@@ -158,11 +167,5 @@ vim.lsp.config('pylsp', {
   }
 })
 
-vim.lsp.config('ruby-lsp', {
-  cmd = { "ruby-lsp" },
-  filetypes = { "ruby", "eruby" },
-  root_markers = { "Gemfile", ".git" },
-})
-
-vim.lsp.enable({ 'pylsp', 'clangd', 'tinymist', 'ruby-lsp' })
+vim.lsp.enable({ 'pylsp', 'clangd', 'tinymist', 'gopls', 'ruby_lsp' })
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
