@@ -1,1 +1,13 @@
-/home/athrail/.config/omarchy/current/theme/mako.ini
+background-color=#191724
+text-color=#e0def4
+border-color=#c4a7e7
+border-radius=5
+progress-color=over #f6c177
+
+anchor=top-center
+font=Fira Sans Condensed 14
+padding=10
+default-timeout=5000
+
+[urgency=high]
+border-color=#eb6f92

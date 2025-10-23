@@ -1,21 +1,12 @@
-# Dynamic theme colors
-config-file = ?"~/.config/omarchy/current/theme/ghostty.conf"
-
-# Font
-font-family = "Iosevka Nerd Font"
-font-style = Regular
-font-size = 14
-
-# Window
-window-padding-x = 5
-window-padding-y = 5
-confirm-close-surface=false
-resize-overlay = never
-
-# Cursor stlying
-cursor-style = "block"
-cursor-style-blink = false
 shell-integration-features = no-cursor
+window-decoration = none
 
-# Keyboard bindings
-keybind = f11=toggle_fullscreen
+font-family = JetBrainsMono Nerd Font
+font-size = 14
+mouse-hide-while-typing = true
+scrollback-limit = 1000000
+
+theme = rose-pine
+cursor-style = block
+
+window-save-state = always
