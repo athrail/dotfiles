@@ -84,21 +84,7 @@ require 'nvim-treesitter.configs'.setup({
   highlight = { enable = true }
 })
 
-local win_config = function()
-  local height = math.floor(0.618 * vim.o.lines)
-  local width = math.floor(0.618 * vim.o.columns)
-  return {
-    anchor = 'NW',
-    height = height,
-    width = width,
-    row = math.floor(0.5 * (vim.o.lines - height)),
-    col = math.floor(0.5 * (vim.o.columns - width)),
-  }
-end
-
-require 'mini.pick'.setup(
-  { window = { config = win_config } }
-)
+require 'mini.pick'.setup()
 require 'mini.extra'.setup()
 vim.keymap.set('n', '<leader>ff', MiniPick.builtin.files)
 vim.keymap.set('n', '<leader>fg', MiniPick.builtin.grep_live)
@@ -110,7 +96,7 @@ vim.keymap.set('n', '<leader><leader>', MiniPick.builtin.buffers)
 vim.keymap.set('n', '<leader>\'', MiniPick.builtin.resume)
 
 vim.keymap.set('n', 'grr', ":Pick lsp scope=\"references\"<CR>")
-vim.keymap.set('n', 'grs', ":Pick lsp scope=\"workspace_symbol\"<CR>")
+vim.keymap.set('n', 'grs', ":Pick lsp scope=\"workspace_symboo\"<CR>")
 vim.keymap.set('n', 'gd', ":Pick lsp scope=\"definition\"<CR>")
 vim.keymap.set('n', 'gri', ":Pick lsp scope=\"implementation\"<CR>")
 vim.keymap.set('n', 'gO', ":Pick lsp scope=\"document_symbol\"<CR>")
@@ -137,9 +123,6 @@ require("noice").setup({
     inc_rename = false,           -- enables an input dialog for inc-rename.nvim
     lsp_doc_border = false,       -- add a border to hover docs and signature help
   },
-  popupmenu = {
-    enabled = false
-  }
 })
 
 require 'typst-preview'.setup()
