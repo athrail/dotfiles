@@ -43,9 +43,4 @@ done
 cp -r $HOME/.tmux.conf $DEV_ENV
 cp -r $HOME/.zshrc $DEV_ENV
 
-# backup scripts
-mkdir -p $DEV_ENV/.local/bin
-
-cp -r $HOME/.local/bin/hp_change_source.sh $DEV_ENV/.local/bin/hp_change_source.sh
-
 echo "Backup completed."
