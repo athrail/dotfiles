@@ -41,6 +41,8 @@ vim.keymap.set('n', '<leader>"', '<C-w>s<C-w>w')
 vim.keymap.set('n', '<leader>bd', ':bd<CR>')
 vim.keymap.set('n', '<leader>bD', ':bd!<CR>')
 
+vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
+
 -- Git blame for selection
 local function git_blame()
   local lines_start = vim.fn.line('v')
@@ -52,7 +54,8 @@ vim.keymap.set('v', '<leader>gb', git_blame)
 
 -- Plugins
 local plugins = {
-  { 'folke/tokyonight.nvim' },
+  -- { 'folke/tokyonight.nvim' },
+  { "rose-pine/neovim" },
   { 'stevearc/oil.nvim' },
   { 'nvim-treesitter/nvim-treesitter', branch = 'main', lazy = false, build = ':TSUpdate' },
   { 'echasnovski/mini.align' },
@@ -86,14 +89,14 @@ vim.opt.rtp:prepend(lazypath)
 -- Plugins
 require("lazy").setup(plugins, {})
 
-require 'tokyonight'.setup({
-  styles = {
-    comments = { italic = false },
-    keywords = { italic = false },
-  }
-})
 vim.cmd('autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE')
-vim.cmd('colorscheme tokyonight')
+-- require 'tokyonight'.setup({
+--   styles = {
+--     comments = { italic = false },
+--     keywords = { italic = false },
+--   }
+-- })
+vim.cmd('colorscheme rose-pine')
 
 require'nvim-treesitter'.setup {
   -- Directory to install parsers and queries to
@@ -153,19 +156,22 @@ vim.lsp.config.clangd = {
   filetypes = { 'c', 'cpp' },
 }
 
-vim.lsp.config('pylsp', {
-  filetypes = { 'py' },
-  root_markers = { 'pyproject.toml' },
+vim.lsp.config.tailwindcss = {
   settings = {
-    pylsp = {
-      plugins = {
-        pycodestyle = {
-          maxLineLength = 120,
-        }
-      }
+    tailwindCSS = {
+      classAttributes = { "class", "className", "class:list", "classList", "ngClass" },
+      includeLanguages = {
+        eelixir = "html-eex",
+        elixir = "phoenix-heex",
+        eruby = "erb",
+        heex = "phoenix-heex",
+        htmlangular = "html",
+        templ = "html",
+        htmldjango = "html"
+      },
     }
   }
-})
+}
 
-vim.lsp.enable({ 'pylsp', 'clangd', 'tinymist', 'gopls', 'ruby_lsp' })
+vim.lsp.enable({ 'pylsp', 'clangd', 'tinymist', 'gopls', 'ruby_lsp', 'tailwindcss' })
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
