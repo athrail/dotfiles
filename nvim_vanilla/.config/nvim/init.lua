@@ -31,6 +31,7 @@ vim.diagnostic.config({
 -- General keymap
 vim.keymap.set('n', '<leader>o', ':update<CR>:source<CR>')
 vim.keymap.set('n', '<leader>w', ':write<CR>')
+vim.keymap.set('n', '<C-s>', ':write<CR>')
 vim.keymap.set('n', '<leader>q', ':quit<CR>')
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', '<Esc>', ':noh<Return><Esc>', { silent = true })
@@ -167,5 +168,5 @@ vim.lsp.config('pylsp', {
   }
 })
 
-vim.lsp.enable({ 'pylsp', 'clangd', 'tinymist', 'gopls', 'ruby_lsp' })
+vim.lsp.enable({ 'pylsp', 'clangd' })
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)

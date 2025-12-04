@@ -5,17 +5,12 @@ set fish_greeting
 set -xg VISUAL "nvim"
 set -xg EDITOR "nvim"
 set -xg MANPAGER "nvim +Man!"
-set -xg GEM_HOME "$(gem env user_gemhome)"
 
-fish_add_path "/home/athrail/.local/bin"
-fish_add_path "$GEM_HOME/bin"
-
-mise activate fish | source
+fish_add_path "$HOME/.local/bin"
 
 # aliases
 alias ff fastfetch
 alias .. "cd .."
-alias ls eza
 alias cl clear
 alias cat bat
 alias lg lazygit
