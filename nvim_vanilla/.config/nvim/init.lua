@@ -56,11 +56,7 @@ local plugins = {
   { 'folke/tokyonight.nvim' },
   { 'stevearc/oil.nvim' },
   { 'nvim-treesitter/nvim-treesitter', branch = 'main', lazy = false, build = ':TSUpdate' },
-  { 'echasnovski/mini.align' },
-  { 'echasnovski/mini.completion' },
-  { 'echasnovski/mini.trailspace' },
-  { 'echasnovski/mini.statusline' },
-  { 'echasnovski/mini.surround' },
+  { 'echasnovski/mini.nvim', version = false },
   { 'chomosuke/typst-preview.nvim' },
   { 'j-hui/fidget.nvim' },
   { 'neovim/nvim-lspconfig' },
@@ -103,11 +99,11 @@ require'nvim-treesitter'.setup {
 require'nvim-treesitter'.install { 'c', 'cpp', 'python', 'json', 'yaml', 'ruby' }
 
 require 'fzf-lua'.setup()
+vim.keymap.set('n', '<leader>sg', FzfLua.live_grep)
+vim.keymap.set('n', '<leader>sw', FzfLua.grep_cword)
+vim.keymap.set('n', '<leader>sh', FzfLua.helptags)
 vim.keymap.set('n', '<leader>ff', FzfLua.files)
-vim.keymap.set('n', '<leader>fg', FzfLua.live_grep)
-vim.keymap.set('n', '<leader>fw', FzfLua.grep_cword)
-vim.keymap.set('n', '<leader>fh', FzfLua.helptags)
-vim.keymap.set('n', '<leader><leader>', FzfLua.buffers)
+vim.keymap.set('n', '<leader><leader>', FzfLua.files)
 vim.keymap.set('n', '<leader>\'', FzfLua.resume)
 
 vim.keymap.set('n', 'grr', FzfLua.lsp_references)
@@ -118,6 +114,7 @@ vim.keymap.set('n', 'gO', FzfLua.lsp_document_symbols)
 
 require 'mini.align'.setup()
 require 'mini.completion'.setup()
+require 'mini.snippets'.setup()
 require 'mini.trailspace'.setup()
 require 'mini.statusline'.setup()
 require 'mini.surround'.setup()
@@ -168,5 +165,15 @@ vim.lsp.config('pylsp', {
   }
 })
 
-vim.lsp.enable({ 'pylsp', 'clangd' })
+vim.lsp.config('tailwindcss', {
+  settings = {
+    tailwindCSS = {
+      includeLanguages = {
+        htmldjango = "html",
+      },
+    }
+  }
+})
+
+vim.lsp.enable({ 'pylsp', 'clangd', 'tailwindcss', 'lua_ls' })
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
