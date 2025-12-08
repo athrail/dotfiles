@@ -30,17 +30,31 @@ vim.diagnostic.config({
 
 -- General keymap
 vim.keymap.set('n', '<leader>o', ':update<CR>:source<CR>')
-vim.keymap.set('n', '<leader>w', ':write<CR>')
 vim.keymap.set('n', '<C-s>', ':write<CR>')
 vim.keymap.set('n', '<leader>q', ':quit<CR>')
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', '<Esc>', ':noh<Return><Esc>', { silent = true })
 
-vim.keymap.set('n', '<leader>%', '<C-w>v<C-w>w')
-vim.keymap.set('n', '<leader>"', '<C-w>s<C-w>w')
+-- Move Lines
+vim.keymap.set("n", "<A-j>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })
+vim.keymap.set("n", "<A-k>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move Up" })
 
+-- Move to window using the <ctrl> hjkl keys
+vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
+
+-- Window splits and close
+vim.keymap.set('n', '<leader>ws', '<C-w>s<C-w>w')
+vim.keymap.set('n', '<leader>wv', '<C-w>v<C-w>w')
+vim.keymap.set('n', '<leader>wq', '<C-w>q')
+
+-- Buffer managements
 vim.keymap.set('n', '<leader>bd', ':bd<CR>')
 vim.keymap.set('n', '<leader>bD', ':bd!<CR>')
+vim.keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+vim.keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 
 -- Git blame for selection
 local function git_blame()
@@ -54,13 +68,21 @@ vim.keymap.set('v', '<leader>gb', git_blame)
 -- Plugins
 local plugins = {
   { 'folke/tokyonight.nvim' },
-  { 'stevearc/oil.nvim' },
   { 'nvim-treesitter/nvim-treesitter', branch = 'main', lazy = false, build = ':TSUpdate' },
   { 'echasnovski/mini.nvim', version = false },
   { 'chomosuke/typst-preview.nvim' },
-  { 'j-hui/fidget.nvim' },
   { 'neovim/nvim-lspconfig' },
-  { 'ibhagwan/fzf-lua' },
+  { 'mason-org/mason.nvim' },
+  {
+    'folke/snacks.nvim',
+    opts = {
+      explorer = { enabled = true },
+      notifier = {
+        enabled = true,
+        timeout = 3000,
+      },
+    },
+  },
 }
 
 -- Bootstrap lazy.nvim
@@ -98,46 +120,45 @@ require'nvim-treesitter'.setup {
 }
 require'nvim-treesitter'.install { 'c', 'cpp', 'python', 'json', 'yaml', 'ruby' }
 
-require 'fzf-lua'.setup()
-vim.keymap.set('n', '<leader>sg', FzfLua.live_grep)
-vim.keymap.set('n', '<leader>sw', FzfLua.grep_cword)
-vim.keymap.set('n', '<leader>sh', FzfLua.helptags)
-vim.keymap.set('n', '<leader>ff', FzfLua.files)
-vim.keymap.set('n', '<leader><leader>', FzfLua.files)
-vim.keymap.set('n', '<leader>\'', FzfLua.resume)
-
-vim.keymap.set('n', 'grr', FzfLua.lsp_references)
-vim.keymap.set('n', 'grs', FzfLua.lsp_workspace_symbols)
-vim.keymap.set('n', 'gd', FzfLua.lsp_definitions)
-vim.keymap.set('n', 'gri', FzfLua.lsp_implementations)
-vim.keymap.set('n', 'gO', FzfLua.lsp_document_symbols)
-
 require 'mini.align'.setup()
 require 'mini.completion'.setup()
 require 'mini.snippets'.setup()
 require 'mini.trailspace'.setup()
 require 'mini.statusline'.setup()
 require 'mini.surround'.setup()
+require 'mini.tabline'.setup()
 require 'typst-preview'.setup()
-require 'fidget'.setup({
-  notification = {
-    override_vim_notify = true,
-  },
-})
 
-require 'oil'.setup({
-  columns = {
-    'icon',
-    'permissions',
-    'size',
-    'mtime',
-  },
-  view_options = {
-    show_hidden = true,
-    case_insensitive = true,
-  }
-})
-vim.keymap.set('n', '<leader>e', ':Oil<CR>')
+-- Snacks setup
+vim.keymap.set('n', '<leader>e', function() Snacks.explorer() end)
+
+vim.keymap.set('n', '<leader>sg', function() Snacks.picker.grep() end)
+vim.keymap.set('n', '<leader>sw', function() Snacks.picker.grep_word() end)
+vim.keymap.set('n', '<leader>sh', function() Snacks.picker.help() end)
+vim.keymap.set('n', '<leader>sR', function() Snacks.picker.resume() end)
+
+vim.keymap.set('n', '<leader>ff', function() Snacks.picker.files() end)
+vim.keymap.set('n', '<leader>fg', function() Snacks.picker.git_files() end)
+vim.keymap.set('n', '<leader><leader>', function() Snacks.picker.files() end)
+vim.keymap.set('n', '<leader>.', function() Snacks.picker.buffers() end)
+
+vim.keymap.set('n', '<leader>gg', function() Snacks.lazygit() end)
+vim.keymap.set('n', "<leader>gb", function() Snacks.picker.git_branches() end)
+vim.keymap.set('n', "<leader>gl", function() Snacks.picker.git_log() end)
+vim.keymap.set('n', "<leader>gL", function() Snacks.picker.git_log_line() end)
+vim.keymap.set('n', "<leader>gs", function() Snacks.picker.git_status() end)
+
+
+vim.keymap.set('n', 'gr', function() Snacks.picker.lsp_references() end)
+vim.keymap.set('n', '<leader>sS', function() Snacks.picker.lsp_workspace_symbols() end)
+vim.keymap.set('n', '<leader>ss', function() Snacks.picker.lsp_symbols() end)
+vim.keymap.set('n', 'gr', function() Snacks.picker.lsp_definitions() end)
+vim.keymap.set('n', 'gI', function() Snacks.picker.lsp_implementations() end)
+
+vim.keymap.set('n', '<C-/>', function() Snacks.terminal() end)
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { silent = true })
+
+require 'mason'.setup()
 
 -- LSP section (leverage lsp-config for most)
 vim.lsp.config.clangd = {
@@ -151,20 +172,6 @@ vim.lsp.config.clangd = {
   filetypes = { 'c', 'cpp' },
 }
 
-vim.lsp.config('pylsp', {
-  filetypes = { 'py' },
-  root_markers = { 'pyproject.toml' },
-  settings = {
-    pylsp = {
-      plugins = {
-        pycodestyle = {
-          maxLineLength = 120,
-        }
-      }
-    }
-  }
-})
-
 vim.lsp.config('tailwindcss', {
   settings = {
     tailwindCSS = {
@@ -175,5 +182,5 @@ vim.lsp.config('tailwindcss', {
   }
 })
 
-vim.lsp.enable({ 'pylsp', 'clangd', 'tailwindcss', 'lua_ls' })
+vim.lsp.enable({ 'pyright', 'clangd', 'tailwindcss', 'lua_ls' })
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
