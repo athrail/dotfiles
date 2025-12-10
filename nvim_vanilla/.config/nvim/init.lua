@@ -69,6 +69,7 @@ vim.keymap.set('v', '<leader>gb', git_blame)
 local plugins = {
   { 'folke/tokyonight.nvim' },
   { 'nvim-treesitter/nvim-treesitter', branch = 'main', lazy = false, build = ':TSUpdate' },
+  { 'nvim-treesitter/nvim-treesitter-textobjects', branch = 'main' },
   { 'echasnovski/mini.nvim', version = false },
   { 'chomosuke/typst-preview.nvim' },
   { 'neovim/nvim-lspconfig' },
@@ -81,8 +82,10 @@ local plugins = {
         enabled = true,
         timeout = 3000,
       },
+      terminal = { enabled = true },
     },
   },
+  { 'saghen/blink.cmp', version = '1.*', opts = {} },
 }
 
 -- Bootstrap lazy.nvim
@@ -114,19 +117,71 @@ require 'tokyonight'.setup({
 vim.cmd('autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE')
 vim.cmd('colorscheme tokyonight')
 
+require 'nvim-treesitter-textobjects'.setup()
 require'nvim-treesitter'.setup {
   -- Directory to install parsers and queries to
-  install_dir = vim.fn.stdpath('data') .. '/site'
+  install_dir = vim.fn.stdpath('data') .. '/site',
+  textobjects = {
+    select = {
+      enable = true,
+      lookahead = true,
+      include_surrounding_whitespace = true,
+      keymaps = {
+        -- You can use the capture groups defined in textobjects.scm
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
+      },
+    },
+    move = {
+      enable = true,
+      set_jumps = true, -- whether to set jumps in the jumplist
+      goto_next_start = {
+        ["]m"] = "@function.outer",
+        ["]]"] = "@class.outer",
+        -- You can use regex matching (i.e. lua pattern) and/or pass a list in a "query" key to group multiple queries.
+        ["]o"] = "@loop.*",
+        -- ["]o"] = { query = { "@loop.inner", "@loop.outer" } }
+        --
+        -- You can pass a query group to use query from `queries/<lang>/<query_group>.scm file in your runtime path.
+        -- Below example nvim-treesitter's `locals.scm` and `folds.scm`. They also provide highlights.scm and indent.scm.
+        ["]s"] = { query = "@local.scope", query_group = "locals", desc = "Next scope" },
+        ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
+      },
+      goto_next_end = {
+        ["]M"] = "@function.outer",
+        ["]["] = "@class.outer",
+      },
+      goto_previous_start = {
+        ["[m"] = "@function.outer",
+        ["[["] = "@class.outer",
+      },
+      goto_previous_end = {
+        ["[M"] = "@function.outer",
+        ["[]"] = "@class.outer",
+      },
+      -- Below will go to either the start or the end, whichever is closer.
+      -- Use if you want more granular movements
+      -- Make it even more gradual by adding multiple queries and regex.
+      goto_next = {
+        ["]d"] = "@conditional.outer",
+      },
+      goto_previous = {
+        ["[d"] = "@conditional.outer",
+      }
+    }
+  }
 }
-require'nvim-treesitter'.install { 'c', 'cpp', 'python', 'json', 'yaml', 'ruby' }
+require 'nvim-treesitter'.install { 'c', 'cpp', 'python', 'json', 'yaml' }
 
 require 'mini.align'.setup()
-require 'mini.completion'.setup()
 require 'mini.snippets'.setup()
 require 'mini.trailspace'.setup()
 require 'mini.statusline'.setup()
 require 'mini.surround'.setup()
 require 'mini.tabline'.setup()
+require 'mini.pairs'.setup()
 require 'typst-preview'.setup()
 
 -- Snacks setup
@@ -149,13 +204,13 @@ vim.keymap.set('n', "<leader>gL", function() Snacks.picker.git_log_line() end)
 vim.keymap.set('n', "<leader>gs", function() Snacks.picker.git_status() end)
 
 
-vim.keymap.set('n', 'gr', function() Snacks.picker.lsp_references() end)
-vim.keymap.set('n', '<leader>sS', function() Snacks.picker.lsp_workspace_symbols() end)
-vim.keymap.set('n', '<leader>ss', function() Snacks.picker.lsp_symbols() end)
-vim.keymap.set('n', 'gr', function() Snacks.picker.lsp_definitions() end)
-vim.keymap.set('n', 'gI', function() Snacks.picker.lsp_implementations() end)
+vim.keymap.set('n', '<leader>cr', function() Snacks.picker.lsp_references() end)
+vim.keymap.set('n', '<leader>cs', function() Snacks.picker.lsp_symbols() end)
+vim.keymap.set('n', '<leader>cS', function() Snacks.picker.lsp_workspace_symbols() end)
+vim.keymap.set('n', '<leader>cd', function() Snacks.picker.lsp_definitions() end)
+vim.keymap.set('n', '<leader>ci', function() Snacks.picker.lsp_implementations() end)
 
-vim.keymap.set('n', '<C-/>', function() Snacks.terminal() end)
+vim.keymap.set('n', '<leader>t', function() Snacks.terminal() end)
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { silent = true })
 
 require 'mason'.setup()
@@ -182,5 +237,5 @@ vim.lsp.config('tailwindcss', {
   }
 })
 
-vim.lsp.enable({ 'pyright', 'clangd', 'tailwindcss', 'lua_ls' })
+vim.lsp.enable({ 'pyright', 'clangd', 'tailwindcss', 'lua_ls', 'tinymist' })
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
