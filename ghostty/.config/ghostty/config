@@ -1,0 +1,18 @@
+theme = TokyoNight Night
+window-decoration = none
+
+window-padding-x = 5
+window-padding-y = 5
+
+font-family = JetBrainsMono Nerd Font
+font-size = 13
+mouse-hide-while-typing = true
+scrollback-limit = 1000000
+
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
+
+window-save-state = always
+confirm-close-surface = false
+resize-overlay = never
