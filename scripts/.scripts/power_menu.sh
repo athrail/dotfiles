@@ -4,7 +4,7 @@ menu() {
   local prompt="Power menu"
   local options="Lock\nSleep\nRestart\nShut down"
 
-  local selection=$(echo -e "$options" | fuzzel --lines 4 --dmenu -p "$prompt…" "${args[@]}")
+  local selection=$(echo -e "$options" | rofi -fixed-num-lines 4 -dmenu "${args[@]}")
   case $selection in
   *Lock*) loginctl lock-session ;;
   *Sleep*) systemctl suspend ;;
