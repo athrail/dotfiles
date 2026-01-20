@@ -1,7 +1,7 @@
 background-color=#191724
 text-color=#e0def4
 border-color=#c4a7e7
-border-radius=5
+border-radius=0
 progress-color=over #f6c177
 
 anchor=top-center
