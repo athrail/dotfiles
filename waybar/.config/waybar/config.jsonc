@@ -74,6 +74,7 @@
   "pulseaudio": {
     "scroll-step": 1,
     "format": "  {volume}%",
-    "on-click": "pavucontrol"
+    "format-muted": "  muted",
+    "on-click": "footclient -e wiremix"
   }
 }
