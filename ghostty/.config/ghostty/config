@@ -1,11 +1,12 @@
 theme = Rose Pine
 window-decoration = none
 
-window-padding-x = 5
-window-padding-y = 5
+window-padding-x = 10
+window-padding-y = 10
 
 font-family = IosevkaTerm Nerd Font Mono
 font-size = 14
+font-feature = -calt, -liga, -dlig
 mouse-hide-while-typing = true
 scrollback-limit = 1000000
 
