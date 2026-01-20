@@ -2,7 +2,7 @@
 
 * {
   font-family: "JetBrainsMono Nerd Font", FontAwesome;
-  font-size: 14px;
+  font-size: 18px;
   margin: 0;
   padding: 0;
   border-radius: 0;
@@ -22,12 +22,8 @@ tooltip, tooltip *, menu, menu * {
 #clock {
   background-color: @base;
   margin: 0px 3px;
-  /* border-bottom: solid 2px; */
-  padding: 3px 5px;
-}
-
-#workspaces {
   padding: 2px;
+  /* border-bottom: solid 2px; */
 }
 
 #load {

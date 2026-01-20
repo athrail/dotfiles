@@ -12,13 +12,13 @@
   "modules-center": [],
   "modules-right": [
     "clock",
-    "tray",
     // "load",
     // "memory",
     // "temperature#cpu",
     // "temperature#gpu",
     "bluetooth",
-    "pulseaudio"
+    "pulseaudio",
+    "tray"
   ],
   // Modules configuration
   "hyprland/workspaces": {
@@ -69,7 +69,7 @@
     "tooltip-format": "{device_alias}",
     "tooltip-format-connected": " {device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}",
-    "on-click": "blueman-manager"
+    "on-click": "footclient -e bluetui"
   },
   "pulseaudio": {
     "scroll-step": 1,
