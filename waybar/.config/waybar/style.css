@@ -1,7 +1,7 @@
 @import "rose-pine.css";
 
 * {
-  font-family: "JetBrainsMono Nerd Font", FontAwesome;
+  font-family: "Fira Sans Condensed", FontAwesome;
   font-size: 18px;
   margin: 0;
   padding: 0;
@@ -13,15 +13,11 @@ window#waybar {
   color: @iris;
 }
 
-tooltip, tooltip *, menu, menu * {
-  font-family: "Fira Sans Condensed";
-}
-
 #window, #workspaces, #tray,
 #load, #memory, #temperature, #bluetooth, #pulseaudio, #tray,
 #clock {
   background-color: @base;
-  margin: 0px 3px;
+  margin: 0px 6px;
   padding: 2px;
   /* border-bottom: solid 2px; */
 }
@@ -60,10 +56,6 @@ tooltip, tooltip *, menu, menu * {
 
 #pulseaudio {
   border-color: @love;
-}
-
-#window * {
-  font-family: "Fira Sans Condensed";
 }
 
 #workspaces * {
