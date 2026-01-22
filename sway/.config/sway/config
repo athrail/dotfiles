@@ -94,6 +94,8 @@ bindsym Ctrl+Shift+2 layout splitv; border pixel 2
 bindsym Ctrl+Shift+3 layout tabbed; border normal 2
 bindsym Ctrl+Shift+4 layout stacking; border normal 2
 bindsym Ctrl+Shift+5 layout toggle split; border pixel 2
+bindsym $mod+b splith
+bindsym $mod+v splitv
 bindsym $mod+f fullscreen
 bindsym $mod+g floating toggle
 bindsym $mod+a focus parent
@@ -125,7 +127,7 @@ bindsym XF86AudioPrev exec playerctl previous
 
 # Notification center
 bindsym $mod+Shift+n exec swaync-client -t
-bindsym $mod+v exec cliphist list | wofi -dmenu | cliphist decode | wl-copy
+bindsym $mod+Shift+v exec cliphist list | wofi -dmenu | cliphist decode | wl-copy
 
 # Show keybindings help
 bindsym $mod+slash exec $config_dir/scripts/help
