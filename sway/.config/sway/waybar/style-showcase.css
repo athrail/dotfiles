@@ -1,0 +1,355 @@
+/* Showcase Waybar Theme - Maximum Visual Impact */
+
+/* Color Palette */
+@define-color bg #00141d;
+@define-color bg-alt #14191f;
+@define-color fg #FFFFFF;
+@define-color gray #1a1a1a;
+@define-color cyan #b3e5fc;
+@define-color barbie #4fc3f7;
+@define-color blue #80bfff;
+@define-color red #ff6b6b;
+@define-color yellow #ffd97d;
+@define-color green #66bb6a;
+@define-color purple #c792ea;
+@define-color orange #ffb74d;
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", monospace;
+    font-size: 14px;
+    font-weight: 500;
+    min-height: 0;
+}
+
+window#waybar {
+    background: linear-gradient(180deg, @bg 0%, @bg-alt 100%);
+    color: @fg;
+    border-bottom: 2px solid @cyan;
+}
+
+/* App Launcher */
+#custom-launcher {
+    padding: 0 14px;
+    background: @bg-alt;
+    color: @barbie;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 4px 0 4px 6px;
+    border-radius: 8px;
+}
+
+#custom-launcher:hover {
+    background: @gray;
+    color: @cyan;
+}
+
+/* Workspaces */
+#workspaces {
+    background: @bg-alt;
+    margin: 4px 6px;
+    padding: 0 4px;
+    border-radius: 8px;
+}
+
+#workspaces button {
+    padding: 4px 10px;
+    background: transparent;
+    color: @fg;
+    border: none;
+    border-radius: 6px;
+    margin: 2px 3px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#workspaces button:hover {
+    background: @gray;
+    color: @cyan;
+}
+
+#workspaces button.focused {
+    background: @cyan;
+    color: @bg;
+    font-weight: bold;
+}
+
+#workspaces button.urgent {
+    background: @red;
+    color: @fg;
+}
+
+#workspaces button.occupied {
+    background: rgba(79, 195, 247, 0.2);
+    color: @cyan;
+    font-weight: 600;
+}
+
+#workspaces button.persistent {
+    color: #666;
+}
+
+/* Mode Indicator */
+#mode {
+    background: @red;
+    color: @fg;
+    padding: 4px 12px;
+    margin: 4px 6px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+/* Window Title */
+#window {
+    background: @bg-alt;
+    color: @cyan;
+    padding: 4px 16px;
+    margin: 4px 6px;
+    border-radius: 8px;
+    font-weight: normal;
+    transition: all 0.3s ease;
+}
+
+#window.empty {
+    background: transparent;
+    padding: 0;
+    margin: 0;
+}
+
+/* Clock - Center Piece */
+#clock {
+    background: @bg-alt;
+    color: @fg;
+    padding: 4px 20px;
+    margin: 4px 8px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+#clock:hover {
+    background: @gray;
+}
+
+/* System Monitoring Modules */
+#cpu,
+#memory,
+#disk {
+    background: @bg-alt;
+    padding: 4px 12px;
+    margin: 4px 4px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+#cpu {
+    border-left: 3px solid @red;
+}
+
+#cpu:hover {
+    background: @gray;
+}
+
+#memory {
+    border-left: 3px solid @barbie;
+}
+
+#memory:hover {
+    background: @gray;
+}
+
+#disk {
+    border-left: 3px solid @yellow;
+}
+
+#disk:hover {
+    background: @gray;
+}
+
+/* Network */
+#network {
+    background: @bg-alt;
+    padding: 4px 12px;
+    margin: 4px 4px;
+    border-radius: 8px;
+    border-left: 3px solid @cyan;
+    transition: all 0.3s ease;
+}
+
+#network:hover {
+    background: @gray;
+}
+
+#network.disconnected {
+    border-left-color: @red;
+    color: @red;
+}
+
+/* Audio */
+#pulseaudio {
+    background: @bg-alt;
+    padding: 4px 12px;
+    margin: 4px 4px;
+    border-radius: 8px;
+    border-left: 3px solid @barbie;
+    transition: all 0.3s ease;
+}
+
+#pulseaudio:hover {
+    background: @gray;
+}
+
+#pulseaudio.muted {
+    border-left-color: @red;
+}
+
+/* Battery */
+#battery {
+    background: @bg-alt;
+    padding: 4px 12px;
+    margin: 4px 4px;
+    border-radius: 8px;
+    border-left: 3px solid @green;
+    transition: all 0.3s ease;
+}
+
+#battery:hover {
+    background: @gray;
+}
+
+#battery.charging {
+    border-left-color: @cyan;
+}
+
+#battery.warning:not(.charging) {
+    border-left-color: @yellow;
+    color: @yellow;
+}
+
+#battery.critical:not(.charging) {
+    border-left-color: @red;
+    color: @red;
+}
+
+#battery.full {
+    border-left-color: @green;
+}
+
+/* Custom Modules */
+#custom-weather,
+#custom-updates,
+#custom-vpn,
+#custom-media {
+    background: @bg-alt;
+    padding: 4px 12px;
+    margin: 4px 4px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+#custom-weather {
+    border-left: 3px solid @blue;
+}
+
+#custom-weather:hover {
+    background: @gray;
+}
+
+#custom-updates {
+    border-left: 3px solid @yellow;
+}
+
+#custom-updates:hover {
+    background: @gray;
+}
+
+#custom-vpn {
+    border-left: 3px solid @green;
+}
+
+#custom-vpn:hover {
+    background: @gray;
+}
+
+#custom-media {
+    border-left: 3px solid @purple;
+    min-width: 100px;
+}
+
+#custom-media:hover {
+    background: @gray;
+}
+
+/* Notification Icon */
+#custom-notification {
+    background: @bg-alt;
+    padding: 4px 12px;
+    margin: 4px 4px;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+#custom-notification:hover {
+    background: @gray;
+}
+
+/* System Tray */
+#tray {
+    background: @bg-alt;
+    padding: 4px 8px;
+    margin: 4px 4px;
+    border-radius: 8px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}
+
+/* Power Button */
+#custom-power {
+    background: @bg-alt;
+    color: @red;
+    padding: 4px 14px;
+    margin: 4px 6px 4px 4px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#custom-power:hover {
+    background: @gray;
+    color: @orange;
+}
+
+/* Smooth transitions for all modules */
+#cpu,
+#memory,
+#disk,
+#network,
+#pulseaudio,
+#battery,
+#custom-weather,
+#custom-updates,
+#custom-vpn,
+#custom-media,
+#custom-notification,
+#tray {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Tooltip styling */
+tooltip {
+    background: @bg;
+    border: 2px solid @cyan;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+tooltip label {
+    color: @fg;
+}
