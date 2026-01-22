@@ -5,7 +5,8 @@ menu() {
 
   local selection=$(echo -e "$options" | fuzzel --lines 4 --width 10 --dmenu -p "󰐥 ")
   case $selection in
-  *Lock*) loginctl lock-session ;;
+  # *Lock*) loginctl lock-session ;;
+  *Lock*) gtklock ;;
   *Sleep*) systemctl suspend ;;
   *Restart*) systemctl reboot ;;
   *Shut\ down*) systemctl poweroff ;;

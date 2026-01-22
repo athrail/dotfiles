@@ -7,22 +7,23 @@ if [ -z "$CHANGE" ]; then
   exit 1
 fi
 
-# Get the focused monitor name
-MONITOR=$(hyprctl monitors -j | jq -r '.[] | select(.focused == true) | .name')
-
-# Map monitor names to I2C bus numbers or handle laptop display
-case $MONITOR in
-"DP-1")
-  BUS=6 # HP 4K USB-C monitor
-  ;;
-*)
-  echo "Unknown monitor: $MONITOR"
-  exit 1
-  ;;
-esac
+# # Get the focused monitor name
+# MONITOR=$(hyprctl monitors -j | jq -r '.[] | select(.focused == true) | .name')
+#
+# # Map monitor names to I2C bus numbers or handle laptop display
+# case $MONITOR in
+# "DP-1")
+#   BUS=6 # HP 4K USB-C monitor
+#   ;;
+# *)
+#   echo "Unknown monitor: $MONITOR"
+#   exit 1
+#   ;;
+# esac
 
 # Get current brightness for external monitors
-CURRENT=$(ddcutil --bus $BUS getvcp 10 --terse | cut -d' ' -f4)
+# CURRENT=$(ddcutil --bus $BUS getvcp 10 --terse | cut -d' ' -f4)
+CURRENT=$(ddcutil getvcp 10 --terse | cut -d' ' -f4)
 
 # Calculate new brightness
 NEW=$((CURRENT + CHANGE))
@@ -33,4 +34,5 @@ if [ $NEW -gt 100 ]; then NEW=100; fi
 
 notify-send "☀️ Brightness $NEW" -t 500
 # Set new brightness
-ddcutil --bus $BUS --sleep-multiplier 0.1 setvcp 10 $NEW
+# ddcutil --bus $BUS --sleep-multiplier 0.1 setvcp 10 $NEW
+ddcutil --sleep-multiplier 0.1 setvcp 10 $NEW
