@@ -7,13 +7,14 @@ set $down j
 set $up k
 set $right l
 set $term foot
-set $menu rofi -show drun -config $config_dir/rofi/config.rasi
+# set $menu rofi -show drun
+set $menu fuzzel
 set $config_dir ~/.config/sway
 set $browser helium
 
 ### Output configuration
 # Simple static wallpaper with swaybg
-output * bg ~/.config/sway/wallpaper/wallhaven-k87q1m_3440x1440.png fill
+output * bg ~/Pictures/1.jpg fill
 
 # For multiple monitors:
 # output HDMI-A-1 resolution 1920x1080 position 1920,0
@@ -21,7 +22,7 @@ output * bg ~/.config/sway/wallpaper/wallhaven-k87q1m_3440x1440.png fill
 ### Idle configuration
 exec swayidle -w \
     timeout 300 'swaymsg "output * dpms off"' \
-         resume 'swaymsg "output * dpms on" && gtklock' \
+    resume 'swaymsg "output * dpms on" && gtklock' \
     before-sleep 'gtklock'
 
 ### Input configuration
@@ -33,6 +34,7 @@ input type:touchpad {
 }
 
 input type:keyboard {
+    xkb_layout "pl"
     xkb_options caps:escape
     repeat_delay 300
     repeat_rate 50
@@ -94,10 +96,10 @@ bindsym Ctrl+Shift+2 layout splitv; border pixel 2
 bindsym Ctrl+Shift+3 layout tabbed; border normal 2
 bindsym Ctrl+Shift+4 layout stacking; border normal 2
 bindsym Ctrl+Shift+5 layout toggle split; border pixel 2
-bindsym $mod+b splith
-bindsym $mod+v splitv
+bindsym $mod+b splitt
 bindsym $mod+f fullscreen
 bindsym $mod+g floating toggle
+bindsym $mod+Shift+g focus mode_toggle
 bindsym $mod+a focus parent
 bindsym $mod+Shift+p exec $config_dir/scripts/sway-layout-menu.sh
 
@@ -127,13 +129,13 @@ bindsym XF86AudioPrev exec playerctl previous
 
 # Notification center
 bindsym $mod+Shift+n exec swaync-client -t
-bindsym $mod+Shift+v exec cliphist list | wofi -dmenu | cliphist decode | wl-copy
+bindsym $mod+Shift+v exec cliphist list | fuzzel --dmenu | cliphist decode | wl-copy
 
 # Show keybindings help
 bindsym $mod+slash exec $config_dir/scripts/help
 
 # Audio mixer
-bindsym $mod+Shift+a exec $term -e pulsemixer
+bindsym $mod+Shift+a exec foot --title=wiremix --app-id=wiremix wiremix
 
 # Applications
 bindsym $mod+Shift+f exec thunar
@@ -144,51 +146,65 @@ bindsym $mod+Ctrl+s sticky toggle
 font pango:IosevkaTermNF 12
 
 # Borders
-default_border pixel 2
-default_floating_border pixel 4
+default_border normal
+default_floating_border normal
 titlebar_padding 15 4
 gaps inner 10
 gaps outer 0
 
-# Colors
-set $bg #00141d
-set $fg #FFFFFF
-set $gray #1a1a1a
-set $cyan #b3e5fc
-set $barbie #4fc3f7
-set $blue #80bfff
+# Rose Pine Theme for Sway WM
+# Set the colors using the Rose Pine palette
+set $base #191724
+set $surface #1f1d2e
+set $overlay #26233a
+set $muted #6e6a86
+set $subtle #908caa
+set $text #e0def4
+set $love #eb6f92
+set $gold #f6c177
+set $rose #ebbcba
+set $pine #31748f
+set $foam #9ccfd8
+set $iris #c4a7e7
+set $highlight_low #21202e
+set $highlight_med #403d52
+set $highlight_high #524f67
 
-# class                 border   backgr  text    indicator child_border
-client.focused          $barbie  $cyan   $gray   $blue     $barbie
-client.focused_inactive $gray    $bg     $fg     $bg       $gray
-client.unfocused        $gray    $bg     $fg     $bg       $gray
-client.urgent           $blue    $blue   $bg     $blue     $blue
+# Window colors
+# class                 border          backgr     text    indicator    child_border
+client.focused          $foam           $overlay   $text   $gold        $foam
+client.focused_inactive $muted          $overlay   $text   $overlay     $muted
+client.unfocused        $highlight_low  $overlay   $text   $overlay     $highlight_low
+client.placeholder      $highlight_med  $overlay   $text   $overlay     $highlight_med
 
 ### Startup applications
 #exec_always autotiling
 exec_always bash -c "killall -q swaync; while pgrep -x swaync >/dev/null; do sleep 0.1; done; swaync -c ~/.config/sway/swaync/config.json -s ~/.config/sway/swaync/style.css"
 # exec blueman-applet
 exec lxpolkit
+exec gsettings set org.gnome.desktop.interface color-scheme "prefer-dark" # for GTK4 apps
 
 # Clipboard history
 exec wl-paste --watch cliphist store
 
 # Status bar - launch waybar on startup
-exec_always bash -c "killall -q waybar; while pgrep -x waybar >/dev/null; do sleep 0.1; done; waybar -c ~/.config/sway/waybar/config -s ~/.config/sway/waybar/style.css"
+exec_always bash -c "killall -q waybar; while pgrep -x waybar >/dev/null; do sleep 0.1; done; waybar"
 
 ### App-specific settings
 # Float
-for_window [app_id="mpv"] floating enable, move position center
-for_window [class="mpv"] floating enable, move position center
-for_window [app_id="eog"] floating enable, move position center
-for_window [class="Eog"] floating enable, move position center
-for_window [app_id="galculator"] floating enable, move position center
-for_window [class="Galculator"] floating enable, move position center
-for_window [app_id="transmission-gtk"] floating enable, move position center
-for_window [class="Transmission-gtk"] floating enable, move position center
-for_window [app_id="nwg-look"] floating enable, move position center
-for_window [app_id="pavucontrol"] floating enable, move position center
-for_window [app_id="blueman-manager"] floating enable, move position center
+for_window [app_id="mpv"] floating enable, move position center, border normal
+for_window [app_id="wiremix"] floating enable, move position center, border normal
+for_window [app_id="bluetui"] floating enable, move position center, border normal
+for_window [class="mpv"] floating enable, move position center, border normal
+for_window [app_id="eog"] floating enable, move position center, border normal
+for_window [class="Eog"] floating enable, move position center, border normal
+for_window [app_id="galculator"] floating enable, move position center, border normal
+for_window [class="Galculator"] floating enable, move position center, border normal
+for_window [app_id="transmission-gtk"] floating enable, move position center, border normal
+for_window [class="Transmission-gtk"] floating enable, move position center, border normal
+for_window [app_id="nwg-look"] floating enable, move position center, border normal
+for_window [app_id="pavucontrol"] floating enable, move position center, border normal
+for_window [app_id="blueman-manager"] floating enable, move position center, border normal
 
 # Thunar - uncomment to make all thunar windows float (dialogs don't have distinguishable properties)
 # for_window [app_id="thunar"] floating enable, move position center
@@ -204,14 +220,14 @@ for_window [class=".*"] inhibit_idle fullscreen
 for_window [app_id=".*"] inhibit_idle fullscreen
 
 ### Workspace assignments
-assign [class="discord"] workspace number 8
-assign [app_id="discord"] workspace number 8
-assign [class="Gimp"] workspace number 9
-assign [app_id="gimp"] workspace number 9
-assign [class="obs"] workspace number 10
-assign [app_id="com.obsproject.Studio"] workspace number 10
+# assign [class="discord"] workspace number 8
+# assign [app_id="discord"] workspace number 8
+# assign [class="Gimp"] workspace number 9
+# assign [app_id="gimp"] workspace number 9
+# assign [class="obs"] workspace number 10
+# assign [app_id="com.obsproject.Studio"] workspace number 10
 
 #include /etc/sway/config.d/*
 # Import environment variables for systemd and D-Bus services
-exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
-exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP PATH
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP PATH
