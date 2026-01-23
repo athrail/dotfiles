@@ -1,92 +1,135 @@
-@import "rose-pine.css";
+/* DWM-style color scheme matching slstatus */
+@define-color bg #00141d;
+@define-color fg #FFFFFF;
+@define-color gray #1a1a1a;
+@define-color cyan #b3e5fc;
+@define-color barbie #4fc3f7;
+@define-color blue #80bfff;
+@define-color red #ff6b6b;
+@define-color yellow #ffc107;
+@define-color purple #9c27b0;
+
+@define-color base #191724;
+@define-color surface #1f1d2e;
+@define-color overlay #26233a;
+@define-color muted #6e6a86;
+@define-color subtle #908caa;
+@define-color text #e0def4;
+@define-color love #eb6f92;
+@define-color gold #f6c177;
+@define-color rose #ebbcba;
+@define-color pine #31748f;
+@define-color foam #9ccfd8;
+@define-color iris #c4a7e7;
+@define-color highlight_low #21202e;
+@define-color highlight_med #403d52;
+@define-color highlight_high #524f67;
 
 * {
-  font-family: "Fira Sans Condensed", FontAwesome;
-  font-size: 18px;
-  margin: 0;
-  padding: 0;
-  border-radius: 0;
+    border: none;
+    border-radius: 0;
+    font-family: "IosevkaTermNF", monospace;
+    font-size: 16px;
+    min-height: 0;
 }
 
 window#waybar {
-  background-color: @base;
-  color: @iris;
+    background-color: @bg;
+    color: @fg;
 }
 
-#window, #workspaces, #tray,
-#load, #memory, #temperature, #bluetooth, #pulseaudio, #tray,
-#clock {
-  background-color: @base;
-  margin: 0px 6px;
-  padding: 2px;
-  /* border-bottom: solid 2px; */
+/* Workspaces */
+#workspaces {
+    background-color: @bg;
 }
 
-#load {
-  border-color: @iris;
-}
-
+/* Window title (left side) - dark bg, light text */
 #window {
-  border-color: @foam;
-}
-
-#clock {
-  border-color: @love;
-}
-
-#memory {
-  border-color: @gold;
-}
-
-#temperature.cpu {
-  border-color: @rose;
-}
-
-#temperature.gpu {
-  border-color: @pine;
-}
-
-#bluetooth {
-  border-color: @foam;
-}
-
-#pulseaudio {
-  border-color: @love;
-}
-
-#pulseaudio {
-  border-color: @love;
-}
-
-#workspaces * {
-  padding: 0 2px;
-  border-radius: 5px;
+    background-color: @bg;
+    color: @fg;
+    font-weight: normal;
+    padding: 0 12px;
 }
 
 #workspaces button {
-  color: @iris;
-  padding: 0 4px;
+    padding: 0 8px;
+    background-color: @bg;
+    color: @fg;
+    border: none;
+    border-bottom: 3px solid transparent;
+    min-width: 24px;
 }
 
-#workspaces button.active {
-  color: @base;
-  background-color: @iris;
+/* Workspace with windows (occupied) - style non-empty workspaces */
+#workspaces button:not(.empty):not(.focused) {
+    color: @fg;
+}
+
+#workspaces button:hover {
+    background-color: @gray;
+    color: @cyan;
+}
+
+/* Active/focused workspace */
+#workspaces button.focused {
+    background-color: @cyan;
+    color: @bg;
+    font-weight: bold;
 }
 
 #workspaces button.urgent {
-  color: @base;
-  background-color: @love;
+    background-color: @blue;
+    color: @fg;
+    border-bottom: 3px solid @blue;
 }
 
-#tray * {
-  padding: 0;
+/* Right-side modules */
+#cpu,
+#memory,
+#disk,
+#pulseaudio,
+#network,
+#battery,
+#clock,
+#tray,
+#custom-notification {
+    padding: 0 8px;
+    background-color: @bg;
+    color: @fg;
+}
+
+/* All module text should be white, icons colored via HTML markup in config */
+#cpu,
+#memory,
+#disk,
+#pulseaudio,
+#network,
+#battery,
+#clock {
+    color: @fg;
+}
+
+#cpu {
+    padding-left: 8px;
+}
+
+#clock.time {
+    padding-right: 8px;
+}
+
+#tray {
+    background-color: @bg;
+    padding-right: 12px;
+}
+
+#custom-notification {
+    padding-right: 12px;
 }
 
 #tray > .passive {
-  -gtk-icon-effect: dim;
+    -gtk-icon-effect: dim;
 }
 
 #tray > .needs-attention {
-  -gtk-icon-effect: highlight;
-  background-color: @red;
+    -gtk-icon-effect: highlight;
 }
