@@ -1,0 +1,92 @@
+@import "rose-pine.css";
+
+* {
+  font-family: "Fira Sans Condensed", FontAwesome;
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+}
+
+window#waybar {
+  background-color: @base;
+  color: @iris;
+}
+
+#window, #workspaces, #tray,
+#load, #memory, #temperature, #bluetooth, #pulseaudio, #tray,
+#clock {
+  background-color: @base;
+  margin: 0px 6px;
+  padding: 2px;
+  /* border-bottom: solid 2px; */
+}
+
+#load {
+  border-color: @iris;
+}
+
+#window {
+  border-color: @foam;
+}
+
+#clock {
+  border-color: @love;
+}
+
+#memory {
+  border-color: @gold;
+}
+
+#temperature.cpu {
+  border-color: @rose;
+}
+
+#temperature.gpu {
+  border-color: @pine;
+}
+
+#bluetooth {
+  border-color: @foam;
+}
+
+#pulseaudio {
+  border-color: @love;
+}
+
+#pulseaudio {
+  border-color: @love;
+}
+
+#workspaces * {
+  padding: 0 2px;
+  border-radius: 5px;
+}
+
+#workspaces button {
+  color: @iris;
+  padding: 0 4px;
+}
+
+#workspaces button.active {
+  color: @base;
+  background-color: @iris;
+}
+
+#workspaces button.urgent {
+  color: @base;
+  background-color: @love;
+}
+
+#tray * {
+  padding: 0;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: @red;
+}
