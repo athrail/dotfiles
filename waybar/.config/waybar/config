@@ -8,10 +8,10 @@
     "memory",
     "disk",
     "network",
-    "sway/window"
+    "hyprland/window"
   ],
   "modules-center": [
-    "sway/workspaces"
+    "hyprland/workspaces"
   ],
   "modules-right": [
     "pulseaudio",
@@ -21,13 +21,13 @@
     "custom/notification",
     "tray"
   ],
-  "sway/workspaces": {
+  "hyprland/workspaces": {
     "disable-scroll": false,
     "all-outputs": true,
     "format": "{name}",
     "numeric-first": true
   },
-  "sway/window": {
+  "hyprland/window": {
     "format": "{title}",
     "max-length": 80,
     "tooltip": false

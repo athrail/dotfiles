@@ -1,13 +1,4 @@
-/* DWM-style color scheme matching slstatus */
-@define-color bg #00141d;
-@define-color fg #FFFFFF;
-@define-color gray #1a1a1a;
-@define-color cyan #b3e5fc;
-@define-color barbie #4fc3f7;
-@define-color blue #80bfff;
-@define-color red #ff6b6b;
-@define-color yellow #ffc107;
-@define-color purple #9c27b0;
+/* Rose pine color */
 
 @define-color base #191724;
 @define-color surface #1f1d2e;
@@ -34,27 +25,27 @@
 }
 
 window#waybar {
-    background-color: @bg;
-    color: @fg;
+    background-color: @base;
+    color: @text;
 }
 
 /* Workspaces */
 #workspaces {
-    background-color: @bg;
+    background-color: @base;
 }
 
 /* Window title (left side) - dark bg, light text */
 #window {
-    background-color: @bg;
-    color: @fg;
+    background-color: @base;
+    color: @text;
     font-weight: normal;
     padding: 0 12px;
 }
 
 #workspaces button {
-    padding: 0 8px;
-    background-color: @bg;
-    color: @fg;
+    padding: 0 4px;
+    background-color: @base;
+    color: @text;
     border: none;
     border-bottom: 3px solid transparent;
     min-width: 24px;
@@ -62,25 +53,25 @@ window#waybar {
 
 /* Workspace with windows (occupied) - style non-empty workspaces */
 #workspaces button:not(.empty):not(.focused) {
-    color: @fg;
+    color: @text;
 }
 
 #workspaces button:hover {
-    background-color: @gray;
-    color: @cyan;
+    background-color: @overlay;
+    color: @pine;
 }
 
 /* Active/focused workspace */
-#workspaces button.focused {
-    background-color: @cyan;
-    color: @bg;
+#workspaces button.active {
+    background-color: @pine;
+    color: @base;
     font-weight: bold;
 }
 
 #workspaces button.urgent {
-    background-color: @blue;
-    color: @fg;
-    border-bottom: 3px solid @blue;
+    background-color: @love;
+    color: @text;
+    border-bottom: 3px solid @love;
 }
 
 /* Right-side modules */
@@ -94,8 +85,8 @@ window#waybar {
 #tray,
 #custom-notification {
     padding: 0 8px;
-    background-color: @bg;
-    color: @fg;
+    background-color: @base;
+    color: @text;
 }
 
 /* All module text should be white, icons colored via HTML markup in config */
@@ -106,7 +97,7 @@ window#waybar {
 #network,
 #battery,
 #clock {
-    color: @fg;
+    color: @text;
 }
 
 #cpu {
@@ -118,7 +109,7 @@ window#waybar {
 }
 
 #tray {
-    background-color: @bg;
+    background-color: @base;
     padding-right: 12px;
 }
 
