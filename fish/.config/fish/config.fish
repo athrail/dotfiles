@@ -9,7 +9,6 @@ set -xg MANPAGER "nvim +Man!"
 fish_add_path "$HOME/.local/bin"
 fish_add_path "$HOME/.composer/vendor/bin"
 fish_add_path "$HOME/go/bin"
-fish_add_path "$HOME/.config/emacs/bin"
 
 # aliases
 alias ff fastfetch
