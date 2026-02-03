@@ -2,8 +2,8 @@
 set fish_greeting
 
 # exports
-set -xg VISUAL "nvim"
-set -xg EDITOR "nvim"
+set -xg VISUAL nvim
+set -xg EDITOR nvim
 set -xg MANPAGER "nvim +Man!"
 
 fish_add_path "$HOME/.local/bin"
@@ -14,6 +14,7 @@ fish_add_path "$HOME/go/bin"
 alias ff fastfetch
 alias .. "cd .."
 alias cl clear
+alias ls eza
 alias cat bat
 alias lg lazygit
 alias tms tmux-sessionizer.sh
