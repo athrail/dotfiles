@@ -1,7 +1,7 @@
 #! /bin/bash
 
 menu() {
-  local options=" hyprland\n fish\n fuzzel\n mako\n nvim\n sway\n swaync\n tmux\n waybar"
+  local options=" hyprland\n fish\n foot\n fuzzel\n mako\n nvim\n sway\n swaync\n tmux\n waybar"
   local file=""
   local terminal="foot"
   local editor="nvim"
@@ -10,6 +10,7 @@ menu() {
   case $selection in
   *hyprland*) file="$HOME/.config/hypr" ;;
   *fish*) file="$HOME/.config/fish/config.fish" ;;
+  *foot*) file="$HOME/.config/foot/foot.ini" ;;
   *fuzzel*) file="$HOME/.config/fuzzel/fuzzel.ini" ;;
   *mako*) file="$HOME/.config/mako" ;;
   *nvim*) file="$HOME/.config/nvim" ;;
