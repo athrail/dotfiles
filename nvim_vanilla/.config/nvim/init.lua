@@ -67,25 +67,59 @@ vim.keymap.set('v', '<leader>gb', git_blame)
 
 -- Plugins
 local plugins = {
-  { 'folke/tokyonight.nvim' },
+  {
+    "rose-pine/neovim",
+    name = "rose-pine",
+    config = function()
+      require 'rose-pine'.setup({
+        styles = {
+          italic = false,
+        }
+      })
+      vim.cmd('autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE')
+      vim.cmd("colorscheme rose-pine")
+    end
+  },
   { 'nvim-treesitter/nvim-treesitter', branch = 'main', lazy = false, build = ':TSUpdate' },
   { 'nvim-treesitter/nvim-treesitter-textobjects', branch = 'main' },
   { 'echasnovski/mini.nvim', version = false },
   { 'chomosuke/typst-preview.nvim' },
   { 'neovim/nvim-lspconfig' },
   { 'mason-org/mason.nvim' },
-  {
-    'folke/snacks.nvim',
-    opts = {
-      explorer = { enabled = true },
-      notifier = {
-        enabled = true,
-        timeout = 3000,
-      },
-      terminal = { enabled = true },
-    },
-  },
   { 'saghen/blink.cmp', version = '1.*', opts = {} },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      "nvim-tree/nvim-web-devicons", -- optional, but recommended
+    },
+    lazy = false, -- neo-tree will lazily load itself
+    opts = {
+      sort_case_insensitive = true,
+      filesystem = {
+        filtered_items = {
+          visible = false, -- hide filtered items on open
+          hide_gitignored = true,
+          hide_dotfiles = false,
+          hide_by_name = {
+            ".github",
+            ".gitignore",
+            "package-lock.json",
+            ".changeset",
+            ".prettierrc.json",
+          },
+          never_show = { ".git" },
+        },
+      },
+    }
+  },
+  {
+    "ibhagwan/fzf-lua",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {}
+  },
 }
 
 -- Bootstrap lazy.nvim
@@ -107,15 +141,6 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Plugins
 require("lazy").setup(plugins, {})
-
-require 'tokyonight'.setup({
-  styles = {
-    comments = { italic = false },
-    keywords = { italic = false },
-  }
-})
-vim.cmd('autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE')
-vim.cmd('colorscheme tokyonight')
 
 require 'nvim-treesitter-textobjects'.setup()
 require'nvim-treesitter'.setup {
@@ -173,7 +198,6 @@ require'nvim-treesitter'.setup {
     }
   }
 }
-require 'nvim-treesitter'.install { 'c', 'cpp', 'python', 'json', 'yaml' }
 
 require 'mini.align'.setup()
 require 'mini.snippets'.setup()
@@ -184,33 +208,31 @@ require 'mini.tabline'.setup()
 require 'mini.pairs'.setup()
 require 'typst-preview'.setup()
 
--- Snacks setup
-vim.keymap.set('n', '<leader>e', function() Snacks.explorer() end)
+vim.keymap.set('n', '<leader>e', function() vim.cmd("Neotree focus") end)
 
-vim.keymap.set('n', '<leader>sg', function() Snacks.picker.grep() end)
-vim.keymap.set('n', '<leader>sw', function() Snacks.picker.grep_word() end)
-vim.keymap.set('n', '<leader>sh', function() Snacks.picker.help() end)
-vim.keymap.set('n', '<leader>sR', function() Snacks.picker.resume() end)
+local fzfl = require 'fzf-lua'
+fzfl.register_ui_select()
 
-vim.keymap.set('n', '<leader>ff', function() Snacks.picker.files() end)
-vim.keymap.set('n', '<leader>fg', function() Snacks.picker.git_files() end)
-vim.keymap.set('n', '<leader><leader>', function() Snacks.picker.files() end)
-vim.keymap.set('n', '<leader>.', function() Snacks.picker.buffers() end)
+vim.keymap.set('n', '<leader>sg', fzfl.live_grep)
+vim.keymap.set('n', '<leader>sG', fzfl.grep)
+vim.keymap.set('n', '<leader>sw', fzfl.grep_cword)
+vim.keymap.set('n', '<leader>sR', fzfl.resume)
+-- vim.keymap.set('n', '<leader>sh', function() Snacks.picker.help() end)
 
-vim.keymap.set('n', '<leader>gg', function() Snacks.lazygit() end)
-vim.keymap.set('n', "<leader>gb", function() Snacks.picker.git_branches() end)
-vim.keymap.set('n', "<leader>gl", function() Snacks.picker.git_log() end)
-vim.keymap.set('n', "<leader>gL", function() Snacks.picker.git_log_line() end)
-vim.keymap.set('n', "<leader>gs", function() Snacks.picker.git_status() end)
+vim.keymap.set('n', '<leader>ff', fzfl.files)
+vim.keymap.set('n', '<leader>.', fzfl.files)
+vim.keymap.set('n', '<leader><leader>', fzfl.files)
+vim.keymap.set('n', '<leader>fg', fzfl.git_files)
+vim.keymap.set('n', '<leader>,', fzfl.buffers)
 
+-- vim.keymap.set('n', '<leader>gg', function() Snacks.lazygit() end)
 
-vim.keymap.set('n', '<leader>cr', function() Snacks.picker.lsp_references() end)
-vim.keymap.set('n', '<leader>cs', function() Snacks.picker.lsp_symbols() end)
-vim.keymap.set('n', '<leader>cS', function() Snacks.picker.lsp_workspace_symbols() end)
-vim.keymap.set('n', '<leader>cd', function() Snacks.picker.lsp_definitions() end)
-vim.keymap.set('n', '<leader>ci', function() Snacks.picker.lsp_implementations() end)
+vim.keymap.set('n', '<leader>cr', fzfl.lsp_references)
+vim.keymap.set('n', '<leader>cs', fzfl.lsp_document_symbols)
+vim.keymap.set('n', '<leader>cS', fzfl.lsp_workspace_symbols)
+vim.keymap.set('n', '<leader>cd', fzfl.lsp_definitions)
+vim.keymap.set('n', '<leader>ci', fzfl.lsp_implementations)
 
-vim.keymap.set('n', '<leader>t', function() Snacks.terminal() end)
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { silent = true })
 
 require 'mason'.setup()
@@ -237,5 +259,5 @@ vim.lsp.config('tailwindcss', {
   }
 })
 
-vim.lsp.enable({ 'pyright', 'clangd', 'tailwindcss', 'lua_ls', 'tinymist' })
+vim.lsp.enable({ 'ty', 'clangd', 'tailwindcss', 'lua_ls', 'tinymist' })
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
