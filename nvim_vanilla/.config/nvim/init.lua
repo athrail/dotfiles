@@ -226,7 +226,7 @@ require 'mini.tabline'.setup()
 require 'mini.pairs'.setup()
 require 'typst-preview'.setup()
 
-vim.keymap.set('n', '<leader>e', function() vim.cmd("Neotree focus") end)
+vim.keymap.set('n', '<leader>e', function() vim.cmd("Neotree current") end)
 
 local fzfl = require 'fzf-lua'
 fzfl.register_ui_select()
@@ -235,7 +235,7 @@ vim.keymap.set('n', '<leader>sg', fzfl.live_grep)
 vim.keymap.set('n', '<leader>sG', fzfl.grep)
 vim.keymap.set('n', '<leader>sw', fzfl.grep_cword)
 vim.keymap.set('n', '<leader>sR', fzfl.resume)
--- vim.keymap.set('n', '<leader>sh', function() Snacks.picker.help() end)
+vim.keymap.set('n', '<leader>sh', fzfl.helptags)
 
 vim.keymap.set('n', '<leader>ff', fzfl.files)
 vim.keymap.set('n', '<leader>.', fzfl.files)
