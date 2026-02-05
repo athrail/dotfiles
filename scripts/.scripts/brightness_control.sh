@@ -33,4 +33,4 @@ if [ $NEW -gt 100 ]; then NEW=100; fi
 
 notify-send "☀️ Brightness $NEW" -t 500
 # Set new brightness
-ddcutil --bus $BUS --sleep-multiplier 0.1 setvcp 10 $NEW
+ddcutil --bus $BUS setvcp 10 $NEW
