@@ -44,9 +44,11 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+(use-package swiper)
 (use-package ivy
   :diminish
-  :bind (:map ivy-minibuffer-map
+  :bind (("C-s" . swiper)
+	 :map ivy-minibuffer-map
 	 ("TAB" . ivy-alt-done)
 	 ("C-l" . ivy-alt-done)
 	 ("C-j" . ivy-next-line)
@@ -62,28 +64,24 @@
 
 (use-package autothemer)
 
+(use-package undo-fu)
 (use-package evil
-  :ensure t
   :diminish evil-mode
-  :bind (:map evil-normal-state-map
-	 ("C-h" . evil-window-left)
+  :bind (("C-h" . evil-window-left)
 	 ("C-j" . evil-window-down)
 	 ("C-k" . evil-window-up)
 	 ("C-l" . evil-window-right)
 	 ("H" . evil-prev-buffer)
-	 ("L" . evil-next-buffer)
-	 ("C-s" . save-buffer))
+	 ("L" . evil-next-buffer))
   :init (evil-mode 1)
   )
 
 (use-package doom-modeline
-  :ensure t
   :init (doom-modeline-mode 1))
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
-(use-package undo-fu)
 (use-package which-key
   :init (which-key-mode)
   :diminish which-key-mode
@@ -106,9 +104,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("94071442d5800f294f428e79a87b8061ac99efeda9d1688ddbf4bbd86b628550"
-     default))
+ '(evil-undo-system 'undo-fu)
  '(package-selected-packages
    '(autothemer counsel doom-modeline evil ivy-rich rainbow-delimiters
 		undo-fu)))
@@ -119,4 +115,4 @@
  ;; If there is more than one, they won't work right.
  )
 
-(load-theme 'rose-pine)
+(load-theme 'rose-pine t)
