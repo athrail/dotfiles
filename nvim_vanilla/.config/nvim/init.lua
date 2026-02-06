@@ -29,9 +29,9 @@ vim.diagnostic.config({
 })
 
 -- General keymap
-vim.keymap.set('n', '<leader>o', ':update<CR>:source<CR>')
-vim.keymap.set('n', '<C-s>', ':write<CR>')
-vim.keymap.set('n', '<leader>q', ':quit<CR>')
+vim.keymap.set('n', '<leader>o', ':update<CR>:source<CR>', { desc = "Source current file" })
+vim.keymap.set('n', '<C-s>', ':write<CR>', { desc = "Save file" })
+vim.keymap.set('n', '<leader>q', ':quit<CR>', { desc = "Quit" })
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', '<Esc>', ':noh<Return><Esc>', { silent = true })
 
@@ -46,13 +46,13 @@ vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = tr
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
 
 -- Window splits and close
-vim.keymap.set('n', '<leader>ws', '<C-w>s<C-w>w')
-vim.keymap.set('n', '<leader>wv', '<C-w>v<C-w>w')
-vim.keymap.set('n', '<leader>wq', '<C-w>q')
+vim.keymap.set('n', '<leader>ws', '<C-w>s<C-w>w', { desc = "Horizontal Split" })
+vim.keymap.set('n', '<leader>wv', '<C-w>v<C-w>w', { desc = "Vertical Split" })
+vim.keymap.set('n', '<leader>wq', '<C-w>q', { desc = "Close window" })
 
 -- Buffer managements
-vim.keymap.set('n', '<leader>bd', ':bd<CR>')
-vim.keymap.set('n', '<leader>bD', ':bd!<CR>')
+vim.keymap.set('n', '<leader>bd', ':bd<CR>', { desc = "Kill buffer" })
+vim.keymap.set('n', '<leader>bD', ':bd!<CR>', { desc = "Force kill buffer" })
 vim.keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 vim.keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 
@@ -63,7 +63,7 @@ local function git_blame()
 
   vim.cmd(string.format(':Git blame -L%d,%d -- %%', lines_start, lines_end))
 end
-vim.keymap.set('v', '<leader>gb', git_blame)
+vim.keymap.set('v', '<leader>gb', git_blame, { desc = "Git blame selection" })
 
 -- Plugins
 local plugins = {
@@ -137,6 +137,24 @@ local plugins = {
     keys = {
       { "<leader>gg", "<cmd>Neogit<cr>", desc = "Show Neogit UI" }
     }
+  },
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    },
+    keys = {
+      {
+        "<leader>?",
+        function()
+          require("which-key").show({ global = false })
+        end,
+        desc = "Buffer Local Keymaps (which-key)",
+      },
+    },
   }
 }
 
@@ -226,30 +244,29 @@ require 'mini.tabline'.setup()
 require 'mini.pairs'.setup()
 require 'typst-preview'.setup()
 
-vim.keymap.set('n', '<leader>e', function() vim.cmd("Neotree current") end)
+vim.keymap.set('n', '<leader>e', function() vim.cmd("Neotree current") end, { desc = "Neotree" })
 
 local fzfl = require 'fzf-lua'
 fzfl.register_ui_select()
 
-vim.keymap.set('n', '<leader>sg', fzfl.live_grep)
-vim.keymap.set('n', '<leader>sG', fzfl.grep)
-vim.keymap.set('n', '<leader>sw', fzfl.grep_cword)
-vim.keymap.set('n', '<leader>sR', fzfl.resume)
-vim.keymap.set('n', '<leader>sh', fzfl.helptags)
+vim.keymap.set('n', '<leader>sg', fzfl.live_grep, { desc = "Live grep" })
+vim.keymap.set('n', '<leader>sG', fzfl.grep, { desc = "Grep through files" })
+vim.keymap.set('n', '<leader>sw', fzfl.grep_cword, { desc = "Look for word under cursor" })
+vim.keymap.set('n', '<leader>sR', fzfl.resume, { desc = "Resume last search" })
+vim.keymap.set('n', '<leader>sh', fzfl.helptags, { desc = "Look through help" })
 
-vim.keymap.set('n', '<leader>ff', fzfl.files)
-vim.keymap.set('n', '<leader>.', fzfl.files)
-vim.keymap.set('n', '<leader><leader>', fzfl.files)
-vim.keymap.set('n', '<leader>fg', fzfl.git_files)
-vim.keymap.set('n', '<leader>,', fzfl.buffers)
+vim.keymap.set('n', '<leader>ff', fzfl.files, { desc = "Find file" })
+vim.keymap.set('n', '<leader>.', fzfl.files, { desc = "Find file" })
+vim.keymap.set('n', '<leader><leader>', fzfl.files, { desc = "Find file" })
+vim.keymap.set('n', '<leader>fg', fzfl.git_files, { desc = "Git Files" })
+vim.keymap.set('n', '<leader>,', fzfl.buffers, { desc = "Buffers" })
+vim.keymap.set('n', '<leader>fb', fzfl.buffers, { desc = "Buffers" })
 
--- vim.keymap.set('n', '<leader>gg', function() Snacks.lazygit() end)
-
-vim.keymap.set('n', '<leader>cr', fzfl.lsp_references)
-vim.keymap.set('n', '<leader>cs', fzfl.lsp_document_symbols)
-vim.keymap.set('n', '<leader>cS', fzfl.lsp_workspace_symbols)
-vim.keymap.set('n', '<leader>cd', fzfl.lsp_definitions)
-vim.keymap.set('n', '<leader>ci', fzfl.lsp_implementations)
+vim.keymap.set('n', '<leader>cr', fzfl.lsp_references, { desc = "LSP references" })
+vim.keymap.set('n', '<leader>cs', fzfl.lsp_document_symbols, { desc = "Document symbols" })
+vim.keymap.set('n', '<leader>cS', fzfl.lsp_workspace_symbols, { desc = "Workspace symbols" })
+vim.keymap.set('n', '<leader>cd', fzfl.lsp_definitions, { desc = "Definitions" })
+vim.keymap.set('n', '<leader>ci', fzfl.lsp_implementations, { desc = "Implementations" })
 
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { silent = true })
 
