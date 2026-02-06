@@ -36,11 +36,11 @@
     "spacing": 6
   },
   "clock#date": {
-    "format": "<span color='#80bfff'>󰸗</span> {:%a %b %d}",
+    "format": "<span color='#80bfff'>󰸗 </span> {:%a %b %d}",
     "tooltip": false
   },
   "clock#time": {
-    "format": "<span color='#9c27b0'>󰥔</span> {:%H:%M}",
+    "format": "<span color='#9c27b0'>󰥔 </span> {:%H:%M}",
     "tooltip-format": "<b>{:%A, %B %d, %Y}</b>\n<tt><small>{calendar}</small></tt>",
     "calendar": {
       "mode": "month",
@@ -53,20 +53,20 @@
     }
   },
   "disk": {
-    "format": "<span color='#ffc107'>󰋊</span> {percentage_used}%",
+    "format": "<span color='#ffc107'>󰋊 </span> {percentage_used}%",
     "path": "/",
     "tooltip": true,
     "tooltip-format": "Used: {used} / {total} ({percentage_used}%)\nFree: {free}",
     "interval": 30
   },
   "cpu": {
-    "format": "<span color='#ff6b6b'>󰻠</span> {usage}%",
+    "format": "<span color='#ff6b6b'>󰻠 </span> {usage}%",
     "tooltip": true,
     "tooltip-format": "CPU: {usage}%\nLoad: {load}",
     "interval": 1
   },
   "memory": {
-    "format": "<span color='#4fc3f7'>󰍛</span> {}%",
+    "format": "<span color='#4fc3f7'>󰍛 </span> {}%",
     "tooltip": true,
     "tooltip-format": "RAM: {used:0.1f}GB / {total:0.1f}GB ({percentage}%)\nSwap: {swapUsed:0.1f}GB / {swapTotal:0.1f}GB",
     "interval": 1
@@ -76,24 +76,24 @@
       "warning": 30,
       "critical": 15
     },
-    "format": "<span color='#b3e5fc'>󱊣</span> {capacity}%",
+    "format": "<span color='#b3e5fc'>󱊣 </span> {capacity}%",
     "format-charging": "<span color='#4fc3f7'>󱊥</span> {capacity}%",
     "format-plugged": "<span color='#4fc3f7'>󱊥</span> {capacity}%",
     "format-alt": "{time}",
     "tooltip": false
   },
   "network": {
-    "format-wifi": "<span color='#b3e5fc'>󰖩</span> {essid}",
-    "format-ethernet": "<span color='#b3e5fc'>󰈀</span> ETH",
-    "format-linked": "<span color='#b3e5fc'>󰈀</span> No IP",
-    "format-disconnected": "<span color='#808080'>󰖪</span> Disconnected",
+    "format-wifi": "<span color='#b3e5fc'>󰖩 </span> {essid}",
+    "format-ethernet": "<span color='#b3e5fc'>󰈀 </span> ETH",
+    "format-linked": "<span color='#b3e5fc'>󰈀 </span> No IP",
+    "format-disconnected": "<span color='#808080'>󰖪 </span> Disconnected",
     "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
     "interval": 5,
     "on-click": "nm-connection-editor"
   },
   "pulseaudio": {
-    "format": "<span color='#b3e5fc'>󰕾</span> {volume}%",
-    "format-muted": "<span color='#808080'>󰖁</span> MUTE",
+    "format": "<span color='#b3e5fc'>󰕾 </span> {volume}%",
+    "format-muted": "<span color='#808080'>󰖁 </span> MUTE",
     "tooltip": false,
     "on-click": "foot --title=wiremix --app-id=wiremix wiremix",
     "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
@@ -112,14 +112,14 @@
     "tooltip": false,
     "format": "{icon}",
     "format-icons": {
-      "notification": "<span foreground='#ff6b6b'>󰂚</span>",
-      "none": "<span foreground='#b3e5fc'>󰂚</span>",
-      "dnd-notification": "<span foreground='#ff6b6b'>󰂛</span>",
-      "dnd-none": "<span foreground='#b3e5fc'>󰂛</span>",
-      "inhibited-notification": "<span foreground='#ff6b6b'>󰂚</span>",
-      "inhibited-none": "<span foreground='#b3e5fc'>󰂚</span>",
-      "dnd-inhibited-notification": "<span foreground='#ff6b6b'>󰂛</span>",
-      "dnd-inhibited-none": "<span foreground='#b3e5fc'>󰂛</span>"
+      "notification": "<span foreground='#ff6b6b'>󰂚 </span>",
+      "none": "<span foreground='#b3e5fc'>󰂚 </span>",
+      "dnd-notification": "<span foreground='#ff6b6b'>󰂛 </span>",
+      "dnd-none": "<span foreground='#b3e5fc'>󰂛 </span>",
+      "inhibited-notification": "<span foreground='#ff6b6b'>󰂚 </span>",
+      "inhibited-none": "<span foreground='#b3e5fc'>󰂚 </span>",
+      "dnd-inhibited-notification": "<span foreground='#ff6b6b'>󰂛 </span>",
+      "dnd-inhibited-none": "<span foreground='#b3e5fc'>󰂛 </span>"
     },
     "return-type": "json",
     "exec-if": "which swaync-client",
