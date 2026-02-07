@@ -155,6 +155,45 @@ local plugins = {
         desc = "Buffer Local Keymaps (which-key)",
       },
     },
+  },
+  {
+    "ej-shafran/compile-mode.nvim",
+    version = "^5.0.0",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      { "m00qek/baleia.nvim", tag = "v1.3.0" },
+    },
+    config = function()
+      ---@type CompileModeOpts
+      vim.g.compile_mode = {
+        -- if you use something like `nvim-cmp` or `blink.cmp` for completion,
+        -- set this to fix tab completion in command mode:
+        input_word_completion = true,
+
+        -- to add ANSI escape code support, add:
+        baleia_setup = true,
+
+        -- to make `:Compile` replace special characters (e.g. `%`) in
+        -- the command (and behave more like `:!`), add:
+        bang_expansion = true,
+      }
+    end
+  },
+  -- lazy.nvim
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {
+      -- add any options here
+    },
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
+      }
   }
 }
 
@@ -267,6 +306,9 @@ vim.keymap.set('n', '<leader>cs', fzfl.lsp_document_symbols, { desc = "Document 
 vim.keymap.set('n', '<leader>cS', fzfl.lsp_workspace_symbols, { desc = "Workspace symbols" })
 vim.keymap.set('n', '<leader>cd', fzfl.lsp_definitions, { desc = "Definitions" })
 vim.keymap.set('n', '<leader>ci', fzfl.lsp_implementations, { desc = "Implementations" })
+
+vim.keymap.set('n', '<leader>cc', function() vim.cmd("Compile") end, { desc = "Compile" })
+vim.keymap.set('n', '<leader>cm', function() vim.cmd("Recompile") end, { desc = "Recompile" })
 
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { silent = true })
 
