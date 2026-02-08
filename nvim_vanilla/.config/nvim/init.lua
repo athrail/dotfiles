@@ -30,7 +30,6 @@ vim.diagnostic.config({
 
 -- General keymap
 vim.keymap.set('n', '<leader>o', ':update<CR>:source<CR>', { desc = "Source current file" })
-vim.keymap.set('n', '<C-s>', ':write<CR>', { desc = "Save file" })
 vim.keymap.set('n', '<leader>q', ':quit<CR>', { desc = "Quit" })
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', '<Esc>', ':noh<Return><Esc>', { silent = true })
@@ -50,11 +49,6 @@ vim.keymap.set('n', '<leader>ws', '<C-w>s<C-w>w', { desc = "Horizontal Split" })
 vim.keymap.set('n', '<leader>wv', '<C-w>v<C-w>w', { desc = "Vertical Split" })
 vim.keymap.set('n', '<leader>wq', '<C-w>q', { desc = "Close window" })
 
--- Buffer managements
-vim.keymap.set('n', '<leader>bd', ':bd<CR>', { desc = "Kill buffer" })
-vim.keymap.set('n', '<leader>bD', ':bd!<CR>', { desc = "Force kill buffer" })
-vim.keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-vim.keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 
 -- Git blame for selection
 local function git_blame()
@@ -80,13 +74,15 @@ local plugins = {
       vim.cmd("colorscheme rose-pine")
     end
   },
-  { 'nvim-treesitter/nvim-treesitter', branch = 'main', lazy = false, build = ':TSUpdate' },
+  { 'nvim-treesitter/nvim-treesitter',             branch = 'main', lazy = false, build = ':TSUpdate' },
   { 'nvim-treesitter/nvim-treesitter-textobjects', branch = 'main' },
-  { 'echasnovski/mini.nvim', version = false },
+  { 'nvim-mini/mini.statusline', version = false },
+  { 'nvim-mini/mini.tabline', version = false },
+  { 'nvim-mini/mini.pairs', version = false },
   { 'chomosuke/typst-preview.nvim' },
   { 'neovim/nvim-lspconfig' },
   { 'mason-org/mason.nvim' },
-  { 'saghen/blink.cmp', version = '1.*', opts = {} },
+  { 'saghen/blink.cmp',                            version = '1.*', opts = {} },
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
@@ -95,7 +91,7 @@ local plugins = {
       "MunifTanjim/nui.nvim",
       "nvim-tree/nvim-web-devicons", -- optional, but recommended
     },
-    lazy = false, -- neo-tree will lazily load itself
+    lazy = false,                    -- neo-tree will lazily load itself
     opts = {
       sort_case_insensitive = true,
       filesystem = {
@@ -116,22 +112,17 @@ local plugins = {
     }
   },
   {
-    "ibhagwan/fzf-lua",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {}
-  },
-  {
     "NeogitOrg/neogit",
     lazy = true,
     dependencies = {
-      "nvim-lua/plenary.nvim",         -- required
-      "sindrets/diffview.nvim",        -- optional - Diff integration
+      "nvim-lua/plenary.nvim",  -- required
+      "sindrets/diffview.nvim", -- optional - Diff integration
 
       -- Only one of these is needed.
       -- "nvim-telescope/telescope.nvim", -- optional
-      "ibhagwan/fzf-lua",              -- optional
+      -- "ibhagwan/fzf-lua",              -- optional
       -- "nvim-mini/mini.pick",           -- optional
-      -- "folke/snacks.nvim",             -- optional
+      "folke/snacks.nvim", -- optional
     },
     cmd = "Neogit",
     keys = {
@@ -192,8 +183,43 @@ local plugins = {
       -- OPTIONAL:
       --   `nvim-notify` is only needed, if you want to use the notification view.
       --   If not available, we use `mini` as the fallback
-      "rcarriga/nvim-notify",
-      }
+      -- "rcarriga/nvim-notify",
+    }
+  },
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    ---@type snacks.Config
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+      bigfile = { enabled = true },
+      dashboard = { enabled = true },
+      indent = { enabled = true },
+      input = { enabled = true },
+      notifier = { enabled = true },
+      quickfile = { enabled = true },
+      scope = { enabled = true },
+      statuscolumn = { enabled = true },
+      words = { enabled = true },
+
+      layout = {
+        backdrop = false,
+        width = 0.5,
+        min_width = 80,
+        height = 0.8,
+        min_height = 30,
+        box = "vertical",
+        border = true,
+        title = "{title} {live} {flags}",
+        title_pos = "center",
+        { win = "input",   height = 1,          border = "bottom" },
+        { win = "list",    border = "none" },
+        { win = "preview", title = "{preview}", height = 0.4,     border = "top" },
+      },
+    },
   }
 }
 
@@ -205,7 +231,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   if vim.v.shell_error ~= 0 then
     vim.api.nvim_echo({
       { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out, "WarningMsg" },
+      { out,                            "WarningMsg" },
       { "\nPress any key to exit..." },
     }, true, {})
     vim.fn.getchar()
@@ -218,7 +244,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup(plugins, {})
 
 require 'nvim-treesitter-textobjects'.setup()
-require'nvim-treesitter'.setup {
+require 'nvim-treesitter'.setup {
   -- Directory to install parsers and queries to
   install_dir = vim.fn.stdpath('data') .. '/site',
   textobjects = {
@@ -274,41 +300,70 @@ require'nvim-treesitter'.setup {
   }
 }
 
-require 'mini.align'.setup()
-require 'mini.snippets'.setup()
-require 'mini.trailspace'.setup()
 require 'mini.statusline'.setup()
-require 'mini.surround'.setup()
 require 'mini.tabline'.setup()
 require 'mini.pairs'.setup()
 require 'typst-preview'.setup()
 
+require 'noice'.setup {
+  lsp = {
+    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+    override = {
+      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+      ["vim.lsp.util.stylize_markdown"] = true,
+      ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+    },
+  },
+  -- you can enable a preset for easier configuration
+  presets = {
+    bottom_search = true,         -- use a classic bottom cmdline for search
+    command_palette = true,       -- position the cmdline and popupmenu together
+    long_message_to_split = true, -- long messages will be sent to a split
+    inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+    lsp_doc_border = false,       -- add a border to hover docs and signature help
+  },
+}
+
 vim.keymap.set('n', '<leader>e', function() vim.cmd("Neotree current") end, { desc = "Neotree" })
 
-local fzfl = require 'fzf-lua'
-fzfl.register_ui_select()
+-- Search menu
+vim.keymap.set('n', '<leader>sg', function() Snacks.picker.grep() end)
+vim.keymap.set('n', '<leader>sw', function() Snacks.picker.grep_word() end)
+vim.keymap.set('n', '<leader>sh', function() Snacks.picker.help() end)
+vim.keymap.set('n', '<leader>sR', function() Snacks.picker.resume() end)
 
-vim.keymap.set('n', '<leader>sg', fzfl.live_grep, { desc = "Live grep" })
-vim.keymap.set('n', '<leader>sG', fzfl.grep, { desc = "Grep through files" })
-vim.keymap.set('n', '<leader>sw', fzfl.grep_cword, { desc = "Look for word under cursor" })
-vim.keymap.set('n', '<leader>sR', fzfl.resume, { desc = "Resume last search" })
-vim.keymap.set('n', '<leader>sh', fzfl.helptags, { desc = "Look through help" })
+-- Find menu
+vim.keymap.set('n', '<leader>ff', function() Snacks.picker.files() end)
+vim.keymap.set('n', '<leader>fg', function() Snacks.picker.git_files() end)
+vim.keymap.set('n', '<leader>fb', function() Snacks.picker.buffers() end)
 
-vim.keymap.set('n', '<leader>ff', fzfl.files, { desc = "Find file" })
-vim.keymap.set('n', '<leader>.', fzfl.files, { desc = "Find file" })
-vim.keymap.set('n', '<leader><leader>', fzfl.files, { desc = "Find file" })
-vim.keymap.set('n', '<leader>fg', fzfl.git_files, { desc = "Git Files" })
-vim.keymap.set('n', '<leader>,', fzfl.buffers, { desc = "Buffers" })
-vim.keymap.set('n', '<leader>fb', fzfl.buffers, { desc = "Buffers" })
+-- Git stuff
+-- vim.keymap.set('n', '<leader>gg', function() Snacks.lazygit() end)
+vim.keymap.set('n', '<leader>gG', function() Snacks.lazygit() end)
+vim.keymap.set('n', "<leader>gb", function() Snacks.picker.git_branches() end)
+vim.keymap.set('n', "<leader>gl", function() Snacks.picker.git_log() end)
+vim.keymap.set('n', "<leader>gL", function() Snacks.picker.git_log_line() end)
+vim.keymap.set('n', "<leader>gs", function() Snacks.picker.git_status() end)
 
-vim.keymap.set('n', '<leader>cr', fzfl.lsp_references, { desc = "LSP references" })
-vim.keymap.set('n', '<leader>cs', fzfl.lsp_document_symbols, { desc = "Document symbols" })
-vim.keymap.set('n', '<leader>cS', fzfl.lsp_workspace_symbols, { desc = "Workspace symbols" })
-vim.keymap.set('n', '<leader>cd', fzfl.lsp_definitions, { desc = "Definitions" })
-vim.keymap.set('n', '<leader>ci', fzfl.lsp_implementations, { desc = "Implementations" })
+-- LSP stuff
+vim.keymap.set('n', '<leader>cr', function() Snacks.picker.lsp_references() end)
+vim.keymap.set('n', '<leader>cs', function() Snacks.picker.lsp_symbols() end)
+vim.keymap.set('n', '<leader>cS', function() Snacks.picker.lsp_workspace_symbols() end)
+vim.keymap.set('n', '<leader>cd', function() Snacks.picker.lsp_definitions() end)
+vim.keymap.set('n', '<leader>ci', function() Snacks.picker.lsp_implementations() end)
+
+-- Buffer managements
+vim.keymap.set('n', '<leader>bd', function() Snacks.bufdelete() end, { desc = "Kill buffer" })
+vim.keymap.set('n', '<leader>ba', function() Snacks.bufdelete.all() end, { desc = "Force kill buffer" })
+vim.keymap.set('n', '<leader>bs', function() vim.cmd('write') end, { desc = "Save" })
+vim.keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+vim.keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+
+vim.keymap.set('n', '<C-/>', function() Snacks.terminal() end)
 
 vim.keymap.set('n', '<leader>cc', function() vim.cmd("Compile") end, { desc = "Compile" })
 vim.keymap.set('n', '<leader>cm', function() vim.cmd("Recompile") end, { desc = "Recompile" })
+
 
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { silent = true })
 
