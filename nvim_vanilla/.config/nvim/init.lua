@@ -29,8 +29,11 @@ vim.diagnostic.config({
 })
 
 -- General keymap
-vim.keymap.set('n', '<leader>o', ':update<CR>:source<CR>', { desc = "Source current file" })
-vim.keymap.set('n', '<leader>q', ':quit<CR>', { desc = "Quit" })
+vim.keymap.set('n', '<leader>o', function()
+  vim.cmd("update")
+  vim.cmd("source")
+end, { desc = "Source current file" })
+vim.keymap.set('n', '<leader>q', function() vim.cmd("quit") end, { desc = "Quit" })
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', '<Esc>', ':noh<Return><Esc>', { silent = true })
 
