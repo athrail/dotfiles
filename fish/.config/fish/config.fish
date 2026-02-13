@@ -18,6 +18,7 @@ alias ls eza
 alias cat bat
 alias lg lazygit
 alias tms tmux-sessionizer.sh
+alias in "sudo pacman -Sy --needed --noconfirm"
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
@@ -25,7 +26,7 @@ end
 
 fzf --fish | source
 zoxide init fish | source
-mise activate | source
+# mise activate | source
 
 fish_config prompt choose astronaut
 
