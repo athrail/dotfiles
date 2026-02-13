@@ -1,12 +1,12 @@
 #! /bin/bash
 
 menu() {
-  local options=" hyprland\n fish\n foot\n fuzzel\n mako\n nvim\n sway\n swaync\n tmux\n waybar"
+  local options="  hyprland\n  fish\n  foot\n fuzzel\n  mako\n  nvim\n  sway\n  swaync\n  tmux\n  waybar"
   local file=""
   local terminal="foot"
   local editor="nvim"
 
-  local selection=$(echo -e "$options" | fuzzel --lines $(echo -e "$options" | wc -l) --width 11 --dmenu -p "󰐥 ")
+  local selection=$(echo -e "$options" | fuzzel --lines $(echo -e "$options" | wc -l) --width 13 --dmenu -p "󰐥 ")
   case $selection in
   *hyprland*) file="$HOME/.config/hypr" ;;
   *fish*) file="$HOME/.config/fish/config.fish" ;;
