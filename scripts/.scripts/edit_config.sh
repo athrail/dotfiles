@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 menu() {
-  local options="  hyprland\n  fish\n  foot\n fuzzel\n  mako\n  nvim\n  sway\n  swaync\n  tmux\n  waybar"
+  local options="hyprland\nfish\nfoot\nfuzzel\nmako\nnvim\nsway\nswaync\ntmux\nwaybar"
   local file=""
   local terminal="foot"
   local editor="nvim"
