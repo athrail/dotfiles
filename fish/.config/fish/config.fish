@@ -19,6 +19,7 @@ alias cat bat
 alias lg lazygit
 alias tms tmux-sessionizer.sh
 alias in "sudo pacman -Sy --needed --noconfirm"
+alias up "paru -Syu --noconfirm && flatpak update -y"
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
