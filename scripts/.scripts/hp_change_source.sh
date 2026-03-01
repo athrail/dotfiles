@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 menu() {
   local options="Type-C\nDP\nHDMI"

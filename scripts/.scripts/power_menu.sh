@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 menu() {
   local options="Lock\nSleep\nRestart\nShut down"
