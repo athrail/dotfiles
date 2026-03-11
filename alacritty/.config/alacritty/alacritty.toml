@@ -83,8 +83,8 @@ italic = { family = "Iosevka" }
 size = 14
 
 [window]
-padding.x = 10
-padding.y = 10
+padding = { x = 5, y = 5 }
+opacity = 0.90
 decorations = "None"
 
 [keyboard]
