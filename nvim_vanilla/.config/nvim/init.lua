@@ -73,10 +73,41 @@ local plugins = {
           italic = false,
         }
       })
-      vim.cmd('autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE')
+      -- vim.cmd('autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE')
       vim.cmd("colorscheme rose-pine")
     end
   },
+  { 'xiyaowong/transparent.nvim', lazy = false, opts = {
+    groups = {           -- table: default groups
+      "Normal",
+      "NormalNC",
+      "Comment",
+      "Constant",
+      "Special",
+      "Identifier",
+      "Statement",
+      "PreProc",
+      "Type",
+      "Underlined",
+      "Todo",
+      "String",
+      "Function",
+      "Conditional",
+      "Repeat",
+      "Operator",
+      "Structure",
+      "LineNr",
+      "NonText",
+      "SignColumn",
+      "CursorLine",
+      "CursorLineNr",
+      "StatusLine",
+      "StatusLineNC",
+      "EndOfBuffer",
+    },
+    extra_groups = {"NeoTreeNormal","NeoTreeNormalNC"}, -- and this was super important as well
+    exclude_groups = {}, -- table: groups you don't want to clear
+  } },
   { 'nvim-treesitter/nvim-treesitter',             branch = 'main', lazy = false, build = ':TSUpdate' },
   { 'nvim-treesitter/nvim-treesitter-textobjects', branch = 'main' },
   { 'nvim-mini/mini.statusline', version = false },
