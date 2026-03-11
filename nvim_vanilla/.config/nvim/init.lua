@@ -15,7 +15,7 @@ vim.o.clipboard = 'unnamedplus'
 vim.o.incsearch = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
-vim.o.scrolloff = 20
+vim.o.scrolloff = 5
 vim.o.cursorline = true
 vim.o.completeopt = 'menu,menuone,noinsert'
 vim.o.termguicolors = true
@@ -151,45 +151,6 @@ local plugins = {
     },
   },
   {
-    "ej-shafran/compile-mode.nvim",
-    version = "^5.0.0",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      { "m00qek/baleia.nvim", tag = "v1.3.0" },
-    },
-    config = function()
-      ---@type CompileModeOpts
-      vim.g.compile_mode = {
-        -- if you use something like `nvim-cmp` or `blink.cmp` for completion,
-        -- set this to fix tab completion in command mode:
-        input_word_completion = true,
-
-        -- to add ANSI escape code support, add:
-        baleia_setup = true,
-
-        -- to make `:Compile` replace special characters (e.g. `%`) in
-        -- the command (and behave more like `:!`), add:
-        bang_expansion = true,
-      }
-    end
-  },
-  -- lazy.nvim
-  {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    opts = {
-      -- add any options here
-    },
-    dependencies = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      "MunifTanjim/nui.nvim",
-      -- OPTIONAL:
-      --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as the fallback
-      -- "rcarriga/nvim-notify",
-    }
-  },
-  {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
@@ -223,7 +184,7 @@ local plugins = {
         { win = "preview", title = "{preview}", height = 0.4,     border = "top" },
       },
     },
-  }
+  },
 }
 
 -- Bootstrap lazy.nvim
@@ -308,32 +269,15 @@ require 'mini.tabline'.setup()
 require 'mini.pairs'.setup()
 require 'typst-preview'.setup()
 
-require 'noice'.setup {
-  lsp = {
-    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-    override = {
-      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-      ["vim.lsp.util.stylize_markdown"] = true,
-      ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
-    },
-  },
-  -- you can enable a preset for easier configuration
-  presets = {
-    bottom_search = true,         -- use a classic bottom cmdline for search
-    command_palette = true,       -- position the cmdline and popupmenu together
-    long_message_to_split = true, -- long messages will be sent to a split
-    inc_rename = false,           -- enables an input dialog for inc-rename.nvim
-    lsp_doc_border = false,       -- add a border to hover docs and signature help
-  },
-}
-
-vim.keymap.set('n', '<leader>e', function() vim.cmd("Neotree current") end, { desc = "Neotree" })
+vim.keymap.set('n', '<leader>e', function() vim.cmd("Neotree current reveal_file=%") end, { desc = "Neotree" })
 
 -- Search menu
 vim.keymap.set('n', '<leader>sg', function() Snacks.picker.grep() end)
 vim.keymap.set('n', '<leader>sw', function() Snacks.picker.grep_word() end)
 vim.keymap.set('n', '<leader>sh', function() Snacks.picker.help() end)
 vim.keymap.set('n', '<leader>sR', function() Snacks.picker.resume() end)
+vim.keymap.set('n', "<leader>sm", function() Snacks.picker.man() end)
+vim.keymap.set('n', "<leader>sk", function() Snacks.picker.keymaps() end)
 
 -- Find menu
 vim.keymap.set('n', '<leader>ff', function() Snacks.picker.files() end)
@@ -394,5 +338,5 @@ vim.lsp.config('tailwindcss', {
   }
 })
 
-vim.lsp.enable({ 'ty', 'clangd', 'tailwindcss', 'lua_ls', 'tinymist' })
+vim.lsp.enable({ 'ty', 'clangd', 'tailwindcss', 'lua_ls', 'tinymist', 'ts_ls', 'emmet_language_server' })
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
