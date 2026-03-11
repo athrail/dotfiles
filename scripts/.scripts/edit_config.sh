@@ -1,16 +1,16 @@
 #! /usr/bin/env bash
 
 menu() {
-  local options="hyprland\nfish\nfoot\nfuzzel\nmako\nnvim\nsway\nswaync\ntmux\nwaybar"
+  local options="hyprland\nfish\nalacritty\nfuzzel\nmako\nnvim\nsway\nswaync\ntmux\nwaybar"
   local file=""
-  local terminal="foot"
+  local terminal="alacritty --command"
   local editor="nvim"
 
   local selection=$(echo -e "$options" | fuzzel --lines $(echo -e "$options" | wc -l) --width 14 --dmenu -p "󰐥 ")
   case $selection in
   *hyprland*) file="$HOME/.config/hypr" ;;
   *fish*) file="$HOME/.config/fish/config.fish" ;;
-  *foot*) file="$HOME/.config/foot/foot.ini" ;;
+  *alacritty*) file="$HOME/.config/alacritty/alacritty.toml" ;;
   *fuzzel*) file="$HOME/.config/fuzzel/fuzzel.ini" ;;
   *mako*) file="$HOME/.config/mako" ;;
   *nvim*) file="$HOME/.config/nvim" ;;
