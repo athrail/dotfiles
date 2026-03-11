@@ -16,9 +16,7 @@
   "modules-right": [
     "pulseaudio",
     "bluetooth",
-    "battery",
     "clock#time",
-    "custom/notification",
     "tray"
   ],
   "hyprland/workspaces": {
