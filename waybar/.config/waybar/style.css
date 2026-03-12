@@ -43,17 +43,16 @@ window#waybar {
 }
 
 #workspaces button {
-    padding: 0 4px;
+    /* padding: 0 4px; */
     background-color: @base;
     color: @text;
     border: none;
-    border-bottom: 3px solid transparent;
     min-width: 24px;
 }
 
 /* Workspace with windows (occupied) - style non-empty workspaces */
 #workspaces button:not(.empty):not(.focused) {
-    color: @text;
+    /* color: @text; */
 }
 
 #workspaces button:hover {
@@ -63,7 +62,7 @@ window#waybar {
 
 /* Active/focused workspace */
 #workspaces button.active {
-    background-color: @pine;
+    background-color: @iris;
     color: @base;
     font-weight: bold;
 }
@@ -71,7 +70,6 @@ window#waybar {
 #workspaces button.urgent {
     background-color: @love;
     color: @text;
-    border-bottom: 3px solid @love;
 }
 
 /* Right-side modules */
