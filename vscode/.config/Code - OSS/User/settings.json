@@ -1,0 +1,123 @@
+{
+  "workbench.startupEditor": "none",
+  "telemetry.editStats.enabled": false,
+  "telemetry.feedback.enabled": false,
+  "telemetry.telemetryLevel": "off",
+  "chat.agent.enabled": false,
+  "editor.minimap.enabled": false,
+  "breadcrumbs.enabled": false,
+  "window.menuBarVisibility": "toggle",
+  "window.titleBarStyle": "native",
+  "editor.formatOnSave": true,
+  "editor.scrollbar.verticalScrollbarSize": 0,
+  "editor.fontFamily": "Iosevka",
+  "editor.fontSize": 16,
+  "terminal.integrated.fontFamily": "Iosevka Term",
+  "terminal.integrated.fontSize": 16,
+  "editor.glyphMargin": false,
+  "editor.folding": false,
+  "editor.lineNumbers": "relative",
+
+  "vim.easymotion": true,
+  "vim.incsearch": true,
+  "vim.useSystemClipboard": true,
+  "vim.useCtrlKeys": true,
+  "vim.hlsearch": true,
+  "vim.insertModeKeyBindings": [],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<leader>", "d"],
+      "after": ["d", "d"],
+    },
+    {
+      "before": ["<leader>", "b", "d"],
+      "after": ["<C-w>", "<C-q>"],
+    },
+    {
+      "before": ["<leader>", "f", "f"],
+      "commands": ["workbench.action.quickOpen"],
+    },
+    {
+      "before": ["<leader>", "s", "g"],
+      "commands": [
+        {
+          "command": "periscope.search",
+          "when": "editorTextFocus",
+        },
+      ],
+    },
+    {
+      "before": ["<leader>", "s", "R"],
+      "commands": [
+        {
+          "command": "periscope.resumeSearch",
+          "when": "editorTextFocus",
+        },
+      ],
+    },
+    {
+      "before": ["<C-h>"],
+      "after": ["<C-w>", "h"],
+    },
+    {
+      "before": ["<C-l>"],
+      "after": ["<C-w>", "l"],
+    },
+    {
+      "before": ["<C-j>"],
+      "after": ["<C-w>", "j"],
+    },
+    {
+      "before": ["<C-k>"],
+      "after": ["<C-w>", "k"],
+    },
+    {
+      "before": ["H"],
+      "commands": ["workbench.action.previousEditor"],
+      "silent": true,
+    },
+    {
+      "before": ["L"],
+      "commands": ["workbench.action.nextEditor"],
+      "silent": true,
+    },
+    {
+      "before": ["K"],
+      "commands": ["editor.action.showHover"],
+      "silent": true,
+    },
+  ],
+  "vim.leader": "<space>",
+  "vim.handleKeys": {
+    "<C-a>": false,
+    "<C-f>": false,
+    "<C-p>": false,
+    "<C-b>": false,
+  },
+  // To improve performance
+  "extensions.experimental.affinity": {
+    "vscodevim.vim": 1,
+  },
+  "chat.agentsControl.enabled": false,
+  "window.commandCenter": false,
+  "workbench.layoutControl.enabled": false,
+  "workbench.colorTheme": "Rosé Pine (no italics)",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "prettier.jsxSingleQuote": true,
+  "prettier.printWidth": 120,
+  "prettier.singleQuote": true,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+  },
+  "workbench.secondarySideBar.defaultVisibility": "hidden",
+  "workbench.iconTheme": "rose-pine-icons",
+  "workbench.activityBar.location": "bottom",
+  "window.customTitleBarVisibility": "never",
+}
