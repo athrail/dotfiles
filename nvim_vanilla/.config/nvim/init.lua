@@ -3,21 +3,21 @@ local vim = vim
 -- General options
 vim.o.number = true
 vim.o.relativenumber = true
-vim.o.signcolumn = 'yes'
+vim.o.signcolumn = "yes"
 vim.o.wrap = false
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 vim.o.expandtab = true
 vim.o.swapfile = false
-vim.g.mapleader = ' '
-vim.o.winborder = 'rounded'
-vim.o.clipboard = 'unnamedplus'
+vim.g.mapleader = " "
+vim.o.winborder = "rounded"
+vim.o.clipboard = "unnamedplus"
 vim.o.incsearch = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.scrolloff = 5
 vim.o.cursorline = true
-vim.o.completeopt = 'menu,menuone,noinsert'
+vim.o.completeopt = "menu,menuone,noinsert"
 vim.o.termguicolors = true
 
 -- Diagnostics configuration
@@ -29,13 +29,14 @@ vim.diagnostic.config({
 })
 
 -- General keymap
-vim.keymap.set('n', '<leader>o', function()
+vim.keymap.set("n", "<leader>o", function()
   vim.cmd("update")
   vim.cmd("source")
 end, { desc = "Source current file" })
-vim.keymap.set('n', '<leader>q', function() vim.cmd("quit") end, { desc = "Quit" })
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-vim.keymap.set('n', '<Esc>', ':noh<Return><Esc>', { silent = true })
+vim.keymap.set("n", "<leader>q", function() vim.cmd("quit") end, { desc = "Quit" })
+vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
+vim.keymap.set("n", "<Esc>", ":noh<Return><Esc>", { silent = true })
+vim.keymap.set("n", "<C-s>", function() vim.cmd("write") end, { desc = "Save" })
 
 -- Move Lines
 vim.keymap.set("n", "<A-j>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })
@@ -48,200 +49,68 @@ vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = tr
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
 
 -- Window splits and close
-vim.keymap.set('n', '<leader>ws', '<C-w>s<C-w>w', { desc = "Horizontal Split" })
-vim.keymap.set('n', '<leader>wv', '<C-w>v<C-w>w', { desc = "Vertical Split" })
-vim.keymap.set('n', '<leader>wq', '<C-w>q', { desc = "Close window" })
+vim.keymap.set("n", "<leader>ws", "<C-w>s<C-w>w", { desc = "Horizontal Split" })
+vim.keymap.set("n", "<leader>wv", "<C-w>v<C-w>w", { desc = "Vertical Split" })
+vim.keymap.set("n", "<leader>wq", "<C-w>q", { desc = "Close window" })
 
 
 -- Git blame for selection
 local function git_blame()
-  local lines_start = vim.fn.line('v')
-  local lines_end   = vim.fn.line('.')
+  local lines_start = vim.fn.line("v")
+  local lines_end   = vim.fn.line(".")
 
-  vim.cmd(string.format(':Git blame -L%d,%d -- %%', lines_start, lines_end))
+  vim.cmd(string.format(":Git blame -L%d,%d -- %%", lines_start, lines_end))
 end
-vim.keymap.set('v', '<leader>gb', git_blame, { desc = "Git blame selection" })
+vim.keymap.set("v", "<leader>gb", git_blame, { desc = "Git blame selection" })
 
 -- Plugins
-local plugins = {
-  {
-    "rose-pine/neovim",
-    name = "rose-pine",
-    config = function()
-      require 'rose-pine'.setup({
-        styles = {
-          italic = false,
-        }
-      })
-      -- vim.cmd('autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE')
-      vim.cmd("colorscheme rose-pine")
-    end
-  },
-  { 'xiyaowong/transparent.nvim', lazy = false, opts = {
-    groups = {           -- table: default groups
-      "Normal",
-      "NormalNC",
-      "Comment",
-      "Constant",
-      "Special",
-      "Identifier",
-      "Statement",
-      "PreProc",
-      "Type",
-      "Underlined",
-      "Todo",
-      "String",
-      "Function",
-      "Conditional",
-      "Repeat",
-      "Operator",
-      "Structure",
-      "LineNr",
-      "NonText",
-      "SignColumn",
-      "CursorLine",
-      "CursorLineNr",
-      "StatusLine",
-      "StatusLineNC",
-      "EndOfBuffer",
-    },
-    extra_groups = {"NeoTreeNormal","NeoTreeNormalNC"}, -- and this was super important as well
-    exclude_groups = {}, -- table: groups you don't want to clear
-  } },
-  { 'nvim-treesitter/nvim-treesitter',             branch = 'main', lazy = false, build = ':TSUpdate' },
-  { 'nvim-treesitter/nvim-treesitter-textobjects', branch = 'main' },
-  { 'nvim-mini/mini.statusline', version = false },
-  { 'nvim-mini/mini.tabline', version = false },
-  { 'nvim-mini/mini.pairs', version = false },
-  { 'chomosuke/typst-preview.nvim' },
-  { 'neovim/nvim-lspconfig' },
-  { 'mason-org/mason.nvim' },
-  { 'saghen/blink.cmp',                            version = '1.*', opts = {} },
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      "nvim-tree/nvim-web-devicons", -- optional, but recommended
-    },
-    lazy = false,                    -- neo-tree will lazily load itself
-    opts = {
-      sort_case_insensitive = true,
-      filesystem = {
-        filtered_items = {
-          visible = false, -- hide filtered items on open
-          hide_gitignored = true,
-          hide_dotfiles = false,
-          hide_by_name = {
-            ".github",
-            ".gitignore",
-            "package-lock.json",
-            ".changeset",
-            ".prettierrc.json",
-          },
-          never_show = { ".git" },
-        },
-      },
-    }
-  },
-  {
-    "NeogitOrg/neogit",
-    lazy = true,
-    dependencies = {
-      "nvim-lua/plenary.nvim",  -- required
-      "sindrets/diffview.nvim", -- optional - Diff integration
+vim.pack.add({
+  { src = "https://github.com/Mofiqul/dracula.nvim" },
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
+  { src = "https://github.com/nvim-mini/mini.statusline" },
+  { src = "https://github.com/nvim-mini/mini.tabline" },
+  { src = "https://github.com/nvim-mini/mini.pairs" },
+  { src = "https://github.com/chomosuke/typst-preview.nvim" },
+  { src = "https://github.com/neovim/nvim-lspconfig" },
+  { src = "https://github.com/mason-org/mason.nvim" },
+  { src = "https://github.com/saghen/blink.cmp", version = "v1" },
+  { src = "https://github.com/nvim-lua/plenary.nvim" },
+  { src = "https://github.com/MunifTanjim/nui.nvim" },
+  { src = "https://github.com/nvim-tree/nvim-web-devicons" },
+  { src = "https://github.com/nvim-neo-tree/neo-tree.nvim", version = "v3.x" },
+  { src = "https://github.com/NeogitOrg/neogit" },
+  { src = "https://github.com/ibhagwan/fzf-lua" },
+  { src = "https://github.com/sindrets/diffview.nvim" },
+  { src = "https://github.com/folke/which-key.nvim" },
+})
 
-      -- Only one of these is needed.
-      -- "nvim-telescope/telescope.nvim", -- optional
-      -- "ibhagwan/fzf-lua",              -- optional
-      -- "nvim-mini/mini.pick",           -- optional
-      "folke/snacks.nvim", -- optional
-    },
-    cmd = "Neogit",
-    keys = {
-      { "<leader>gg", "<cmd>Neogit<cr>", desc = "Show Neogit UI" }
-    }
-  },
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    },
-    keys = {
-      {
-        "<leader>?",
-        function()
-          require("which-key").show({ global = false })
-        end,
-        desc = "Buffer Local Keymaps (which-key)",
-      },
-    },
-  },
-  {
-    "folke/snacks.nvim",
-    priority = 1000,
-    lazy = false,
-    ---@type snacks.Config
-    opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-      bigfile = { enabled = true },
-      dashboard = { enabled = true },
-      indent = { enabled = true },
-      input = { enabled = true },
-      notifier = { enabled = true },
-      quickfile = { enabled = true },
-      scope = { enabled = true },
-      statuscolumn = { enabled = true },
-      words = { enabled = true },
-
-      layout = {
-        backdrop = false,
-        width = 0.5,
-        min_width = 80,
-        height = 0.8,
-        min_height = 30,
-        box = "vertical",
-        border = true,
-        title = "{title} {live} {flags}",
-        title_pos = "center",
-        { win = "input",   height = 1,          border = "bottom" },
-        { win = "list",    border = "none" },
-        { win = "preview", title = "{preview}", height = 0.4,     border = "top" },
-      },
-    },
-  },
-}
-
--- Bootstrap lazy.nvim
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-  if vim.v.shell_error ~= 0 then
-    vim.api.nvim_echo({
-      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out,                            "WarningMsg" },
-      { "\nPress any key to exit..." },
-    }, true, {})
-    vim.fn.getchar()
-    os.exit(1)
-  end
-end
-vim.opt.rtp:prepend(lazypath)
+vim.cmd("colorscheme dracula")
 
 -- Plugins
-require("lazy").setup(plugins, {})
+require "neo-tree".setup({
+  sort_case_insensitive = true,
+  filesystem = {
+    filtered_items = {
+      visible = false, -- hide filtered items on open
+      hide_gitignored = true,
+      hide_dotfiles = false,
+      hide_by_name = {
+        ".github",
+        ".gitignore",
+        "package-lock.json",
+        ".changeset",
+        ".prettierrc.json",
+      },
+      never_show = { ".git" },
+    },
+  },
+})
 
-require 'nvim-treesitter-textobjects'.setup()
-require 'nvim-treesitter'.setup {
+require "nvim-treesitter-textobjects".setup()
+require "nvim-treesitter".setup {
   -- Directory to install parsers and queries to
-  install_dir = vim.fn.stdpath('data') .. '/site',
+  install_dir = vim.fn.stdpath("data") .. "/site",
   textobjects = {
     select = {
       enable = true,
@@ -266,7 +135,7 @@ require 'nvim-treesitter'.setup {
         -- ["]o"] = { query = { "@loop.inner", "@loop.outer" } }
         --
         -- You can pass a query group to use query from `queries/<lang>/<query_group>.scm file in your runtime path.
-        -- Below example nvim-treesitter's `locals.scm` and `folds.scm`. They also provide highlights.scm and indent.scm.
+        -- Below example nvim-treesitter"s `locals.scm` and `folds.scm`. They also provide highlights.scm and indent.scm.
         ["]s"] = { query = "@local.scope", query_group = "locals", desc = "Next scope" },
         ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
       },
@@ -295,71 +164,69 @@ require 'nvim-treesitter'.setup {
   }
 }
 
-require 'mini.statusline'.setup()
-require 'mini.tabline'.setup()
-require 'mini.pairs'.setup()
-require 'typst-preview'.setup()
+require "mini.statusline".setup()
+require "mini.tabline".setup()
+require "mini.pairs".setup()
+require "typst-preview".setup()
+require "mason".setup()
+require "fzf-lua".setup({
+  winopts = {
+    preview = {
+      vertical = "up:r0%",
+      layout = "vertical"
+    }
+  }
+})
 
-vim.keymap.set('n', '<leader>e', function() vim.cmd("Neotree current reveal_file=%") end, { desc = "Neotree" })
+vim.keymap.set("n", "<leader>E", function() vim.cmd("Neotree current reveal_file=%") end, { desc = "Neotree" })
+vim.keymap.set("n", "<leader>e", function() vim.cmd("Neotree current ") end, { desc = "Neotree" })
 
 -- Search menu
-vim.keymap.set('n', '<leader>sg', function() Snacks.picker.grep() end)
-vim.keymap.set('n', '<leader>sw', function() Snacks.picker.grep_word() end)
-vim.keymap.set('n', '<leader>sh', function() Snacks.picker.help() end)
-vim.keymap.set('n', '<leader>sR', function() Snacks.picker.resume() end)
-vim.keymap.set('n', "<leader>sm", function() Snacks.picker.man() end)
-vim.keymap.set('n', "<leader>sk", function() Snacks.picker.keymaps() end)
+vim.keymap.set("n", "<leader>sg", FzfLua.live_grep)
+vim.keymap.set("n", "<leader>sw", FzfLua.grep_cword)
+vim.keymap.set("n", "<leader>sh", FzfLua.helptags)
+vim.keymap.set("n", "<leader>sR", FzfLua.resume)
+vim.keymap.set("n", "<leader>sm", FzfLua.manpages)
+vim.keymap.set("n", "<leader>sk", FzfLua.keymaps)
 
 -- Find menu
-vim.keymap.set('n', '<leader>ff', function() Snacks.picker.files() end)
-vim.keymap.set('n', '<leader>fg', function() Snacks.picker.git_files() end)
-vim.keymap.set('n', '<leader>fb', function() Snacks.picker.buffers() end)
+vim.keymap.set("n", "<leader>ff", FzfLua.files)
+vim.keymap.set("n", "<leader>fg", FzfLua.git_files)
+vim.keymap.set("n", "<leader>fb", FzfLua.buffers)
 
 -- Git stuff
--- vim.keymap.set('n', '<leader>gg', function() Snacks.lazygit() end)
-vim.keymap.set('n', '<leader>gG', function() Snacks.lazygit() end)
-vim.keymap.set('n', "<leader>gb", function() Snacks.picker.git_branches() end)
-vim.keymap.set('n', "<leader>gl", function() Snacks.picker.git_log() end)
-vim.keymap.set('n', "<leader>gL", function() Snacks.picker.git_log_line() end)
-vim.keymap.set('n', "<leader>gs", function() Snacks.picker.git_status() end)
+vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<cr>", { desc = "Show Neogit UI" })
 
 -- LSP stuff
-vim.keymap.set('n', '<leader>cr', function() Snacks.picker.lsp_references() end)
-vim.keymap.set('n', '<leader>cs', function() Snacks.picker.lsp_symbols() end)
-vim.keymap.set('n', '<leader>cS', function() Snacks.picker.lsp_workspace_symbols() end)
-vim.keymap.set('n', '<leader>cd', function() Snacks.picker.lsp_definitions() end)
-vim.keymap.set('n', '<leader>ci', function() Snacks.picker.lsp_implementations() end)
+vim.keymap.set("n", "<leader>cr", FzfLua.lsp_references)
+vim.keymap.set("n", "<leader>cs", FzfLua.lsp_document_symbols)
+vim.keymap.set("n", "<leader>cS", FzfLua.lsp_workspace_symbols)
+vim.keymap.set("n", "<leader>cd", FzfLua.lsp_definitions)
+vim.keymap.set("n", "<leader>ci", FzfLua.lsp_implementations)
+vim.keymap.set("n", "<leader>cu", FzfLua.lsp_document_diagnostics)
+vim.keymap.set("n", "<leader>cU", FzfLua.lsp_workspace_diagnostics)
 
 -- Buffer managements
-vim.keymap.set('n', '<leader>bd', function() Snacks.bufdelete() end, { desc = "Kill buffer" })
-vim.keymap.set('n', '<leader>ba', function() Snacks.bufdelete.all() end, { desc = "Force kill buffer" })
-vim.keymap.set('n', '<leader>bs', function() vim.cmd('write') end, { desc = "Save" })
 vim.keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 vim.keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 
-vim.keymap.set('n', '<C-/>', function() Snacks.terminal() end)
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { silent = true })
+vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)
 
-vim.keymap.set('n', '<leader>cc', function() vim.cmd("Compile") end, { desc = "Compile" })
-vim.keymap.set('n', '<leader>cm', function() vim.cmd("Recompile") end, { desc = "Recompile" })
-
-
-vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { silent = true })
-
-require 'mason'.setup()
 
 -- LSP section (leverage lsp-config for most)
 vim.lsp.config.clangd = {
   cmd = {
-    'clangd',
-    '--clang-tidy',
-    '--background-index',
-    '--offset-encoding=utf-8',
+    "clangd",
+    "--clang-tidy",
+    "--background-index",
+    "--offset-encoding=utf-8",
   },
-  root_markers = { '.clangd', 'compile_commands.json' },
-  filetypes = { 'c', 'cpp' },
+  root_markers = { ".clangd", "compile_commands.json" },
+  filetypes = { "c", "cpp" },
 }
 
-vim.lsp.config('tailwindcss', {
+vim.lsp.config("tailwindcss", {
   settings = {
     tailwindCSS = {
       includeLanguages = {
@@ -369,5 +236,4 @@ vim.lsp.config('tailwindcss', {
   }
 })
 
-vim.lsp.enable({ 'ty', 'clangd', 'tailwindcss', 'lua_ls', 'tinymist', 'ts_ls', 'emmet_language_server' })
-vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
+vim.lsp.enable({ "ty", "clangd", "tailwindcss", "lua_ls", "tinymist", "ts_ls", "emmet_language_server" })
