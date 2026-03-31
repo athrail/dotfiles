@@ -4,7 +4,6 @@
   "workbench.iconTheme": "rose-pine-icons",
   "workbench.activityBar.location": "bottom",
   "workbench.layoutControl.enabled": false,
-  "workbench.colorTheme": "Rosé Pine (no italics)",
 
   "telemetry.editStats.enabled": false,
   "telemetry.feedback.enabled": false,
@@ -119,9 +118,19 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "prettier.jsxSingleQuote": true,
-  "prettier.printWidth": 120,
+  "prettier.printWidth": 100,
   "prettier.singleQuote": true,
   "emmet.includeLanguages": {
     "javascript": "javascriptreact",
   },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "workbench.colorTheme": "Dracula Theme",
 }
