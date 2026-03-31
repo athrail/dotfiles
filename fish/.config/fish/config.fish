@@ -6,6 +6,9 @@ set -xg VISUAL nvim
 set -xg EDITOR nvim
 set -xg MANPAGER "nvim +Man!"
 
+fish_config prompt choose astronaut
+set -e VIRTUAL_ENV_DISABLE_PROMPT
+
 fish_add_path "$HOME/.local/bin"
 fish_add_path "$HOME/.composer/vendor/bin"
 fish_add_path "$HOME/go/bin"
@@ -29,7 +32,6 @@ fzf --fish | source
 zoxide init fish | source
 # mise activate | source
 
-fish_config prompt choose astronaut
 
 function update-mirrors
     sudo reflector --country France,Germany,Poland,Netherlands,Czech,Slovakia --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
