@@ -10,14 +10,14 @@ vim.o.shiftwidth = 2
 vim.o.expandtab = true
 vim.o.swapfile = false
 vim.g.mapleader = " "
-vim.o.winborder = "rounded"
+vim.o.winborder = "none"
 vim.o.clipboard = "unnamedplus"
 vim.o.incsearch = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.scrolloff = 5
 vim.o.cursorline = true
-vim.o.completeopt = "menu,menuone,noinsert"
+vim.o.completeopt = "menu,menuone,noselect,popup"
 vim.o.termguicolors = true
 
 -- Diagnostics configuration
@@ -169,6 +169,17 @@ require "mini.tabline".setup()
 require "mini.pairs".setup()
 require "typst-preview".setup()
 require "mason".setup()
+require "blink.cmp".setup({
+  signature = {
+    enabled = true
+  },
+  completion = {
+    documentation = {
+      auto_show = true,
+      auto_show_delay_ms = 100,
+    }
+  }
+})
 require "fzf-lua".setup({
   winopts = {
     preview = {
@@ -233,7 +244,11 @@ vim.lsp.config("tailwindcss", {
         htmldjango = "html",
       },
     }
-  }
+  },
+})
+
+vim.lsp.config("*", {
+  capabilities = require "blink.cmp".get_lsp_capabilities()
 })
 
 vim.lsp.enable({ "ty", "clangd", "tailwindcss", "lua_ls", "tinymist", "ts_ls", "emmet_language_server" })
